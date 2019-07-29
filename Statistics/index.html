@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8" />
@@ -55,15 +55,18 @@
             padding: 10px 30px 10px 30px;
         }
         
-        .inputGroup {
-            display: inline-block;
-            height: 24px;
-        }
 
         .selectBrowser {
             display: inline-block;
             border: 1px solid white;
             margin-bottom: 10px;
+        }
+
+        .select-item {
+            display: inline-block;
+            display: inline-block;
+            height: 24px;
+            margin-right: 15px;
         }
     </style>
 </head>
@@ -100,15 +103,30 @@
         function InputGroupBy() {
             return (
                     <div>
-                        <div>Platform</div>
-                        <select className="inputGroup">
-                            <option>Desktop</option>
-                            <option>Mobile</option> 
-                        </select>
+                        <div className="select-item">
+                            <div>Platform</div>
+                            <select className="inputGroup">
+                                <option>Desktop</option>
+                                <option>Mobile</option> 
+                            </select>
+                        </div>
+
+                        <div className="select-item">
+                            <div>Group by</div>
+                            <select className="groupBy">
+                                <option value="day">Day</option>
+                                <option value="platform">Platform</option> 
+                                <option value="operatingSystem">Operating system</option> 
+                                <option value="browser">Browser</option> 
+                            </select>
+                        </div>
                     </div>
             )
         }
         // Функция возвращает select с возможностью выбора параметров
+
+
+        
 
         function SelectBrowser() {
             return (
@@ -239,19 +257,25 @@
 
         })
 
+
+        let groupBy = document.querySelector(".groupBy");
+
+        let groupByResult = groupBy.value;
+        // Значение по умолчанию day
         
 
-        let sendGetFunc = (x, y, z, browserS) => {
+        let sendGetFunc = (x, y, z, browserS, groupByResult) => {
             if (x !== undefined && y !== undefined) {
 
               
 
                 // выполняем запрос
                 let request = new XMLHttpRequest();
-                request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=${x}&to=${y}&platform=${z}${browserS}`);
+                request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=${groupByResult}&from=${x}&to=${y}&platform=${z}${browserS}`);
                 // console.log(x, y);
                 request.send();
                 // выполняем запрос
+                console.log(`http://localhost:3000/api/v1/statistics?groupBy=${groupByResult}&from=${x}&to=${y}&platform=${z}${browserS}`)
 
                 /* Когда запрос готов - создаем список: */
                 request.addEventListener("readystatechange", function () {
@@ -265,7 +289,7 @@
 
 
                             let items = data.rows.map(item => {
-                                return <Result day={item.day} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
+                                return <Result day={item[groupByResult]} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
                             })
 
                             return  <div>
@@ -285,7 +309,7 @@
         }
 
         let request = new XMLHttpRequest();
-        request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&browsers[]=5`);
+        request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=platform&from=2019-07-01&to=2019-07-07&platform=1&browsers[]=1&browsers[]=2&browsers[]=3&browsers[]=4&browsers[]=5&browsers[]=6&browsers[]=7&browsers[]=8&browsers[]=9`);
         request.send();      
         // http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&platform=1&browsers[]=5
 
@@ -323,23 +347,33 @@
         });
         // Событие выбора Desktop(1) или Mobile(2)
 
+        groupBy.addEventListener("change", () => {
+
+            groupByResult = groupBy.value;
+
+            // console.log(groupByResult);
+
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult);
+
+        })
+
         inputFrom.addEventListener("change", () => {
 
-            console.log(listBr);
+            // console.log(listBr);
 
             x = ((new Date(inputFrom.valueAsDate)).format('yyyy-mm-dd'));
 
-            sendGetFunc(x, y, inputGroup, listBr);
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult);
 
         })
 
         inputTo.addEventListener("change", () => {
 
-            console.log(listBr);
+            // console.log(listBr);
 
             y = ((new Date(inputTo.valueAsDate)).format('yyyy-mm-dd'));
 
-            sendGetFunc(x, y, inputGroup, listBr);
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult);
                  
         })
         

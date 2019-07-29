@@ -8,18 +8,40 @@ body
     padding: 10px 0 10px 0
     margin-right: 10px
 
+.selectPage
+    color: white
+    padding: 10px 20px 10px 20px
+    display: flex
+    background-color: #282c34
+    margin: 0 20px
+    justify-content: center
+    & li, div
+        border: 1px solid #20232a
+        width: 37px
+        height: 37px
+        display: flex
+        justify-content: center
+        align-items: center
+        border-radius: 25px
+        margin: 2px
+        background-color: #20232a
+        &:hover
+            cursor: pointer
+        &:nth-child(2)
+            background-color: #282c34
+
+
 .result 
     display: flex
     background-color: #282c34
     padding: 0 30px
     margin: 0 20px
-
-.result-item 
-    color: #61dafb
-    margin: 7px 0
-    padding: 6px
-    flex-basis: 25%
-    display: inline-block
+    &-item 
+        color: #61dafb
+        margin: 7px 0
+        padding: 6px
+        flex-basis: 25%
+        display: inline-block
 
 .inputDates 
     background-color: #20232a
@@ -29,12 +51,15 @@ body
     margin-bottom: 10px
     font-size: bold
 
+#pages 
+    margin-bottom: 20px
+    
 #root1 
     display: block
-    padding: 10px 30px 10px 30px
+    padding: 10px 20px 10px 20px
 
 #output
-    margin-bottom: 50px
+    margin-bottom: 10px
 
 .select
     &__item

@@ -61,7 +61,7 @@ body {
 .result-item {
   color: #61dafb;
   margin: 7px 0;
-  padding: 6px;
+  padding: 5px;
   -ms-flex-preferred-size: 25%;
       flex-basis: 25%;
   display: inline-block;

@@ -2,15 +2,14 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>Statistics</title>
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistics</title>
+
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <!-- Сам Реакт -->
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <!-- Реакт DOM, позволяет работать с обычным html -->
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-    <!-- Подключаем babel через удаленный сервер CDN -->
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -21,7 +20,6 @@
     <div id="pages"></div>
 
     <script type="text/babel">
-
         function InputDate(text) {
             return (
                 <div className="date">
@@ -67,10 +65,7 @@
                     </div>
             )
         }
-        // Функция возвращает select с возможностью выбора параметров
-
-
-        
+        // Функция возвращает select с возможностью выбора параметров группировки полученных данных
 
         function SelectBrowser() {
             return (
@@ -92,6 +87,7 @@
             )
         }
         // Функция с выбором браузеров
+
         function SelectSistem() {
             return (
 
@@ -107,7 +103,7 @@
                 </div> 
             )
         }
-        // Функция с выбором системы
+        // Функция с выбором системы с которой заходил пользователь
 
         function SelectPage() {
             return (
@@ -128,12 +124,10 @@
                 </ul> 
             )
         }
-        // Функция с выбором страницы
+        // Функция с выбором просматриваемой страницы
 
         let sendGetFunc = (x, y, z, browserS, groupByResult, listSist, chosenPage) => {
             if (x !== undefined && y !== undefined) {
-
-              
 
                 // выполняем запрос
                 let request = new XMLHttpRequest();
@@ -170,9 +164,9 @@
                         )
                     } 
                 });
-                /* Когда запрос готов - создаем список */   
             }     
         }
+        // Самая главная функция (!) - через которую проходят все полученные данные и выводятся на страницу
 
         
         Date.prototype.format = function(format = 'yyyy-mm-dd') {
@@ -204,9 +198,7 @@
                     </div>
                     
                     <InputGroupBy/>
-                    
-                </div>
-                
+                </div> 
             </div>       
         )
         // Переменная с инпутами выбора даты и минимальной группировкой
@@ -217,7 +209,7 @@
                 <div><Result day="Day (can be customized)" impressions="Impressions" conversions="Conversions" money="Money"/></div>
             </div>       
         )
-        // Шапка таблицы с информацией что и где должно располагаться
+        // Шапка таблицы с информацией что и где должно располагаться при выводе на экран
 
         ReactDOM.render(
             InputDates,
@@ -230,27 +222,30 @@
             document.querySelector("#head")
         )
         // Создаем элемент шапки таблицы
+
         ReactDOM.render(
             <SelectPage/>,
             document.querySelector("#pages")
         )
         // Создаем список со страницами
 
-        
 
         let inputFrom = document.querySelectorAll(".date input")[0];
         // Первый инпут даты from
         let inputTo = document.querySelectorAll(".date input")[1];
         // Второй инпут даты to   
 
+
         let x, y; 
         // тут мы храним данные инпутов
         let data;
+        // data
+
 
         var values  = [];
         // Тут у нас выбранные значения браузеров
-
         let elm = document.querySelector(".selectBrowser");
+        // Элемент select со выбором бразеров со страницы
 
         function getSelectValues(select) {
             var result = [];
@@ -266,14 +261,12 @@
             }
             return result;
         }
-        // Функция считывает значение value и выводит в формате ["4"]
+        // Функция считывает значение value и выводит в формате ["*"]
         
         let listBr = "&browsers[]=1&browsers[]=2&browsers[]=3&browsers[]=4&browsers[]=5&browsers[]=6&browsers[]=7&browsers[]=8&browsers[]=9";
-        // Список выбранных браузеров
+        // Список выбранных браузеров по умолчанию
 
         elm.addEventListener("change", () => {
-
-            // console.log( getSelectValues(elm) );
             
             for (let i = 0; i < getSelectValues(elm).length; i++) {
 
@@ -282,19 +275,14 @@
                 } else {
                     listBr = listBr + "&browsers[]=" + getSelectValues(elm)[i];
                 }
-                
             }
             sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist);
-        })
-
-        
+        });
 
         let groupBy = document.querySelector(".groupBy");
 
         let groupByResult = groupBy.value;
         // Значение по умолчанию day
-
-
 
         let selectSistem = document.querySelector(".selectSistem");
         let listSist = "&operatingSystems[]=1&operatingSystems[]=2&operatingSystems[]=3&operatingSystems[]=4&operatingSystems[]=5";
@@ -338,19 +326,11 @@
                 chosenPage = selectPages[i].value;
 
                 sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
-
                 // console.log(chosenPage);
             });
 
         });
             
-    
-
-     
-
-
-    
-
         /* let request = new XMLHttpRequest();
         request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&offset=0&limit=25`);
         request.send();      
@@ -397,7 +377,6 @@
             // console.log(groupByResult);
 
             sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
-
         })
 
         inputFrom.addEventListener("change", () => {
@@ -407,7 +386,6 @@
             x = ((new Date(inputFrom.valueAsDate)).format('yyyy-mm-dd'));
 
             sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
-
         })
 
         inputTo.addEventListener("change", () => {
@@ -416,14 +394,9 @@
 
             y = ((new Date(inputTo.valueAsDate)).format('yyyy-mm-dd'));
 
-            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);
-                 
+            sendGetFunc(x, y, inputGroup, listBr, groupByResult, listSist, chosenPage);      
         })
         
     </script>
-
-
-
 </body>
-
 </html>

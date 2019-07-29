@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Statistics</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- Сам Реакт -->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- Реакт DOM, позволяет работать с обычным html -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- Подключаем babel через удаленный сервер CDN -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #20232a;
+        }
+
+        .date {
+            display: inline-block;
+            padding: 10px 0 10px 0;
+            margin-right: 10px;
+
+        }
+
+        .result {
+            display: flex;
+            background-color: #282c34;
+            padding: 0 30px;
+            margin: 0 20px;
+        }
+
+        .result-item {
+            color: #61dafb;
+            margin: 7px 0;
+            padding: 6px;
+            flex-basis: 25%;
+            display: inline-block;
+        }
+
+        .inputDates {
+            
+            background-color: #20232a;
+            color: white;
+        }
+
+        #head {
+            margin-bottom: 10px;
+            font-size: bold;
+        }
+
+        #root1 {
+            display: block;
+            padding: 10px 30px 10px 30px;
+        }
+        
+        .inputGroup {
+            display: inline-block;
+            height: 24px;
+        }
+
+        .selectBrowser {
+            display: inline-block;
+            border: 1px solid white;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root1"></div>
+    <div id="head"></div>
+    <div id="output"></div>
+
+    <script type="text/babel">
+
+        function InputDate(text) {
+            return (
+                <div className="date">
+                    <div>{text.name}</div>
+                    <input type="date"/>
+                </div>
+            )
+        }
+        // Функция возвращает input с выбором даты и текстом
+
+        function Result(content) {
+            return (
+                <div className="result">
+                    <div className="result-item">{content.day}</div>
+                    <div className="result-item">{content.impressions}</div>
+                    <div className="result-item">{content.conversions}</div>
+                    <div className="result-item">{content.money}</div>
+                </div>
+            )
+        }
+        // Функция возвращает строку с 4 блоками - day, impressions, conversions и money
+
+        function InputGroupBy() {
+            return (
+                    <div>
+                        <div>Platform</div>
+                        <select className="inputGroup">
+                            <option>Desktop</option>
+                            <option>Mobile</option> 
+                        </select>
+                    </div>
+            )
+        }
+        // Функция возвращает select с возможностью выбора параметров
+
+        function SelectBrowser() {
+            return (
+
+                <div> 
+                    <div>Browser</div>
+                    <select className="selectBrowser" multiple>
+                        <option value="1">Chrome</option>
+                        <option value="2">Firefox</option>
+                        <option value="3">UC browser</option>
+                        <option value="4">Opera</option>
+                        <option value="5">Chrome Mobile</option>
+                        <option value="6">Chrome Webview</option>
+                        <option value="7">Android browser</option>
+                        <option value="8">UC browser mobile</option>
+                        <option value="9">Opera Mini</option>
+                    </select>
+                </div> 
+            )
+        }
+        // Функция с выбором браузеров
+
+        Date.prototype.format = function(format = 'yyyy-mm-dd') {
+            const replaces = {
+                yyyy: this.getFullYear(),
+                mm: ('0'+(this.getMonth() + 1)).slice(-2),
+                dd: ('0'+this.getDate()).slice(-2),
+                ss: ('0'+this.getSeconds()).slice(-2)
+            };
+            let result = format;
+            for(const replace in replaces){
+                result = result.replace(replace,replaces[replace]);
+            }
+            return result;
+        };
+        // Создаем метод форматирования даты в нужную нам
+
+        const InputDates = (
+            <div className="inputDates">
+                <div>
+                    <InputDate className="from" name="From"/>
+                    <InputDate className="to" name="To"/>
+                </div>
+                
+                <div>
+                    <SelectBrowser/>
+                    <InputGroupBy/>
+                    
+                </div>
+                
+            </div>       
+        )
+        // Переменная с инпутами выбора даты и минимальной группировкой
+
+        
+        const InputHead = (
+            <div className="inputHead">
+                <div><Result day="Day" impressions="Impressions" conversions="Conversions" money="Money"/></div>
+            </div>       
+        )
+        // Шапка таблицы с информацией что и где должно располагаться
+
+        ReactDOM.render(
+            InputDates,
+            document.querySelector("#root1")
+        )
+        // Создаем элемент с инпутами выбора даты и минимальной группировкой
+
+        ReactDOM.render(
+            InputHead,
+            document.querySelector("#head")
+        )
+        // Создаем элемент шапки таблицы
+
+        
+
+        let inputFrom = document.querySelectorAll(".date input")[0];
+        // Первый инпут даты from
+        let inputTo = document.querySelectorAll(".date input")[1];
+        // Второй инпут даты to   
+
+        let x, y; 
+        // тут мы храним данные инпутов
+        let data;
+
+        var values  = [];
+        // Тут у нас выбранные значения браузеров
+
+        let elm = document.querySelector(".selectBrowser");
+
+        function getSelectValues(select) {
+            var result = [];
+            var options = select && select.options;
+            var opt;
+
+            for (var i=0, iLen=options.length; i<iLen; i++) {
+                opt = options[i];
+
+                if (opt.selected) {
+                result.push(opt.value || opt.text);
+                }
+            }
+            return result;
+        }
+        // Функция считывает значение value и выводит в формате ["4"]
+        
+        let listBr = "&browsers[]=1&browsers[]=2&browsers[]=3&browsers[]=4&browsers[]=5&browsers[]=6&browsers[]=7&browsers[]=8&browsers[]=9";
+        // Список выбранных браузеров
+
+        elm.addEventListener("change", () => {
+
+            // console.log( getSelectValues(elm) );
+            
+            for (let i = 0; i < getSelectValues(elm).length; i++) {
+
+                if (i == 0) {
+                    listBr = "&browsers[]=" + getSelectValues(elm)[i];
+                } else {
+                    listBr = listBr + "&browsers[]=" + getSelectValues(elm)[i];
+                }
+                
+            }
+            // console.log(listBr);
+
+            sendGetFunc(x, y, inputGroup, listBr);
+
+           console.log(listBr);
+
+        })
+
+        
+
+        let sendGetFunc = (x, y, z, browserS) => {
+            if (x !== undefined && y !== undefined) {
+
+              
+
+                // выполняем запрос
+                let request = new XMLHttpRequest();
+                request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=${x}&to=${y}&platform=${z}${browserS}`);
+                // console.log(x, y);
+                request.send();
+                // выполняем запрос
+
+                /* Когда запрос готов - создаем список: */
+                request.addEventListener("readystatechange", function () {
+
+                    if (request.readyState === 4 && request.status == 200) {
+                        
+
+                        data = JSON.parse(request.response);
+
+                        let App = () => {
+
+
+                            let items = data.rows.map(item => {
+                                return <Result day={item.day} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
+                            })
+
+                            return  <div>
+                                        {items}
+                                    </div>    
+                        }
+
+                        ReactDOM.render(
+                            // App(data.rows[0].day, data.rows[0].impressions, data.rows[0].clicks, data.rows[0].money),
+                            App(data.rows.day, data.rows.impressions, data.rows.clicks, data.rows.money),
+                            document.querySelector("#output")
+                        )
+                    } 
+                });
+                /* Когда запрос готов - создаем список */   
+            }     
+        }
+
+        let request = new XMLHttpRequest();
+        request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&browsers[]=5`);
+        request.send();      
+        // http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&platform=1&browsers[]=5
+
+        request.addEventListener("readystatechange", function () {
+
+            if (request.readyState === 4 && request.status == 200) {
+
+                let lol = JSON.parse(request.response);
+                console.log(lol);
+
+            }
+        });
+
+        let inputGroups = document.querySelector(".inputGroup");
+        // Переменная select с выбором платформы
+
+        let inputGroup;
+        // Переменная с данными Desktop(1) или Mobile(2)
+        if (inputGroups.value == "Desktop") {
+            inputGroup = 1;
+        } else {
+            inputGroup = 2;
+        }
+        // Так определяется значение inputGroup по умолчанию
+
+        inputGroups.addEventListener("change", () => {
+            
+            if (inputGroups.value == "Desktop") {
+                inputGroup = 1;
+            } else {
+                inputGroup = 2;
+            }
+
+            sendGetFunc(x, y, inputGroup, listBr);
+        });
+        // Событие выбора Desktop(1) или Mobile(2)
+
+        inputFrom.addEventListener("change", () => {
+
+            console.log(listBr);
+
+            x = ((new Date(inputFrom.valueAsDate)).format('yyyy-mm-dd'));
+
+            sendGetFunc(x, y, inputGroup, listBr);
+
+        })
+
+        inputTo.addEventListener("change", () => {
+
+            console.log(listBr);
+
+            y = ((new Date(inputTo.valueAsDate)).format('yyyy-mm-dd'));
+
+            sendGetFunc(x, y, inputGroup, listBr);
+                 
+        })
+        
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Statistics</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- Сам Реакт -->
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- Реакт DOM, позволяет работать с обычным html -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <!-- Подключаем babel через удаленный сервер CDN -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #20232a;
+        }
+
+        .date {
+            display: inline-block;
+            padding: 10px;
+            margin-right: 10px;
+
+        }
+
+        .result {
+            display: flex;
+            background-color: #282c34;
+            padding: 0 30px;
+            margin: 0 20px;
+        }
+
+        .result-item {
+            color: #61dafb;
+            margin: 7px 0;
+            padding: 6px;
+            flex-basis: 25%;
+            display: inline-block;
+        }
+
+        .inputDates {
+            padding: 10px 30px 10px 30px;
+            background-color: #20232a;
+            color: white;
+        }
+
+        #head {
+            margin-bottom: 10px;
+            font-size: bold;
+        }
+        
+        .inputGroup {
+            display: inline-block;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root1"></div>
+    <div id="head"></div>
+    <div id="output"></div>
+
+    <script type="text/babel">
+
+        function InputDate(text) {
+            return (
+                <div className="date">
+                    <div>{text.name}</div>
+                    <input type="date"/>
+                </div>
+            )
+        }
+        // Функция возвращает Input с выбором даты и текстом
+
+        function Result(content) {
+            return (
+                <div className="result">
+                    <div className="result-item">{content.day}</div>
+                    <div className="result-item">{content.impressions}</div>
+                    <div className="result-item">{content.conversions}</div>
+                    <div className="result-item">{content.money}</div>
+                </div>
+            )
+        }
+        // Функция возвращает строку с 4 блоками - day, impressions, conversions и money
+
+        function InputGroupBy() {
+            return (
+                    <select className="inputGroup">
+                        <option>Day</option>
+                        <option>Impressions</option> 
+                        <option>Conversions</option> 
+                        <option>Money</option> 
+                    </select>
+            )
+        }
+        // Функция возвращает select с возможностью выбора параметров
+
+        const InputDates = (
+            <div className="inputDates">
+                <InputDate className="from" name="From"/>
+                <InputDate className="to" name="To"/>
+                <InputGroupBy/>
+            </div>       
+        )
+
+        // const InputGroup = (
+        //     <div className="inputGroup">
+        //         <InputGroupBy/>
+        //     </div>       
+        // )
+
+        const InputHead = (
+            <div className="inputHead">
+                <div><Result day="Day" impressions="Impressions" conversions="Conversions" money="Money"/></div>
+            </div>       
+        )
+
+        ReactDOM.render(
+            InputHead,
+            document.querySelector("#head")
+        )
+
+
+        ReactDOM.render(
+            InputDates,
+            document.querySelector("#root1")
+        )
+
+
+        let inputFrom = document.querySelectorAll(".date input")[0];
+        let inputTo = document.querySelectorAll(".date input")[1];
+
+        let arrGlobal = {
+
+        };
+
+        
+        
+        inputTo.addEventListener("change", () => {
+            // console.log(inputFrom.valueAsDate);
+
+            let inputToDate = inputTo.valueAsDate;
+            // Получаем дату из input
+            // console.log(inputToDate);
+
+            let data;
+
+            let request = new XMLHttpRequest();
+            // главный обьект для работы с запросом
+            request.open("GET", "http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07");
+            request.send();
+            // выполняем запрос
+
+
+            /* Когда запрос готов - создаем список: */
+            request.addEventListener("readystatechange", function () {
+
+                if (request.readyState === 4 && request.status == 200) {
+                    data = JSON.parse(request.response);
+                    // console.log(data.rows);
+
+                    function Result(content) {
+                        return (
+                            <div className="result">
+                                <div className="result-item">{content.day}</div>
+                                <div className="result-item">{content.impressions}</div>
+                                <div className="result-item">{content.conversions}</div>
+                                <div className="result-item">{content.money}</div>
+                            </div>
+                        )
+                    }
+
+                    let App = (a, b, c, d) => {
+
+                        let items = data.rows.map(item => {
+
+                            let itemDay = (item.day).replace(/-/g, ", ");
+                            // Выводим наши даты в подготовленной для создания Date форме: new Date(****, **, **)
+                            let itemDate = new Date(itemDay);
+                            // Подставляем значение в new Date и выводим
+                            // console.log(itemDate);
+
+                            if (inputToDate - itemDate >= 0) {
+                                // Разница в миллисекундах от указанного времени и - 1 день
+                                // console.log(itemDate + ": подходит под условия")
+
+                                if (inputFrom.valueAsDate !== null) {
+
+                                    if (inputFrom.valueAsDate - itemDate - 86400000 >= 0) {
+                                        // Разница в миллисекундах от указанного времени и - 1 день
+                                        // console.log(itemDate + ": НЕ подходит под условия")
+                                    } else {
+                                        // console.log(itemDate + ": подходит под условия")
+                                        
+
+                                        // arrGlobal.
+
+                                        return <Result day={item.day} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
+                                    }
+                                    
+                                } else {
+                                    return <Result day={item.day} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
+                                }
+
+                            } else {
+                                // console.log(itemDate + ": НЕ подходит под условия")
+                            }
+                             
+                        })
+
+                        return  <div>
+                                    {items}
+                                </div>    
+                        
+                    }
+
+                    ReactDOM.render(
+                        App(data.rows[0].day, data.rows[0].impressions, data.rows[0].clicks, data.rows[0].money),
+                        document.querySelector("#output")
+                    )
+
+                }
+            });
+            /* Когда запрос готов - создаем список */
+                
+        })
+
+        inputFrom.addEventListener("change", () => {
+            // console.log(inputTo.valueAsDate)
+
+            let inputFromDate = inputFrom.valueAsDate;
+            // Получаем дату из input
+            // console.log(inputFromDate);
+            let data;
+
+            let request = new XMLHttpRequest();
+            // главный обьект для работы с запросом
+            request.open("GET", "http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07");
+            request.send();
+            // выполняем запрос
+
+            /* Когда запрос готов - создаем список: */
+            request.addEventListener("readystatechange", function () {
+
+                if (request.readyState === 4 && request.status == 200) {
+                    data = JSON.parse(request.response);
+                    // console.log(data.rows);
+
+                    function Result(content) {
+                        return (
+                            <div className="result">
+                                <div className="result-item">{content.day}</div>
+                                <div className="result-item">{content.impressions}</div>
+                                <div className="result-item">{content.conversions}</div>
+                                <div className="result-item">{content.money}</div>
+                            </div>
+                        )
+                    }
+
+                    let App = (a, b, c, d) => {
+
+                        let items = data.rows.map(item => {
+
+                            let itemDay = (item.day).replace(/-/g, ", ");
+                            // Выводим наши даты в подготовленной для создания Date форме: new Date(****, **, **)
+                            let itemDate = new Date(itemDay);
+                            // Подставляем значение в new Date и выводим
+                            // console.log(itemDate);
+
+                            if (inputFromDate - itemDate - 86400000 >= 0) {
+                                // Разница в миллисекундах от указанного времени и - 1 день
+                                // console.log(itemDate + ": НЕ подходит под условия")
+                            } else {
+                                // console.log(itemDate + ": подходит под условия")
+
+                                if (inputTo.valueAsDate !== null) {
+
+                                    if (inputTo.valueAsDate - itemDate >= 0) {
+                                
+                                    return <Result day={item.day} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
+                                    
+                                }
+                                } else {
+                                    return <Result day={item.day} impressions={item.impressions} conversions={item.clicks} money={item.money}/>
+                                }
+
+
+                            }
+                             
+                        })
+
+                        return  <div>
+                                    {items}
+                                </div>    
+                        
+                    }
+
+                    ReactDOM.render(
+                        App(data.rows[0].day, data.rows[0].impressions, data.rows[0].clicks, data.rows[0].money),
+                        document.querySelector("#output")
+                    )
+
+                }
+            });
+            /* Когда запрос готов - создаем список */
+                
+        })
+
+        
+
+
+
+
+        
+    </script>
+
+
+
+</body>
+
+</html>

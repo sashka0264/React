@@ -4,75 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>Statistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <!-- Сам Реакт -->
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <!-- Реакт DOM, позволяет работать с обычным html -->
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <!-- Подключаем babel через удаленный сервер CDN -->
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #20232a;
-        }
-
-        .date {
-            display: inline-block;
-            padding: 10px 0 10px 0;
-            margin-right: 10px;
-
-        }
-
-        .result {
-            display: flex;
-            background-color: #282c34;
-            padding: 0 30px;
-            margin: 0 20px;
-        }
-
-        .result-item {
-            color: #61dafb;
-            margin: 7px 0;
-            padding: 6px;
-            flex-basis: 25%;
-            display: inline-block;
-        }
-
-        .inputDates {
-            
-            background-color: #20232a;
-            color: white;
-        }
-
-        #head {
-            margin-bottom: 10px;
-            font-size: bold;
-        }
-
-        #root1 {
-            display: block;
-            padding: 10px 30px 10px 30px;
-        }
-        
-
-        .selectBrowser {
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .selectSistem {
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .select-item {
-            display: inline-block;
-            display: inline-block;
-            height: 24px;
-            margin-right: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -107,7 +46,7 @@
         function InputGroupBy() {
             return (
                     <div>
-                        <div className="select-item">
+                        <div className="select__item">
                             <div>Platform</div>
                             <select className="inputGroup">
                                 <option>Desktop</option>
@@ -115,7 +54,7 @@
                             </select>
                         </div>
 
-                        <div className="select-item">
+                        <div className="select__item">
                             <div>Group by</div>
                             <select className="groupBy">
                                 <option value="day">Day</option>
@@ -135,7 +74,7 @@
         function SelectBrowser() {
             return (
 
-                <div> 
+                <div className="select__item"> 
                     <div>Browser</div>
                     <select className="selectBrowser" multiple>
                         <option value="1">Chrome</option>
@@ -155,7 +94,7 @@
         function SelectSistem() {
             return (
 
-                <div> 
+                <div className="select__item"> 
                     <div>SelectSistem</div>
                     <select className="selectSistem" multiple>
                         <option value="1">Windows</option>
@@ -209,7 +148,7 @@
         
         const InputHead = (
             <div className="inputHead">
-                <div><Result day="Day" impressions="Impressions" conversions="Conversions" money="Money"/></div>
+                <div><Result day="Day (can be customized)" impressions="Impressions" conversions="Conversions" money="Money"/></div>
             </div>       
         )
         // Шапка таблицы с информацией что и где должно располагаться

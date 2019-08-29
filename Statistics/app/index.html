@@ -169,6 +169,8 @@
         // Самая главная функция (!) - через которую проходят все полученные данные и выводятся на страницу
 
         
+        
+
         Date.prototype.format = function(format = 'yyyy-mm-dd') {
             const replaces = {
                 yyyy: this.getFullYear(),
@@ -331,7 +333,7 @@
 
         });
             
-        /* let request = new XMLHttpRequest();
+        let request = new XMLHttpRequest();
         request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=2019-07-01&to=2019-07-07&offset=0&limit=25`);
         request.send();      
    
@@ -344,7 +346,7 @@
                 console.log(test); 
 
             }
-        }); */
+        });
 
         let inputGroups = document.querySelector(".inputGroup");
         // Переменная select с выбором платформы

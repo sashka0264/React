@@ -13,16 +13,14 @@ const MyPosts = () => {
 
       <div className="app-content__posts">
         <div className="app-content__posts-title">My posts:</div>
-          <Post message="Some text" likes="7"/>
-          <Post message="Some text" likes="2"/>
-          <Post message="Some text" likes="2"/>
-          <Post message="Some text" likes="2"/>
+          <Post message="Some text" likes="0"/>
           <Post message="Some text" likes="2"/>
       </div>
 
     </div>
   );
 };
+
 
 export default MyPosts;
 

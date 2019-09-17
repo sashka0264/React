@@ -1,7 +1,14 @@
 .app-dialogs {
-    grid-area: contentText;
-    margin: 0 0 5px 0;
-    border-radius: 2px;
-    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
-    background-color: #ebecf0;
+    display: grid;
+    grid-template-columns: 2.5fr 9.5fr
+}
+
+.app-dialogs-messages {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.app-dialogs-items {
+    padding: 10px;
+    margin-top: 10px;
 }

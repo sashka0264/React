@@ -3,17 +3,6 @@
     margin: 0 0 5px 0;
 }
 
-.app-content__images {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 5px;
-}
-
-.app-content__images-image {
-    display: inline-block;
-    width: 24.4%;
-    height: 200px;
-}
 
 .app-content__avatar {
     width: 250px;
@@ -22,16 +11,7 @@
 
 .app-content-avatarAndDescription {
     display: flex;
-    background-color: #ebecf0;
-    border-radius: 2px;
-    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
     padding: 10px;
-}
-
-.app-content-photos {
-    background-color: #ebecf0;
-    padding: 10px;
-    margin-top: 10px;
 }
 
 .app-content__name {
@@ -43,3 +23,4 @@
     font-size: 13px;
     cursor: pointer;
 }
+

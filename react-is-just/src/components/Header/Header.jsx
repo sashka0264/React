@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Header.css";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header className="app-header">
         <img className="app-header__image" src="https://www.shareicon.net/data/128x128/2016/07/10/119874_apps_512x512.png"></img>
@@ -10,4 +10,6 @@ const Header = () => {
   );
 };
 
+
+ 
 export default Header;

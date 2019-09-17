@@ -2,7 +2,14 @@ import React from 'react';
 import "./MyPosts.css";
 import Post from './Post/Post';
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+  let postsElements = props.posts.map( (item) => {
+    return (
+      <Post message={item.message} likes={item.likes}/>
+    );
+  });
+
   return (
     <div className="app-content-posts">
 
@@ -13,8 +20,7 @@ const MyPosts = () => {
 
       <div className="app-content__posts">
         <div className="app-content__posts-title">My posts:</div>
-          <Post message="Some text" likes="0"/>
-          <Post message="Some text" likes="2"/>
+        {postsElements}
       </div>
 
     </div>

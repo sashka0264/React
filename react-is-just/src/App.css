@@ -7,7 +7,7 @@ body {
 .app-wrapper {
   display: grid;
   grid-template-rows: 70px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 2.4fr 9.6fr;
   grid-gap: 10px;
   grid-template-areas: 
   "header header header"

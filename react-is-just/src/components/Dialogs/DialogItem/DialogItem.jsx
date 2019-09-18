@@ -8,6 +8,7 @@ const DialogItem = (props) => {
 
     return (
         <NavLink to={path} className="app-dialogs-items__item">
+            <img src="https://sun9-19.userapi.com/c629400/v629400532/3b34b/Q_OvSVHf4iU.jpg"></img>
             {props.name}
         </NavLink>
     )

@@ -4,13 +4,13 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import "./Profile.css";
 
 const Profile = (props) => {
-
+ 
   return (
     <div className="app-content">
 
         <ProfileInfo/>
 
-        <MyPosts posts={props.posts}/>
+        <MyPosts posts={props.state.posts}/>
         
     </div>
   );

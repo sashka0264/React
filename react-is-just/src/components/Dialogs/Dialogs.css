@@ -1,6 +1,6 @@
 .app-dialogs {
     display: grid;
-    grid-template-columns: 2.5fr 9.5fr
+    grid-template-columns: 3.2fr 8.8fr
 }
 
 .app-dialogs-messages {

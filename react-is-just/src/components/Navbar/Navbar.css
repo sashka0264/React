@@ -21,27 +21,3 @@
   font-weight: 600;
 }
 
-/* Друзья */
-
-.app-nav-friends {
-  margin: 0 0 5px 0;
-  padding: 10px;
-}
-
-.app-nav-friends__title {
-  margin-bottom: 10px;
-}
-
-.app-nav-friends__items {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.app-nav-friends__items img {
-  display: flex;
-  width: 50px;
-  height: 50px;
-  background-position: top;
-  margin: 0 5px 5px 0;
-  border-radius: 50%;
-}

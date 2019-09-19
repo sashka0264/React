@@ -4,11 +4,34 @@
 }
 
 .app-dialogs-messages {
-    padding: 10px;
+    padding: 10px 10px 100px 10px;
     margin-top: 10px;
+    position: relative;
 }
 
 .app-dialogs-items {
     padding: 10px;
     margin-top: 10px;
+}
+
+.app-dialogs-messages__textarea {
+    margin: 9px;
+    border-radius: 6px;
+    padding: 19px;
+    background-color: #ebecf0;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    position: absolute;
+    bottom: 11px;
+    width: 79.5%;
+}
+
+.app-dialogs-messages__send {
+    margin: 9px;
+    border-radius: 6px;
+    padding: 26px 19px 26px 19px;
+    background-color: #ebecf0;
+    position: absolute;
+    bottom: 11px;
+    width: 10%;
+    right: 0;
 }

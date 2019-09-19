@@ -16,9 +16,16 @@ let state = {
         messages: [ 
             {id: 1, content: "Привет, Саня!"}, 
             {id: 2, content: "Как дела-то?"}, 
-            {id: 3, content: "=)"}, 
+            {id: 3, content: "=)"}
         ]
         // Данные с сервера в виде массива обьектов
     }
 };
+
+export let addPost = (postMessage) => {
+    let newPost = {id: 5, message: postMessage, likes: 0};
+
+    state.profilePage.posts.push(newPost);
+};
+
 export {state};

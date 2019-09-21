@@ -1,8 +1,11 @@
 .app-content__posts-post {
     font-size: 13px;
     display: flex;
-    margin: 15px 0 5px 0;
+    margin-top: 1px;
     position: relative;
+    padding: 15px 20px 15px 20px;
+    min-height: 50px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
 
 .app-content__posts-avatar {
@@ -29,4 +32,5 @@
     justify-content: center;
     cursor: pointer;
     align-items: center;
+    bottom: 10px;
 }

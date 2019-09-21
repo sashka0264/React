@@ -18,8 +18,8 @@ const App = (props) => {
         <Navbar/>
 
         <div className="app-reference">
-          <Route path="/profile" render={ () => <Profile state={props.state.profilePage} addPost={props.addPost}/> }/>
-          <Route path="/dialogs" render={ () => <Dialogs state={props.state.messagesPage}/> }/> 
+          <Route path="/profile" render={ () => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/> }/>
+          <Route path="/dialogs" render={ () => <Dialogs state={props.state.messagesPage} updateNewMessageText={props.updateNewMessageText}/> }/> 
           {/* Когда Route срабатывает, функция возвращает компонент */}
 
           <Route path="/news" component={News}/>

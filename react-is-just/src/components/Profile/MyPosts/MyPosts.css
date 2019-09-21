@@ -11,8 +11,7 @@
 
 .app-content__posts {
     margin: 10px 0 0 0;
-
-    padding: 10px;
+    padding: 10px 0;
 }
 
 .app-content__letter-textarea {
@@ -22,11 +21,18 @@
 
 .app-content__posts-title {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    padding: 0 10px;
 }
 
 .app-content__letter-send {
     width: 100%;
     height: 30px;
     margin-top: 10px;
+    border: 1px solid #c1c5d6;
 }
+
+.app-content__posts-text {
+    min-height: 72px;
+}
+

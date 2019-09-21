@@ -18,10 +18,16 @@ const Dialogs = (props) => {
     });
     // Преобразование массива данных в массив компонентов
     let newMessageElement = React.createRef();
+
     let addMessage = () => {
         let text = newMessageElement.current.value;
-
         alert(text);
+    };
+
+    let onMessageChange = () => {
+        let text = newMessageElement.current.value;
+        // updateNewMessageText
+        props.updateNewMessageText(text);
     };
 
     return (
@@ -38,7 +44,7 @@ const Dialogs = (props) => {
                 {messagesElements}
 
 
-                <textarea ref={newMessageElement} className="app-dialogs-messages__textarea" placeholder="Write a message..."></textarea>
+                <textarea onChange={onMessageChange} ref={newMessageElement} className="app-dialogs-messages__textarea" placeholder="Write a message..."></textarea>
                 <button onClick={addMessage} className="app-dialogs-messages__send">send</button>
             </div>
         </div>

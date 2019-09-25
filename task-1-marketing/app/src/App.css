@@ -1,9 +1,18 @@
-.app {
+.app-inference {
     display: inline-block;
     background-color: gainsboro;
     padding: 12px 0px 15px 25px;
     border-radius: 5px;
+    max-height: 430px;
 }
+
+.app-output {
+    margin-top: 10px;
+    border-radius: 5px;
+    background: gainsboro;
+    padding: 10px 10px 20px 10px;
+}
+
 
 .app-dates {
     display: flex;
@@ -16,3 +25,6 @@
     max-width: 330px;
     margin-top: 20px;
 }
+
+
+

@@ -23,7 +23,8 @@ let state = {
     sistem: {
         selectSistem: [{value: "Windows", checked: false}, {value: "Mac OS", checked: false},
         {value: "Linux", checked: false}, {value: "Android", checked: false}, {value: "IOS", checked: false}]
-    }
+    },
+    output: {}
 }
 window.state = state;
 
@@ -55,7 +56,6 @@ export let changeGroup = (value) => {
 // Функция перезаписи данных группировки
 
 export let changeBrowser = (e) => {
-
     state.browser.selectBrowser.forEach( (item) => {
      
         if (item.value === e.target.value) {
@@ -71,7 +71,6 @@ export let changeBrowser = (e) => {
 // Функция перезаписи данных браузеров
 
 export let changeSistem = (e) => {
-
     state.sistem.selectSistem.forEach( (item) => {
      
         if (item.value === e.target.value) {
@@ -85,6 +84,14 @@ export let changeSistem = (e) => {
     rerenderEntireTree(state);
 }
 // Функция перезаписи данных систем
+
+export let createSend = (request) => {
+
+    request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=day&from=${state.datesPage.from}&to=${state.datesPage.to}`);
+    request.send();
+    
+}
+// Функция запроса и получения обьекта данных с информацией
 
 
 export {state};

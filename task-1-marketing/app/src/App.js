@@ -11,21 +11,26 @@ const App = (props) => {
     
     return (
         <div className="app">
-            <div className="app-dates">
-                <Dates datesPage={props.state.datesPage} overwrite={props.overwrite} name="From"/>  
-                <Dates datesPage={props.state.datesPage} overwrite={props.overwrite} name="To"/>  
+            <div className="app-inference">
+                <div className="app-dates">
+                    <Dates datesPage={props.state.datesPage} overwrite={props.overwrite} name="From"/>  
+                    <Dates datesPage={props.state.datesPage} overwrite={props.overwrite} name="To"/>  
+                </div>
+
+                <div className="app-grouping">
+                    <PlatformPage changePlatform={props.changePlatform} platformPage={props.state.platformPage} name="Platform"/>
+                    <GroupBy changeGroup={props.changeGroup} groupBy={props.state.groupBy} name="Group by"/> 
+                </div>
+                
+                <div className="app-software">
+                    <SelectBrowser changeBrowser={props.changeBrowser} browser={props.state.browser} name="Browsers"/>
+                    <SelectSistem changeSistem={props.changeSistem} sistem={props.state.sistem} name="Select sistem"/>
+                </div>
             </div>
 
-            <div className="app-grouping">
-                <PlatformPage changePlatform={props.changePlatform} platformPage={props.state.platformPage} name="Platform"/>
-                <GroupBy changeGroup={props.changeGroup} groupBy={props.state.groupBy} name="Group by"/> 
+            <div className="app-output" id="output">
+                <List output={props.state.output}/> 
             </div>
-            
-            <div className="app-software">
-                <SelectBrowser changeBrowser={props.changeBrowser} browser={props.state.browser} name="Browsers"/>
-                <SelectSistem changeSistem={props.changeSistem} sistem={props.state.sistem} name="Select sistem"/>
-            </div>
-            {/* <List day="Day" impressions="Impressions" conversions="Conversions" money="Money"/>  */}
         </div>
     )
 }

@@ -21,8 +21,8 @@ let state = {
         {value: "Opera Mini", checked: false}]
     }, 
     sistem: {
-        selectSistem: ["Windows", "Mac OS", "Linux", "Android", "IOS"], 
-        selectedSistem: ["Mac OS"]
+        selectSistem: [{value: "Windows", checked: false}, {value: "Mac OS", checked: false},
+        {value: "Linux", checked: false}, {value: "Android", checked: false}, {value: "IOS", checked: false}]
     }
 }
 window.state = state;
@@ -66,24 +66,25 @@ export let changeBrowser = (e) => {
             }
         }
     })
-
     rerenderEntireTree(state);
 }
 // Функция перезаписи данных браузеров
 
-export let changeSistem = (list) => {
+export let changeSistem = (e) => {
 
-    state.sistem.selectedSistem = [];
-
-    // for (let i = 0; i < list.current.children.length; i++) {
-    //     if (list.current.children[i].children[0].checked === true) {
-    //         state.sistem.selectedSistem.push(list.current.children[i].children[0].value);
-    //     };
-    // }
-
+    state.sistem.selectSistem.forEach( (item) => {
+     
+        if (item.value === e.target.value) {
+            if (item.checked === false) {
+                item.checked = true;
+            } else {
+                item.checked = false;
+            }
+        }
+    })
     rerenderEntireTree(state);
 }
-// Функция перезаписи данных системы 
+// Функция перезаписи данных систем
 
 
 export {state};

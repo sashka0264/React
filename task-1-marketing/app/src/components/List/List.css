@@ -1,0 +1,13 @@
+.app-list {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.app-list__item {
+    width: 100%;
+    border: 1px solid gray;
+    margin-left: -1px;
+    display: flex;
+    justify-content: center;
+}

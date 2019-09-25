@@ -1,0 +1,15 @@
+.app-dates__item-input {
+    padding: 5px 0 5px 10px;
+    border: none;
+    margin: 5px 30px 0 0;
+    box-shadow: inset 2px 3px 7px rgba(0,0,0,.35);
+    background-color: rgba(255,127,99,.26);
+    color: #ff7f63;
+    outline: none;
+}
+
+.app-dates__item-name {
+    font-weight: bold;
+}
+
+

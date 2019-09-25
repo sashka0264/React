@@ -1,0 +1,20 @@
+.app-browsers {
+    margin: 10px 0 0 24px;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.app-browsers-items__item {
+    display: flex;
+    align-items: center;
+}
+
+.app-browsers__name {
+    font-weight: bold;
+}
+
+.app-browsers-items__item-input {
+    height: 20px;
+    width: 20px;
+}
+

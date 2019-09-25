@@ -1,0 +1,20 @@
+.app-platform {
+    padding-top: 10px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.app-platform-select {
+    width: 149.86px;
+    padding: 6.5px 0 6.5px 10px;
+    border: none;
+    margin: 5px 20px 0 0;
+    box-shadow: inset 2px 3px 7px rgba(0,0,0,.35);
+    background-color: rgba(255,127,99,.26);
+    color: #ff7f63;
+    outline: none;
+}
+
+.app-platform__name {
+    font-weight: bold;
+}

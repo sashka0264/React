@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "./index.css";
 import {App} from './App'
-import {overwrite, changePlatform, changeGroup, changeBrowser, changeSistem, createSend} from "./redux/state";
+import {overwrite, changePlatform, changeGroup, changeBrowser, changeSistem, createSend, changePage} from "./redux/state";
 
 export let rerenderEntireTree = (state) => {
 
@@ -14,11 +14,15 @@ export let rerenderEntireTree = (state) => {
         request.addEventListener("readystatechange", () => {
             if (request.readyState === 4 && request.status === 200) {
                 state.output = JSON.parse(request.response);
-                ReactDOM.render(<App state={state} changeSistem={changeSistem} changeBrowser={changeBrowser} changeGroup={changeGroup} changePlatform={changePlatform} overwrite={overwrite}/>, document.getElementById('root'));
+
+                let pages = Math.ceil(JSON.parse(request.response).count/25);
+                state.page.pages = pages;
+                
+                ReactDOM.render(<App state={state} changeSistem={changeSistem} changeBrowser={changeBrowser} changeGroup={changeGroup} changePlatform={changePlatform} overwrite={overwrite} changePage={changePage}/>, document.getElementById('root'));
             }
         });   
     } else {
         state.output = {};
-        ReactDOM.render(<App state={state} changeSistem={changeSistem} changeBrowser={changeBrowser} changeGroup={changeGroup} changePlatform={changePlatform} overwrite={overwrite}/>, document.getElementById('root'));
+        ReactDOM.render(<App state={state} changeSistem={changeSistem} changeBrowser={changeBrowser} changeGroup={changeGroup} changePlatform={changePlatform} overwrite={overwrite} changePage={changePage}/>, document.getElementById('root'));
     }
 }

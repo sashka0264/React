@@ -1,0 +1,11 @@
+.app-pages {
+    display: flex;
+}
+
+.app-pages__page {
+    padding: 8px 14px;
+    background: #E8E8E8;
+    margin: 10px;
+    box-shadow: inset 1px 2px 6px rgba(0,0,0,.35);
+    border-radius: 25px;
+}

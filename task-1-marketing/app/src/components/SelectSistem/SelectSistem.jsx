@@ -3,12 +3,12 @@ import "./SelectSistem.css";
 
 const SelectSistem = (props) => {
 
-    let selectElements = props.sistem.selectSistem.map( (item) => {
+    let selectElements = props.sistem.selectSistem.map( (item, index) => {
 
         return (
-            <div className="app-browsers-items__item">
-                <input className="app-browsers-items__item-input" readOnly checked={item.checked} type="checkbox" value={item.value}/>
-                <div className="app-browsers-items__item-name">{item.value}</div> 
+            <div key={index} className="app-browsers-items__item">
+                <input className="app-browsers-items__item-input" readOnly checked={item.checked} type="checkbox" value={item.label}/>
+                <div className="app-browsers-items__item-name">{item.label}</div> 
             </div>
         )
     });

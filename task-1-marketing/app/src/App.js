@@ -29,7 +29,7 @@ const App = (props) => {
             </div>
 
             <div className="app-output" id="output">
-                <List output={props.state.output}/> 
+                <List changePage={props.changePage} page={props.state.page} selectedGroup={props.state.groupBy.selectedGroup} output={props.state.output}/> 
             </div>
         </div>
     )

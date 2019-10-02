@@ -6,6 +6,7 @@
     background-color: rgba(255,127,99,.26);
     color: #ff7f63;
     outline: none;
+    border-radius: 3px;
 }
 
 .app-dates__item-name {

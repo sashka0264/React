@@ -23,14 +23,13 @@ let state = {
     },
     output: {},
     page: {
-        pages: 0,
+        pages: 1,
         usePage: 1
     }, 
 }
 window.state = state;
 
 export let getServerData = (url, arrInState) => {
-    // debugger;
     fetch(`http://localhost:3000/api/v1/${url}`)
 
     .then( (response) => {
@@ -68,7 +67,7 @@ export let getServerData = (url, arrInState) => {
     })
 
     .catch( (error) => {
-        console.error(`Ошибка в соединении с сервером: '${error}'`);
+        console.error(`Ошибка при соединении с сервером: '${error.message}'`);
     });
 
 }
@@ -156,9 +155,8 @@ export let changeSistem = (e) => {
 
 export let changePage = (e) => {
     if (e.target.classList.contains("app-pages__page")) {
-        state.page.usePage = e.target.innerHTML;
+        state.page.usePage = +e.target.innerHTML;
     } 
-    console.log(state.page.usePage);
 
     rerenderEntireTree(state);
 }
@@ -191,7 +189,7 @@ export let createSend = () => {
     })
 
     .catch( (error) => {
-        console.error(`Ошибка в соединении с сервером: '${error}'`);
+        console.error(`Ошибка при соединении с сервером: '${error.message}'`);
     });
 
     return promise;

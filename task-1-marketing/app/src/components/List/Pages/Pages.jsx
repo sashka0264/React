@@ -7,6 +7,11 @@ const Pages = (props) => {
         arr.push(i);
     }
     let pages = arr.map( (item, index) => {
+        if (item <= props.page.usePage) {
+            return (
+                <div key={index} className="app-pages__page app-pages__page-active">{item}</div>
+            )
+        }
         return (
             <div key={index} className="app-pages__page">{item}</div>
         )

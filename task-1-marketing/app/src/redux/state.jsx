@@ -158,30 +158,33 @@ export let changePage = (e) => {
 }
 // Функция перезаписи данных выбранной страницы
 
-export let createSend = (request) => {
-    let groupBy = state.groupBy.selectedGroup,
-        platform = state.platformPage.selectedPlatform["value"];
+export let createSend = () => {
+    let group = state.groupBy.selectedGroup,
+        platform = state.platformPage.selectedPlatform["value"],
+        from = state.datesPage.from,
+        to = state.datesPage.to,
+        browsers = state.browser.requestBrowser,
+        sistems = state.sistem.requestSistem,
+        limit = state.page.usePage*25;
+
+    let promise = fetch(`http://localhost:3000/api/v1/statistics?groupBy=${group}&platform=${platform}
+        &from=${from}
+        &to=${to}
+        ${browsers}
+        ${sistems}
+        &limit=${limit}`
+    )
+
+    .then( (response) => {
+        return response.json();
+    })
+
+    .then( (data) => {
+        state.output = data;
+        state.page.pages = Math.ceil(data.count/25);
+    });
     
-    // fetch(`http://localhost:3000/api/v1/statistics?groupBy=${groupBy}&platform=${platform}
-    //     &from=${state.datesPage.from}
-    //     &to=${state.datesPage.to}
-    //     ${state.browser.requestBrowser}
-    //     ${state.sistem.requestSistem}
-    //     &limit=${state.page.usePage*25}`
-    // )
-
-    // .then( (response) => {
-    //     return response.json()
-    // })
-
-    // .then( (data) => {
-    //     console.log(data);
-    // });
-
-    request.open("GET", `http://localhost:3000/api/v1/statistics?groupBy=${groupBy}&platform=${platform}&from=
-    ${state.datesPage.from}&to=${state.datesPage.to}${state.browser.requestBrowser}${state.sistem.requestSistem}&limit=${state.page.usePage*25}`);
-    request.send();
-    
+    return promise;
 }
 // Функция запроса и получения обьекта данных с информацией
 

@@ -29,6 +29,7 @@ const List = (props) => {
                     <div className="app-list__item">{props.selectedGroup}</div>     
                 </div>
                 {createElements}
+                
                 <Pages changePage={props.changePage} page={props.page}/>
             </div>
         )

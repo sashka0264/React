@@ -8,4 +8,11 @@
     margin: 10px;
     box-shadow: inset 1px 2px 6px rgba(0,0,0,.35);
     border-radius: 25px;
+    transition: 0.3s ease-in-out
+}
+
+.app-pages__page:hover {
+    cursor: pointer;
+    box-shadow: inset 1px 2px 6px rgba(0,0,0,.75);
+    transition: 0.3s ease-in-out
 }

@@ -65,6 +65,10 @@ export let getServerData = (url, arrInState) => {
             }
         }
     })
+
+    .catch( (error) => {
+        console.error(`Ошибка в соединении с сервером: '${error}'`);
+    });
 }
 // Функция получения данных с сервера о браузерах и ОS
 
@@ -182,8 +186,12 @@ export let createSend = () => {
     .then( (data) => {
         state.output = data;
         state.page.pages = Math.ceil(data.count/25);
+    })
+
+    .catch( (error) => {
+        console.error(`Ошибка в соединении с сервером: '${error}'`);
     });
-    
+
     return promise;
 }
 // Функция запроса и получения обьекта данных с информацией

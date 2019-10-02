@@ -30,6 +30,7 @@ let state = {
 window.state = state;
 
 export let getServerData = (url, arrInState) => {
+    // debugger;
     fetch(`http://localhost:3000/api/v1/${url}`)
 
     .then( (response) => {
@@ -69,6 +70,7 @@ export let getServerData = (url, arrInState) => {
     .catch( (error) => {
         console.error(`Ошибка в соединении с сервером: '${error}'`);
     });
+
 }
 // Функция получения данных с сервера о браузерах и ОS
 

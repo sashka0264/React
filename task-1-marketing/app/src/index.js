@@ -29,7 +29,6 @@ getServerData("platforms", state.platformPage.selectPlatform);
 // Данные о платформах
 getServerData("groups", state.groupBy.selectGroup);
 // Данные о группировках
-rerenderEntireTree(state);
 
 subscribe(rerenderEntireTree);
 

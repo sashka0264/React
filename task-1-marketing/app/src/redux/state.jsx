@@ -1,4 +1,8 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () => {};
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
+}
 
 let state = {
     datesPage: {

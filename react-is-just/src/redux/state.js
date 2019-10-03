@@ -1,4 +1,5 @@
-import {rerenderEntireTree} from "../render";
+// import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () => {};
 
 let state = {
     profilePage: {
@@ -25,7 +26,7 @@ let state = {
     }
 };
 
-export let addPost = (postMessage) => {
+export const addPost = (postMessage) => {
     let newPost = {id: 3, message: postMessage, likes: 0};
     state.profilePage.posts.reverse().push(newPost);
     state.profilePage.posts.reverse();
@@ -34,14 +35,18 @@ export let addPost = (postMessage) => {
     rerenderEntireTree(state);
 };
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 };
 
-export let updateNewMessageText = (newText) => {
+export const updateNewMessageText = (newText) => {
     state.messagesPage.newMessageText = newText;
     rerenderEntireTree(state);
+};
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
 };
 
 window.state = state;

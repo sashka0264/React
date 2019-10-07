@@ -13,18 +13,18 @@ const App = (props) => {
         <div className="app">
             <div className="app-inference">
                 <div className="app-dates">
-                    <Dates datesPage={props.state.datesPage} overwrite={props.overwrite} name="From"/>  
-                    <Dates datesPage={props.state.datesPage} overwrite={props.overwrite} name="To"/>  
+                    <Dates datesPage={props.state.datesPage} store={props.store} name="From"/>  
+                    <Dates datesPage={props.state.datesPage} store={props.store} name="To"/>  
                 </div>
 
                 <div className="app-grouping">
-                    <PlatformPage changePlatform={props.changePlatform} platformPage={props.state.platformPage} name="Platform"/>
-                    <GroupBy changeGroup={props.changeGroup} groupBy={props.state.groupBy} name="Group by"/> 
+                    <PlatformPage changePlatform={props.changePlatform} platformPage={props.state.platformPage} store={props.store} name="Platform"/>
+                    <GroupBy changeGroup={props.changeGroup} groupBy={props.state.groupBy} store={props.store} name="Group by"/> 
                 </div>
                 
                 <div className="app-software">
-                    <SelectBrowser changeBrowser={props.changeBrowser} browser={props.state.browser} name="Browsers"/>
-                    <SelectSistem changeSistem={props.changeSistem} sistem={props.state.sistem} name="Select sistem"/>
+                    <SelectBrowser changeBrowser={props.changeBrowser} browser={props.state.browser} store={props.store} name="Browsers"/>
+                    <SelectSistem changeSistem={props.changeSistem} sistem={props.state.sistem} store={props.store} name="Select sistem"/>
                 </div>
             </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import "./SelectSistem.css";
+import {newSistemCreator} from "../../redux/sistemReducer";
 
 const SelectSistem = (props) => {
 
@@ -16,7 +17,8 @@ const SelectSistem = (props) => {
     let selectList = React.createRef();
 
     let changeValue = (e) => {
-        props.changeSistem(e);
+        let action = newSistemCreator(e.target.value);
+        props.store.dispatch(action);
     }
 
     return (

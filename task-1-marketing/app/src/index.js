@@ -1,34 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import "./index.css";
-import {state, getServerData, subscribe} from "./redux/state";
+import {store} from "./redux/state";
 import {App} from './App'
-import {overwrite, changePlatform, changeGroup, changeBrowser, changeSistem, createSend, changePage} from "./redux/state";
 
 let rerenderEntireTree = (state) => {
     let to = state.datesPage.to,
         from = state.datesPage.from;
         
     if (to !== "" && from !== "" && to >= from) {
-        createSend()
+        store.createSend()
 
         .then( () => {
-            ReactDOM.render(<App state={state} changeSistem={changeSistem} changeBrowser={changeBrowser} changeGroup={changeGroup} changePlatform={changePlatform} overwrite={overwrite} changePage={changePage}/>, document.getElementById('root'));
+            ReactDOM.render(<App state={state} dispatch={store.dispatch.bind(store)} store={store}/>, document.getElementById('root'));
         }) 
     } else {
         state.output = {};
-        ReactDOM.render(<App state={state} changeSistem={changeSistem} changeBrowser={changeBrowser} changeGroup={changeGroup} changePlatform={changePlatform} overwrite={overwrite} changePage={changePage}/>, document.getElementById('root'));
+        ReactDOM.render(<App state={state} dispatch={store.dispatch.bind(store)} store={store}/>, document.getElementById('root'));
     }
 }
 
-getServerData("browsers", state.browser.selectBrowser);
+store.getServerData("browsers", store._state.browser.selectBrowser);
 // Данные о браузерах
-getServerData("operating-systems", state.sistem.selectSistem);
+store.getServerData("operating-systems", store._state.sistem.selectSistem);
 // Данные о системах
-getServerData("platforms", state.platformPage.selectPlatform);
+store.getServerData("platforms", store._state.platformPage.selectPlatform);
 // Данные о платформах
-getServerData("groups", state.groupBy.selectGroup);
+store.getServerData("groups", store._state.groupBy.selectGroup);
 // Данные о группировках
-
-subscribe(rerenderEntireTree);
+store.subscribe( () => {
+    let state = store.getState();
+    rerenderEntireTree(state);
+});
 

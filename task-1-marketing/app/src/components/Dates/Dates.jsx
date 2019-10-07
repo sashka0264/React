@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Dates.css";
+import {newDateCreator} from "../../redux/datesPageReducer";
 
 const Dates = (props) => {
     let dateValue;
@@ -12,7 +13,8 @@ const Dates = (props) => {
     }
 
     let inputChange = () => {
-        props.overwrite(props.name, date.current.value);
+        let action = newDateCreator(props.name, date.current.value);
+        props.store.dispatch(action);
     }
     return (
         <div className="app-dates__item">

@@ -1,5 +1,6 @@
 import React from 'react';
 import "./GroupBy.css";
+import {newGroupCreator} from "../../redux/groupByReducer";
 
 const GroupBy = (props) => {
     let selectElements = (props.groupBy.selectGroup).map( (item, index) => {
@@ -14,12 +15,12 @@ const GroupBy = (props) => {
     let changeValue = () => {
         let value = selectValue.current.value;
         value = value[0].toLowerCase() + value.slice(1);
-        props.changeGroup(value);
+        let action = newGroupCreator(value);
+        props.store.dispatch(action);
     }
 
     let valueFromProps = props.groupBy.selectedGroup;
     valueFromProps = valueFromProps[0].toUpperCase() + valueFromProps.slice(1);
-
     return (
         <div className="app-group">
             <div className="app-group__name">{props.name}</div>

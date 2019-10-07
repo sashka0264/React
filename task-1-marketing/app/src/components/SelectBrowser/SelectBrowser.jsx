@@ -1,5 +1,6 @@
 import React from 'react';
 import "./SelectBrowser.css";
+import {newBrowserCreator} from "../../redux/browserReducer";
 
 const SelectBrowser = (props) => {
     
@@ -16,7 +17,8 @@ const SelectBrowser = (props) => {
     let selectList = React.createRef();
 
     let changeValue = (e) => {
-        props.changeBrowser(e);
+        let action = newBrowserCreator(e.target.value);
+        props.store.dispatch(action);
     }
 
     return (

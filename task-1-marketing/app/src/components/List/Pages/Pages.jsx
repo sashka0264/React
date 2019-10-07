@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Pages.css";
+import changePageReducer from "../../../redux/changePageReducer";
 
 const Pages = (props) => {
     let arr = [];
@@ -20,7 +21,8 @@ const Pages = (props) => {
     let selectPage = React.createRef();
 
     let change = (e) => {
-        props.changePage(e);
+        let action = changePageReducer(e);
+        props.store.dispatch(action);
     }
 
     return (

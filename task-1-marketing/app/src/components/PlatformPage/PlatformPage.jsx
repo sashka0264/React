@@ -1,5 +1,6 @@
 import React from 'react';
 import "./PlatformPage.css";
+import {newPlatformCreator} from "../../redux/platformPageReducer";
 
 const PlatformPage = (props) => {
     let selectElements = (props.platformPage.selectPlatform).map( (item, index) => {
@@ -13,7 +14,9 @@ const PlatformPage = (props) => {
 
     let changeValue = () => {
         let value = selectValue.current.value;
-        props.changePlatform(value);
+
+        let action = newPlatformCreator(value);
+        props.store.dispatch(action);
     }
 
     return (

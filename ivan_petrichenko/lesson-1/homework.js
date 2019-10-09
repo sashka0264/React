@@ -15,7 +15,7 @@ const calcCash = (own = 0, everyCash) => {
     return total;
 }
 
-let money = calcCash(null, cash);
+const money = calcCash(null, cash);
 
 const makeBusiness = (owner, cash, emp, director = 'Victor') => {
     const sumSponsors = [...rus, ...eu, 'unexpected sponsor'];

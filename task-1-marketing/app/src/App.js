@@ -5,28 +5,29 @@ import List from "./components/List/List";
 import Groups from "./components/Groups/Groups";
 import Selects from "./components/Selects/Selects";
 
-const App = (props) => {
+const App = ({state, store}) => {
+
     return (
         <div className="app">
             <div className="app-inference">
                 <div className="app-dates">
-                    <Dates datesPage={props.state.datesPage} store={props.store} name="From"/>  
-                    <Dates datesPage={props.state.datesPage} store={props.store} name="To"/>  
+                    <Dates datesPage={state.datesPage} store={store} name="From"/>  
+                    <Dates datesPage={state.datesPage} store={store} name="To"/>  
                 </div>
 
                 <div className="app-grouping">
-                    <Groups platformPage={props.state.platformPage} store={props.store} name="Platform"/>
-                    <Groups groupBy={props.state.groupBy} store={props.store} name="Group by"/> 
+                    <Groups platformPage={state.platformPage} store={store} name="Platform"/>
+                    <Groups groupBy={state.groupBy} store={store} name="Group by"/> 
                 </div>
                 
                 <div className="app-software">
-                    <Selects selectBrowser={props.state.browser.selectBrowser} store={props.store} name="Browsers"/>
-                    <Selects selectSistem={props.state.sistem.selectSistem} store={props.store} name="Select sistem"/>
+                    <Selects selectBrowser={state.browser.selectBrowser} store={store} name="Browsers"/>
+                    <Selects selectSistem={state.sistem.selectSistem} store={store} name="Select sistem"/>
                 </div>
             </div>
 
             <div className="app-output" id="output">
-                <List selectedGroup={props.state.groupBy.selectedGroup} output={props.state.output} page={props.state.page} store={props.store}/> 
+                <List selectedGroup={state.groupBy.selectedGroup} output={state.output} page={state.page} store={store}/> 
             </div>
         </div>
     )

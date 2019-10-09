@@ -3,9 +3,7 @@ import "./Selects.css";
 import {newBrowserCreator} from "../../redux/browserReducer";
 import {newSistemCreator} from "../../redux/sistemReducer";
 
-const Selects = (props) => {
-    
-    const {name, selectBrowser, selectSistem, store} = props;
+const Selects = ({name, selectBrowser, selectSistem, store}) => {
     
     let arr, creator;
 
@@ -29,7 +27,6 @@ const Selects = (props) => {
     const changeValue = (e) => {
         const action = creator(e.target.value);
         store.dispatch(action);
-        console.log(action);
     }
 
     return (

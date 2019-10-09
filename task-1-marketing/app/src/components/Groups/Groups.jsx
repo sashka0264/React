@@ -3,24 +3,25 @@ import "./Groups.css";
 import {newGroupCreator} from "../../redux/groupByReducer";
 import {newPlatformCreator} from "../../redux/platformPageReducer";
 
-const Groups = (props) => {
+const Groups = ({name, groupBy, platformPage, store}) => {
+
     let arr, creator, value;
 
-    if (props.name === "Group by") {
-        arr = props.groupBy.selectGroup;
+    if (name === "Group by") {
+        arr = groupBy.selectGroup;
         creator = newGroupCreator;
-        value = props.groupBy.selectedGroup;
-    } else if (props.name === "Platform") {
-        arr = props.platformPage.selectPlatform;
+        value = groupBy.selectedGroup;
+    } else if (name === "Platform") {
+        arr = platformPage.selectPlatform;
         creator = newPlatformCreator;
-        value = props.platformPage.selectedPlatform["label"];
+        value = platformPage.selectedPlatform["label"];
     }   
 
     const selectElements = arr.map( (item, i) => {
         let x;
-        if (props.name === "Group by") {
+        if (name === "Group by") {
             x = item;
-        } else if (props.name === "Platform") {
+        } else if (name === "Platform") {
             x = item.label;
         }
 
@@ -35,12 +36,12 @@ const Groups = (props) => {
         const value = selectValue.current.value,
             action = creator(value);
 
-        props.store.dispatch(action);
+        store.dispatch(action);
     }
 
     return (
         <div className="app-groups">
-            <div className="app-groups__name">{props.name}</div>
+            <div className="app-groups__name">{name}</div>
             <select className="app-groups-select" value={value} onChange={changeValue} ref={selectValue}>{selectElements}</select>
         </div>
     )

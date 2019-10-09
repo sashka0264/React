@@ -2,12 +2,10 @@ import React from 'react';
 import "./Dates.css";
 import {newDateCreator} from "../../redux/datesPageReducer";
 
-const Dates = (props) => {
-    const {name, datesPage, store} = props;
+const Dates = ({name, datesPage, store}) => {
 
     let dateValue;
     const date = React.createRef();
-
 
     if (name === "To") {
         dateValue = datesPage.to;

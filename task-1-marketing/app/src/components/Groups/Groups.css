@@ -1,10 +1,10 @@
-.app-platform {
+.app-groups {
     padding-top: 10px;
     display: inline-block;
     margin-right: 10px;
 }
 
-.app-platform-select {
+.app-groups-select {
     width: 149.86px;
     padding: 6.5px 0 6.5px 10px;
     border: none;
@@ -16,6 +16,6 @@
     border-radius: 3px;
 }
 
-.app-platform__name {
+.app-groups__name {
     font-weight: bold;
 }

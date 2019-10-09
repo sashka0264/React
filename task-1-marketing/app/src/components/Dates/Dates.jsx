@@ -3,22 +3,25 @@ import "./Dates.css";
 import {newDateCreator} from "../../redux/datesPageReducer";
 
 const Dates = (props) => {
-    let dateValue;
-    let date = React.createRef();
+    const {name, datesPage, store} = props;
 
-    if (props.name === "To") {
-        dateValue = props.datesPage.to;
-    } else if (props.name === "From") {
-        dateValue = props.datesPage.from;
+    let dateValue;
+    const date = React.createRef();
+
+
+    if (name === "To") {
+        dateValue = datesPage.to;
+    } else if (name === "From") {
+        dateValue = datesPage.from;
     }
 
-    let inputChange = () => {
-        let action = newDateCreator(props.name, date.current.value);
-        props.store.dispatch(action);
+    const inputChange = () => {
+        const action = newDateCreator(name, date.current.value);
+        store.dispatch(action);
     }
     return (
         <div className="app-dates__item">
-            <div className="app-dates__item-name">{props.name}*</div>
+            <div className="app-dates__item-name">{name}*</div>
             <input className="app-dates__item-input" value={dateValue} onChange={inputChange} ref={date} type="date"/>
         </div>   
     )

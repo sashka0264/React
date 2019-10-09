@@ -15,7 +15,7 @@ const browserReducer = (state, action) => {
             }
         })
     
-        let arr = [];
+        const arr = [];
         state.selectBrowser.forEach( (item) => {
         
             if (item.checked === true) {

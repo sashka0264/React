@@ -5,7 +5,7 @@ import browserReducer from "./browserReducer";
 import sistemReducer from "./sistemReducer";
 import changePageReducer from "./changePageReducer";
 
-let store = {
+const store = {
     _state: {
         datesPage: {
             to: "",
@@ -89,7 +89,7 @@ let store = {
     // Функция получения данных с сервера о браузерах и ОS
     
     createSend() {
-        let group = this._state.groupBy.selectedGroup,
+        const group = this._state.groupBy.selectedGroup,
             platform = this._state.platformPage.selectedPlatform["value"],
             from = this._state.datesPage.from,
             to = this._state.datesPage.to,
@@ -97,7 +97,7 @@ let store = {
             sistems = this._state.sistem.requestSistem,
             limit = this._state.page.usePage*25;
     
-        let promise = fetch(`http://localhost:3000/api/v1/statistics?groupBy=${group}&platform=${platform}
+        const promise = fetch(`http://localhost:3000/api/v1/statistics?groupBy=${group}&platform=${platform}
             &from=${from}
             &to=${to}
             ${browsers}
@@ -122,6 +122,7 @@ let store = {
     },
     // Функция запроса и получения обьекта данных с информацией
     dispatch(action) {
+        // console.log(action);
         this._state.datesPage = datesPageReducer(this._state.datesPage, action);
         this._state.platformPage = platformPageReducer(this._state.platformPage, action);
         this._state.groupBy = groupByReducer(this._state.groupBy, action);

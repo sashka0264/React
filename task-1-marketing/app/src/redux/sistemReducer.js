@@ -16,7 +16,7 @@ const changeSistem = (state, action) => {
             }
         });
     
-        let arr = [];
+        const arr = [];
         state.selectSistem.forEach( (item) => {
             if (item.checked === true) {
                 arr.push("&operatingSystems[]=", item.value);

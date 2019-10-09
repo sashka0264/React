@@ -1,13 +1,13 @@
 import React from 'react';
 import "./Pages.css";
-import changePageReducer from "../../../redux/changePageReducer";
+import {newPageCreator} from "../../../redux/changePageReducer";
 
 const Pages = (props) => {
-    let arr = [];
+    const arr = [];
     for (let i = 1; i <= props.page.pages; i++) {
         arr.push(i);
     }
-    let pages = arr.map( (item, index) => {
+    const pages = arr.map( (item, index) => {
         if (item <= props.page.usePage) {
             return (
                 <div key={index} className="app-pages__page app-pages__page-active">{item}</div>
@@ -18,10 +18,10 @@ const Pages = (props) => {
         )
     })
 
-    let selectPage = React.createRef();
+    const selectPage = React.createRef();
 
-    let change = (e) => {
-        let action = changePageReducer(e);
+    const change = (e) => {
+        const action = newPageCreator(e.target, e.target.innerHTML);
         props.store.dispatch(action);
     }
 

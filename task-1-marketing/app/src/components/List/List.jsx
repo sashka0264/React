@@ -5,7 +5,7 @@ import "./List.css";
 const List = (props) => {
     if (Object.keys(props.output).length !== 0) {
 
-        let createElements = props.output.rows.map( (item, i) => {
+        const tableRow = props.output.rows.map( (item, i) => {
             return (
                 <div key={i} className="app-list">
                     <div className="app-list__item">{i+1}</div>
@@ -28,9 +28,9 @@ const List = (props) => {
                     <div className="app-list__item">Money</div>
                     <div className="app-list__item">{props.selectedGroup}</div>     
                 </div>
-                {createElements}
+                {tableRow}
                 
-                <Pages changePage={props.changePage} page={props.page}/>
+                <Pages store={props.store} page={props.page}/>
             </div>
         )
     } else {

@@ -19,6 +19,7 @@ const money = calcCash(null, cash);
 
 const makeBusiness = (owner, cash, emp, director = 'Victor') => {
     const sumSponsors = [...rus, ...eu, 'unexpected sponsor'];
+    
     console.log(`We have a business. Owner: ${owner}, director: ${director}.`); 
     console.log(`Our budget: ${money}. And our employers: ${emp}`);
     console.log('And we have a sponsors: ');

@@ -2,6 +2,40 @@ import React from 'react';
 import "./MyPosts.css";
 import Post from './Post/Post';
 import {addPostCreator, updateNewPostTextCreator} from "../../../redux/profile-reducer";
+import styled from "styled-components"
+
+const AppContent = styled.div`
+  margin-top: 10px;
+`;
+
+const AppContentSend = styled.div`
+  display: flex;
+  background-color: #ebecf0;
+  box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+  padding: 10px;
+  button {
+    width: 10%;
+    border: 0px solid #c1c5d6;
+    color: #6c757d;
+    outline: none;
+  }
+  textarea {
+    width: 90%;
+    padding: 7px 0 33px 5px;
+    border: none;
+  }
+`;
+
+const AppContentPosts = styled.div`
+  word-break: break-all;
+  margin: 10px 0 0 0;
+  padding: 10px 0;
+  span {
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+`;
 
 const MyPosts = (props) => {
   let postsElements = props.profilePage.posts.map( (item) => {
@@ -25,19 +59,17 @@ const MyPosts = (props) => {
   };
 
   return (
-    <div className="app-content-posts">
+    <AppContent>
+      <AppContentSend>
+        <textarea maxLength="280" onChange={onPostChange} value={props.profilePage.newPostText} ref={newPostElement} placeholder="What's new?"/>
+        <button onClick={addPosts}>send</button>
+      </AppContentSend>
 
-      <div className="app-content__letter">
-        <textarea onChange={onPostChange} value={props.profilePage.newPostText} ref={newPostElement} className="app-content__letter-textarea" placeholder="What's new?"/>
-        <button className="app-content__letter-send" onClick={ addPosts }>send</button>
-      </div>
-
-      <div className="app-content__posts">
-        <div className="app-content__posts-title">My posts:</div>
+      <AppContentPosts>
+        <span className="app-content__posts-title">My posts:</span>
         {postsElements}
-      </div>
-
-    </div>
+      </AppContentPosts>
+    </AppContent>
   );
 };
 

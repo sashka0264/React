@@ -1,8 +1,8 @@
-import {eu, rus, cash, money, sumSponsors} from './parts/moneyAndSponsors';
+import {eu, money, sumSponsors} from './parts/moneyAndSponsors';
 import {employersNames} from './parts/employers';
 
 class MakeBusiness {
-    constructor(owner, cash, emp, director = 'Victor') {
+    constructor(owner = "Alena", cash = 0, emp = "No", director = 'Victor') {
         this.owner = owner;
         this.cash = cash;
         this.emp = emp;

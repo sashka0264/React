@@ -1,8 +1,9 @@
-.bottom-panel {
+.panel {
   margin-top: 20px;
+  display: flex;
 }
 
-.bottom-panel .new-post-label {
+.panel .new-post-label {
   width: auto;
   flex-grow: 1;
   margin-right: 3px;

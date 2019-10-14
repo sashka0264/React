@@ -5,13 +5,8 @@ const sponsors = {
 };
 const {eu, rus, cash} = sponsors;
 
-const calcCash = (own, cash) => {
-    if ((isNaN(own) || own == '' || own == null)) {
-        own = 0;
-    }
-    const total = cash.reduce((a, b) => a + b, own);
-    return total;
-}
+const calcCash = (cash = 0) => cash.reduce((a, b) => a + b);
+
     
 const money = calcCash(null, cash);
 const sumSponsors = [...eu, ...rus, 'unexpected sponsor'];

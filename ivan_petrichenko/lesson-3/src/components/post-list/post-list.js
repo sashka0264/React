@@ -1,8 +1,9 @@
 import React from 'react';
 import PostListItem from "../post-list-item/post-list-item";
 import './post-list.css';
+import {ListGroup} from 'react-bootstrap';
 
-const PostList = ({data}) => {
+const PostList = ({data, onDelete}) => {
     
     const elements = data.map( (item) => {
         if (typeof item === "object") {
@@ -10,7 +11,7 @@ const PostList = ({data}) => {
 
             return (
                 <li key={id} className="app-list list-group-item">
-                    <PostListItem {...others}/>
+                    <PostListItem {...others} onDelete={() => onDelete(id)}/>
                 </li>
             )
         } else {
@@ -19,9 +20,9 @@ const PostList = ({data}) => {
     });
 
     return (
-        <ul className="app-list list-group">
+        <ListGroup className="app-list">
             {elements}
-        </ul>
+        </ListGroup>
     )
 }
 

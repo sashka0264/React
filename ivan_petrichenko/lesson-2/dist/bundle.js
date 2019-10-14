@@ -137,15 +137,11 @@ var eu = sponsors.eu,
     rus = sponsors.rus,
     cash = sponsors.cash;
 
-var calcCash = function calcCash(own, cash) {
-  if (isNaN(own) || own == '' || own == null) {
-    own = 0;
-  }
-
-  var total = cash.reduce(function (a, b) {
+var calcCash = function calcCash() {
+  var cash = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  return cash.reduce(function (a, b) {
     return a + b;
-  }, own);
-  return total;
+  });
 };
 
 var money = calcCash(null, cash);
@@ -185,7 +181,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var MakeBusiness =
 /*#__PURE__*/
 function () {
-  function MakeBusiness(owner, cash, emp) {
+  function MakeBusiness() {
+    var owner = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Alena";
+    var cash = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+    var emp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "No";
     var director = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'Victor';
 
     _classCallCheck(this, MakeBusiness);

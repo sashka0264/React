@@ -21,11 +21,11 @@ const HeaderBlock = styled.div`
     }
 `
 
-const AppHeader = () => {
+const AppHeader = ({liked, allPosts}) => {
     return (
         <HeaderBlock colored>
             <h1>Kolesnikov Alexandr</h1>
-            <h2>entries: 5, like it: 0</h2>
+            <h2>entries: {allPosts}, like it: {liked}</h2>
         </HeaderBlock>
     )
 }

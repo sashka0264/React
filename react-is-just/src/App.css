@@ -1,7 +1,9 @@
 body {
-  background-color: #c1c5d6;
+  background: #d7d8db;
+  /* background-color: #c1c5d6; */
   font-family: sans-serif;
   color: #101118;
+  background-size: cover;
 }
 
 .app-wrapper {
@@ -12,7 +14,7 @@ body {
   grid-template-areas: 
   "header header header"
   "nav contentText contentText";
-  max-width: 1200px;
+  max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -22,7 +24,14 @@ body {
   margin: 0 0 5px 0;
   border-radius: 2px;
   box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
-  background-color: #ebecf0;
+  background-color: #f2f2f2;
 }
 
-
+@media (max-width: 767px) {
+  .app-wrapper {
+    grid-template-columns: 0 12fr;
+    grid-template-areas: 
+    "header header header"
+    "contentText contentText contentText";
+  }
+}

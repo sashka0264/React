@@ -3,15 +3,15 @@
     margin: 0 0 5px 0;
 }
 
-
 .app-content__avatar {
     width: 250px;
     margin-right: 10px;
+    border-radius: 2px;
 }
 
 .app-content-avatarAndDescription {
     display: flex;
-    padding: 10px;
+    padding: 15px;
 }
 
 .app-content__name {
@@ -24,3 +24,8 @@
     cursor: pointer;
 }
 
+@media (max-width: 767px) {
+    .app-content__avatar {
+        max-width: 175px;
+    }
+}

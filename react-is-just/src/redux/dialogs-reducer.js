@@ -24,7 +24,7 @@ const dialogsReducer = (state = initialState, action) => {
 
     if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
         state.newMessageText = action.content;
-    } else if (action.type === SEND_MESSAGE) {
+    } else if (action.type === SEND_MESSAGE && action.content !== "") {
         state.messages.push({id: 4, content: action.content});
         state.newMessageText = "";
     }

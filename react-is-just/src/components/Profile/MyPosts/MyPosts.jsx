@@ -61,12 +61,17 @@ const MyPosts = (props) => {
   return (
     <AppContent>
       <AppContentSend>
-        <textarea maxLength="280" onChange={onPostChange} value={props.profilePage.newPostText} ref={newPostElement} placeholder="What's new?"/>
+        <textarea 
+          maxLength="280" 
+          onChange={onPostChange} 
+          value={props.profilePage.newPostText} 
+          ref={newPostElement} 
+          placeholder="О чем вы думаете?"/>
         <button onClick={addPosts}>send</button>
       </AppContentSend>
 
       <AppContentPosts>
-        <span className="app-content__posts-title">My posts:</span>
+        <span className="app-content__posts-title">Мои посты:</span>
         {postsElements}
       </AppContentPosts>
     </AppContent>

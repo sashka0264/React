@@ -14,9 +14,8 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
 
-    if (action.type === ADD_POST) {
+    if (action.type === ADD_POST && action.postMessage !== "") {
         let newPost = {id: 3, message: action.postMessage, likes: 0};
-
         state.posts.reverse().push(newPost);
         state.posts.reverse();
         state.newPostText = "";

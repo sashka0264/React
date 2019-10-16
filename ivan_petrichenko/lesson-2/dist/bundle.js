@@ -144,7 +144,7 @@ var calcCash = function calcCash() {
   });
 };
 
-var money = calcCash(null, cash);
+var money = calcCash(cash);
 var sumSponsors = [].concat(_toConsumableArray(eu), _toConsumableArray(rus), ['unexpected sponsor']);
 
 

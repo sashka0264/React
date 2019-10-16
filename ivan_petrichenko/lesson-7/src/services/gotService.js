@@ -16,6 +16,7 @@ export default class GotService {
     }
 
     getAllCharacters() {
+        console.log(this.getResource("/characters?page=5&pageSize=10"))
         return this.getResource("/characters?page=5&pageSize=10");
     }
 

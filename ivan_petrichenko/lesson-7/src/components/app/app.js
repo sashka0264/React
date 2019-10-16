@@ -1,5 +1,5 @@
-import React from 'react';
-import {Col, Row, Container} from 'reactstrap';
+import React, {Component} from 'react';
+import {Col, Row, Container, Button} from 'reactstrap';
 import Header from '../header/header';
 import RandomChar from '../randomChar/randomChar';
 import ItemList from '../itemList/itemList';
@@ -29,30 +29,43 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
-const App = () => {
-    return (
-        <> 
-            <GlobalStyle/>
-            <Container>
-                <Header />
-            </Container>
-            <Container>
-                <Row>
-                    <Col lg={{size: 5, offset: 0}}>
-                        <RandomChar/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md='6'>
-                        <ItemList />
-                    </Col>
-                    <Col md='6'>
-                        <CharDetails />
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    );
-};
+export default class App extends Component {
 
-export default App;
+    state = {
+        randomCharView: false
+    }
+
+    onChangeRandomCharView = () => {
+        this.setState({
+            randomCharView: !this.state.randomCharView
+        })
+    }
+
+    render() {
+        const content = (this.state.randomCharView) ? <RandomChar/> : null;
+        return (
+            <> 
+                <GlobalStyle/>
+                <Container>
+                    <Header />
+                </Container>
+                <Container>
+                    <Row>
+                        <Col lg={{size: 5, offset: 0}}>
+                            {content}
+                            <Button color="info" onClick={this.onChangeRandomCharView}>Показать рандомного персонажа</Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md='6'>
+                            <ItemList />
+                        </Col>
+                        <Col md='6'>
+                            <CharDetails />
+                        </Col>
+                    </Row>
+                </Container>
+            </>
+        );
+    };
+};

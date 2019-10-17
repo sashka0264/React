@@ -4,9 +4,13 @@ import Header from '../header/header';
 import RandomChar from '../randomChar/randomChar';
 import ItemList from '../itemList/itemList';
 import CharDetails from '../charDetails/charDetails';
-import {createGlobalStyle} from 'styled-components'
+import styled, {createGlobalStyle} from 'styled-components'
+import nextId from "react-id-generator";
 
 const GlobalStyle = createGlobalStyle`
+    body {
+        padding-bottom: 80px;
+    }
     a {
         color: inherit;
         text-decoration: none;
@@ -29,20 +33,37 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
+const StyledButton = styled(Button)`
+    margin-bottom: 40px;
+`
+
 export default class App extends Component {
 
     state = {
-        randomCharView: false
+        randomCharView: true,
+        selectedChar: 130
     }
+
+    // createNextId = () => {
+    //     console.log(nextId);
+    // }
 
     onChangeRandomCharView = () => {
         this.setState({
-            randomCharView: !this.state.randomCharView
+            randomCharView: !this.state.randomCharView, 
+        })
+    }
+
+    onCharSelected = (id) => {
+        this.setState({
+            selectedChar: id
         })
     }
 
     render() {
         const content = (this.state.randomCharView) ? <RandomChar/> : null;
+        const buttonText = (this.state.randomCharView) ? "Скрыть" : "Показать";
+
         return (
             <> 
                 <GlobalStyle/>
@@ -53,15 +74,18 @@ export default class App extends Component {
                     <Row>
                         <Col lg={{size: 5, offset: 0}}>
                             {content}
-                            <Button color="info" onClick={this.onChangeRandomCharView}>Показать рандомного персонажа</Button>
+                            <StyledButton color="info" 
+                                onClick={this.onChangeRandomCharView}>
+                                {buttonText} рандомных персонажей
+                            </StyledButton>
                         </Col>
                     </Row>
                     <Row>
                         <Col md='6'>
-                            <ItemList />
+                            <ItemList createNextId={this.createNextId} onCharSelected={this.onCharSelected}/>
                         </Col>
                         <Col md='6'>
-                            <CharDetails />
+                            <CharDetails charId={this.state.selectedChar}/>
                         </Col>
                     </Row>
                 </Container>

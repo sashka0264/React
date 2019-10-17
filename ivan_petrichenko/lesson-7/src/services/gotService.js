@@ -10,7 +10,6 @@ export default class GotService {
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status ${res.status}`);
         }
-        // Если завершится с ошибкой
 
         const some = await res.json();
         return some;

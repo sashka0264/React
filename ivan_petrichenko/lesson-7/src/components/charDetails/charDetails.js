@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import GotService from "../../services/gotService";
 import styled from 'styled-components'
+import Spinner from "../spinner/spinner";
 
 const CharDetailsBlock = styled.div`
     background-color: #fff;
@@ -45,15 +46,16 @@ export default class CharDetails extends Component {
         this.gotService.getCharacter(charId)
             .then((char) => {
                 this.setState({char})
-            })
+            });
+        // this.foo.bar = 0;
     }
 
     render() {
         if (!this.state.char) {
-            return <SelectError>Please select a character</SelectError>
+            return <CharDetailsBlock><Spinner/></CharDetailsBlock>
         }
         
-        const {name, gender, born, died,  culture} = this.state.char;
+        const {name, gender, born, died, culture} = this.state.char;
  
         return (
             <CharDetailsBlock className="rounded">

@@ -7,6 +7,10 @@ import RandomChar from '../randomChar/randomChar';
 import ErrorMessage from "../errorMessage/errorMessage";
 import CharacterPage from "../characterPage/characterPage";
 
+import ItemList from '../itemList/itemList';
+import CharDetails from '../charDetails/charDetails';
+import GotService from "../../services/gotService";
+
 const GlobalStyle = createGlobalStyle`
     body {
         padding-bottom: 80px;
@@ -42,6 +46,8 @@ export default class App extends Component {
         randomCharView: false,
         error: false
     }
+
+    gotService = new GotService();
 
     createNextId = () => {
         return nextId();
@@ -81,7 +87,42 @@ export default class App extends Component {
                             </StyledButton>
                         </Col>
                     </Row>
+
                     <CharacterPage createNextId={this.createNextId}/>
+
+                    <Row>
+                        <Col md='6'>
+                            <ItemList 
+                                createNextId={this.createNextId} 
+                                onItemSelected={this.onItemSelected}
+                                getData={this.gotService.getAllBooks}
+                                renderItem={(item) => (
+                                    <>
+                                        <span>
+                                        {item.name}
+                                        </span> 
+                                        <button>Click me</button>
+                                    </>
+                                )}
+                            />
+                        </Col>
+                        <Col md='6'>
+                            <CharDetails charId={this.state.selectedChar}/>
+                        </Col>
+                    </Row>
+
+                    {/* <Row>
+                        <Col md='6'>
+                            <ItemList 
+                                createNextId={this.createNextId} 
+                                onItemSelected={this.onItemSelected}
+                                getData={this.gotService.getAllHouses}
+                            />
+                        </Col>
+                        <Col md='6'>
+                            <CharDetails charId={this.state.selectedChar}/>
+                        </Col>
+                    </Row> */}
                 </Container>
             </>
         );

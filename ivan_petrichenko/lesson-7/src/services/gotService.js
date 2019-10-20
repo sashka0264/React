@@ -4,59 +4,65 @@ export default class GotService {
         this._apiBase = "https://www.anapioficeandfire.com/api/";
     }
 
-    async getResource(url) {
+    getResource = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
 
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}, status ${res.status}`);
         }
 
-        const some = await res.json();
-        return some;
+        return await res.json();
     }
 
-    async getAllCharacters() {
-        const res = await this.getResource("/characters?page=5&pageSize=10");
+    getAllCharacters = async () => {
+        const res = await this.getResource("/characters?page=5&pageSize=10");;
         return res.map(this._transformCharacter);
     }
 
-    async getCharacter(id) {
+    getCharacter = async (id) => {
         const character = await this.getResource(`/characters/${id}`);
         return this._transformCharacter(character);
     }
 
-    getAllHouses() {
-        return this.getResource(`/houses/`);
+    getAllHouses = async () => {
+        const res = await this.getResource(`/houses/`);
+        return res.map(this._transformHouse);
     }
 
-    getHouse(id) {
-        return this.getResource(`/houses/${id}/`);
+    getHouse = async (id) => {
+        const house = this.getResource(`/houses/${id}/`);
+        return this._transformHouse(house);
     }
 
-    getAllBooks() {
-        return this.getResource(`/books/`);
+    getAllBooks = async () => {
+        const res = await this.getResource(`/books/`);
+        return res.map(this._transformBook); 
     }
 
-    getBook(id) {
-        return this.getResource(`/books/${id}`);
+    getBook = async (id) => {
+        const book = await this.getResource(`/books/${id}`);
+        return this._transformBook(book);
     }
 
-    _transformCharacter(char) {
-        for (let key in char) {
-            if (char[key] === "") {
-                char[key] = "No data :(";
-            };
+    isNoData = (data) => {
+        if (data) {
+            return data;
+        } else {
+            return "No data :("
         }
+    }
+
+    _transformCharacter = (char) => {
         return {
-            name: char.name,
-            gender: char.gender, 
-            born: char.born,
-            died: char.died,
-            culture: char.culture
+            name: this.isNoData(char.name),
+            gender: this.isNoData(char.gender), 
+            born: this.isNoData(char.born),
+            died: this.isNoData(char.died),
+            culture: this.isNoData(char.culture)
         }
     }
 
-    _transformHouse(house) {
+    _transformHouse = (house) => {
         return {
             name: house.name,
             region: house.region,
@@ -67,7 +73,7 @@ export default class GotService {
         }
     }
 
-    _transformBook(book) {
+    _transformBook = (book) => {
         return {
             name: book.name,
             numberOfPages: book.numberOfPages,

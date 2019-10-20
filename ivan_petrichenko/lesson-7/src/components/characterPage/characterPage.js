@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Col, Row} from 'reactstrap';
 import ItemList from '../itemList/itemList';
-import CharDetails from '../charDetails/charDetails';
+import CharDetails, {Field} from '../charDetails/charDetails';
 import ErrorMessage from "../errorMessage/errorMessage";
+import GotService from "../../services/gotService";
+import RowBlock from "../rowBlock/rowBlock";
 
 export default class CharacterPage extends Component {
 
@@ -11,13 +12,15 @@ export default class CharacterPage extends Component {
         error: false
     }
 
+    gotService = new GotService();
+
     componentDidCatch() {
         this.setState({
             error: true
         });
     }
     
-    onCharSelected = (id) => {
+    onItemSelected = (id) => {
         this.setState({
             selectedChar: id
         })
@@ -28,17 +31,26 @@ export default class CharacterPage extends Component {
             return <ErrorMessage/>
         }
 
+        const itemList = (
+            <ItemList 
+                createNextId={this.props.createNextId} 
+                onItemSelected={this.onItemSelected}
+                getData={this.gotService.getAllCharacters}
+                renderItem={(item) => `${item.name} (${item.gender})`}
+            />
+        )
+
+        const charDetails = (
+            <CharDetails charId={this.state.selectedChar}>
+                <Field field="gender" label="Gender"/>
+                <Field field="born" label="Born"/>
+                <Field field="died" label="Died"/>
+                <Field field="culture" label="Culture"/>
+            </CharDetails>
+        )
+
         return (
-            <div>
-                <Row>
-                    <Col md='6'>
-                        <ItemList createNextId={this.props.createNextId} onCharSelected={this.onCharSelected}/>
-                    </Col>
-                    <Col md='6'>
-                        <CharDetails charId={this.state.selectedChar}/>
-                    </Col>
-                </Row>
-            </div>
+            <RowBlock left={itemList} right={charDetails}/>
         )
     }
 }

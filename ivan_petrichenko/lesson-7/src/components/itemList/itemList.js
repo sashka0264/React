@@ -13,35 +13,40 @@ export default class ItemList extends Component {
     gotService = new GotService();
 
     state = {
-        charList: null,
+        itemList: null,
         loading: true
     }
 
     componentDidMount() {
-        this.gotService.getAllCharacters() 
-            .then( (charList) => {
+        const {getData} = this.props;
+
+        getData() 
+            .then( (itemList) => {
                 this.setState({
-                    charList
+                    itemList
                 })
             })
     } 
 
     renderItems(arr) {
         return arr.map((item, i) => {
+            // const {id} = item;
+            const label = this.props.renderItem(item);
+
             return (
                 <ListGroupItem 
                     key={this.props.createNextId()} 
                     className="list-group-item"
-                    onClick={ () => this.props.onCharSelected(41+ i)}>
-                    {item.name}
+                    onClick={ () => this.props.onItemSelected(41+i)}>
+                    {label}
                 </ListGroupItem>
             )
         })
     }
 
     render() {
-        const {charList} = this.state;
-        const content = (!charList) ? <ListGroupItem><Spinner/></ListGroupItem> : this.renderItems(charList);
+        const {itemList} = this.state;
+        const content = (!itemList) ? <ListGroupItem><Spinner/></ListGroupItem> : this.renderItems(itemList);
         
         return (
             <ul className="item-list list-group">

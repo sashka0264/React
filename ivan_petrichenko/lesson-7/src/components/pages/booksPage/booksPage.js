@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import ItemList from "../itemList/itemList";
-import ItemDetails, {Field} from "../itemDetails/itemDetails";
 import ErrorMessage from "../../errorMessage/errorMessage";
-import RowBlock from "../rowBlock/rowBlock";
+import {withRouter} from "react-router-dom";
 
-export default class BooksPage extends Component {
+class BooksPage extends Component {
 
     state = {
         error: false
@@ -15,38 +14,23 @@ export default class BooksPage extends Component {
     }
 
     render() {
-        const {createNextId, onItemSelected, getData, getIdData, itemId} = this.props;
+        const {createNextId, getData} = this.props;
 
         if (this.state.error) {
             return <ErrorMessage/>
         }
 
-        const itemList = (
+        return (
             <ItemList 
                 createNextId={createNextId} 
-                onItemSelected={onItemSelected}
+                onItemSelected={(itemId) => {
+                    this.props.history.push(`/books/${itemId+1}`);
+                }}
                 getData={getData}
-                renderItem={(item) => (
-                    <>
-                        <span>
-                        {item.name}
-                        </span> 
-                        <button>Click Me</button>
-                    </>
-                )}
+                renderItem={(item) => `${item.name}`}
             />
-        )
-
-        const itemDetails = (
-            <ItemDetails getIdData={getIdData} itemId={itemId}>
-                <Field field="numberOfPages" label="Pages"/>
-                <Field field="publiser" label="Publiser"/>
-                <Field field="released" label="Released"/>
-            </ItemDetails>
-        )
-
-        return (
-            <RowBlock left={itemList} right={itemDetails}/>
         )
     }
 }
+
+export default withRouter(BooksPage);

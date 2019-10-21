@@ -64,7 +64,7 @@ export default class GotService {
 
 
     _transformHouse = (house) => {
-        console.log(house);
+        
         return {
             name: this.isNoData(house.name),
             region: this.isNoData(house.region),
@@ -79,7 +79,7 @@ export default class GotService {
         return {
             name: this.isNoData(book.name),
             numberOfPages: this.isNoData(book.numberOfPages),
-            publiser: this.isNoData(book.publiser),
+            publisher: this.isNoData(book.publisher),
             released: this.isNoData(book.released)
         }
     }

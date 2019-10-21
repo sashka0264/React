@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import nextId from "react-id-generator";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 // Основа
 import {Container} from 'reactstrap';
 import {createGlobalStyle} from 'styled-components'
@@ -9,9 +10,10 @@ import RandomCharPage from "../pages/randomCharPage/randomCharPage";
 import CharactersPage from "../pages/characterPage/characterPage";
 import BooksPage from "../pages/booksPage/booksPage";
 import HousesPage from "../pages/housesPage/housesPage";
+import BooksItem from "../pages/booksPage/booksItem/booksItem";
 // Компоненты
 import GotService from "../services/gotService";
-// Доп. сервисы
+// Service
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -71,43 +73,64 @@ export default class App extends Component {
     }
 
     render() {
+     
+
         return (
-            <> 
-                <GlobalStyle/>
-                {/* CSS */}
+            <Router>
+                <div className="app"> 
+                    <GlobalStyle/>
+                    {/* CSS */}
 
-                <Container>
-                    <Header />
-                </Container>
+                    <Container>
+                        <Header />
+                    </Container>
 
-                <Container>
-                    <RandomCharPage/>
+                    <Container>
+                        <RandomCharPage/>
 
-                    <CharactersPage 
-                        createNextId={this.createNextId}
-                        getData={this.gotService.getAllCharacters}
-                        getIdData={this.gotService.getCharacter} 
-                        onItemSelected={this.onCharSelected} 
-                        itemId={this.state.selectedChar} 
-                    />
+                        <Route path="/characters" render={ () => 
+                            <CharactersPage 
+                                createNextId={this.createNextId}
+                                getData={this.gotService.getAllCharacters}
+                                getIdData={this.gotService.getCharacter} 
+                                onItemSelected={this.onCharSelected} 
+                                itemId={this.state.selectedChar} 
+                            /> 
+                        }/>
 
-                    <BooksPage 
-                        createNextId={this.createNextId}
-                        getData={this.gotService.getAllBooks}
-                        getIdData={this.gotService.getBook} 
-                        onItemSelected={this.onBookSelected} 
-                        itemId={this.state.selectedBook}
-                    />
+                        <Route path="/houses" render={ () => 
+                            <HousesPage 
+                                createNextId={this.createNextId}
+                                getData={this.gotService.getAllHouses}
+                                getIdData={this.gotService.getHouse} 
+                                onItemSelected={this.onHouseSelected} 
+                                itemId={this.state.selectedHouse}
+                            />
+                        }/>
 
-                    <HousesPage 
-                        createNextId={this.createNextId}
-                        getData={this.gotService.getAllHouses}
-                        getIdData={this.gotService.getHouse} 
-                        onItemSelected={this.onHouseSelected} 
-                        itemId={this.state.selectedHouse}
-                    />
-                </Container>
-            </>
+                        <Route path="/books" exact render={ () => 
+                            <BooksPage 
+                                createNextId={this.createNextId}
+                                getData={this.gotService.getAllBooks}
+                                getIdData={this.gotService.getBook} 
+                                onItemSelected={this.onBookSelected} 
+                                itemId={this.state.selectedBook}
+                            />
+                        }/>
+
+                        <Route path="/books/:id" render={ 
+                            ({match}) => {
+                                const {id}= match.params;
+                                return (
+                                    <BooksItem 
+                                        getIdData={this.gotService.getBook}
+                                        itemId={id}
+                                    />
+                                )}
+                        }/>
+                    </Container>
+                </div>
+            </Router>
         );
     };
 };

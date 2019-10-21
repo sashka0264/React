@@ -12,7 +12,7 @@ export default class RandomCharPage extends Component {
     
     state = {
         error: false,
-        randomCharView: false,
+        randomCharView: true,
     }
 
     onChangeRandomCharView = () => {

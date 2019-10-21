@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
-import {Col, Row, Container, Button} from 'reactstrap';
-import styled, {createGlobalStyle} from 'styled-components'
 import nextId from "react-id-generator";
+// Основа
+import {Container} from 'reactstrap';
+import {createGlobalStyle} from 'styled-components'
+// CSS
 import Header from '../header/header';
-import RandomChar from '../randomChar/randomChar';
-import ErrorMessage from "../errorMessage/errorMessage";
-import CharacterPage from "../characterPage/characterPage";
-
-import ItemList from '../itemList/itemList';
-import CharDetails from '../charDetails/charDetails';
-import GotService from "../../services/gotService";
+import RandomCharPage from "../pages/randomCharPage/randomCharPage";
+import CharactersPage from "../pages/characterPage/characterPage";
+import BooksPage from "../pages/booksPage/booksPage";
+import HousesPage from "../pages/housesPage/housesPage";
+// Компоненты
+import GotService from "../services/gotService";
+// Доп. сервисы
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -36,93 +38,74 @@ const GlobalStyle = createGlobalStyle`
         }
     }
 `
-const StyledButton = styled(Button)`
-    margin-bottom: 40px;
-`
 
 export default class App extends Component {
 
     state = {
-        randomCharView: false,
-        error: false
+        error: false,
+        selectedChar: 130,
+        selectedBook: 1,
+        selectedHouse: 1
     }
-
-    gotService = new GotService();
 
     createNextId = () => {
         return nextId();
     }
 
+    gotService = new GotService();
+
     componentDidCatch() {
         this.setState({error: true});
     }
 
-    onChangeRandomCharView = () => {
-        this.setState({
-            randomCharView: !this.state.randomCharView, 
-        })
+    onCharSelected = (id) => {
+        this.setState({selectedChar: id+41})
+    }
+
+    onBookSelected = (id) => {
+        this.setState({selectedBook: id+1})
+    }
+
+    onHouseSelected = (id) => {
+        this.setState({selectedHouse: id+1})
     }
 
     render() {
-        const content = (this.state.randomCharView) ? <RandomChar/> : null;
-        const buttonText = (this.state.randomCharView) ? "Скрыть" : "Показать";
-        if (this.state.error) {
-            return <ErrorMessage/>
-        }
-
         return (
             <> 
                 <GlobalStyle/>
+                {/* CSS */}
+
                 <Container>
                     <Header />
                 </Container>
+
                 <Container>
-                    <Row>
-                        <Col lg={{size: 5, offset: 0}}>
-                            {content}
-                            <StyledButton 
-                                color="primary" 
-                                onClick={this.onChangeRandomCharView}>
-                                {buttonText} рандомного персонажа
-                            </StyledButton>
-                        </Col>
-                    </Row>
+                    <RandomCharPage/>
 
-                    <CharacterPage createNextId={this.createNextId}/>
+                    <CharactersPage 
+                        createNextId={this.createNextId}
+                        getData={this.gotService.getAllCharacters}
+                        getIdData={this.gotService.getCharacter} 
+                        onItemSelected={this.onCharSelected} 
+                        itemId={this.state.selectedChar} 
+                    />
 
-                    <Row>
-                        <Col md='6'>
-                            <ItemList 
-                                createNextId={this.createNextId} 
-                                onItemSelected={this.onItemSelected}
-                                getData={this.gotService.getAllBooks}
-                                renderItem={(item) => (
-                                    <>
-                                        <span>
-                                        {item.name}
-                                        </span> 
-                                        <button>Click me</button>
-                                    </>
-                                )}
-                            />
-                        </Col>
-                        <Col md='6'>
-                            <CharDetails charId={this.state.selectedChar}/>
-                        </Col>
-                    </Row>
+                    <BooksPage 
+                        createNextId={this.createNextId}
+                        getData={this.gotService.getAllBooks}
+                        getIdData={this.gotService.getBook} 
+                        onItemSelected={this.onBookSelected} 
+                        itemId={this.state.selectedBook}
+                    />
 
-                    {/* <Row>
-                        <Col md='6'>
-                            <ItemList 
-                                createNextId={this.createNextId} 
-                                onItemSelected={this.onItemSelected}
-                                getData={this.gotService.getAllHouses}
-                            />
-                        </Col>
-                        <Col md='6'>
-                            <CharDetails charId={this.state.selectedChar}/>
-                        </Col>
-                    </Row> */}
+                    <HousesPage 
+                        createNextId={this.createNextId}
+                        getData={this.gotService.getAllHouses}
+                        getIdData={this.gotService.getHouse} 
+                        onItemSelected={this.onHouseSelected} 
+                        itemId={this.state.selectedHouse}
+                    />
                 </Container>
             </>
         );

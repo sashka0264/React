@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import GotService from "../../services/gotService";
 import styled from 'styled-components';
-import Spinner from "../spinner/spinner";
+import Spinner from "../../spinner/spinner";
 
 const ListGroupItem = styled.li`
     cursor: pointer;
     background-color: white;
+`
+
+const List = styled.ul`
+    padding-bottom: 40px;
 `
 
 export default class ItemList extends Component {
@@ -37,7 +41,7 @@ export default class ItemList extends Component {
                 <ListGroupItem 
                     key={this.props.createNextId()} 
                     className="list-group-item"
-                    onClick={ () => this.props.onItemSelected(41+i)}>
+                    onClick={ () => this.props.onItemSelected(i)}>
                     {label}
                 </ListGroupItem>
             )
@@ -49,9 +53,9 @@ export default class ItemList extends Component {
         const content = (!itemList) ? <ListGroupItem><Spinner/></ListGroupItem> : this.renderItems(itemList);
         
         return (
-            <ul className="item-list list-group">
+            <List className="item-list list-group">
                 {content}
-            </ul>
+            </List>
         );
     }
 }

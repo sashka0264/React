@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import GotService from "../../services/gotService";
+import GotService from "../services/gotService";
 import styled from 'styled-components';
 import Spinner from "../spinner/spinner";
 import ErrorMessage from "../errorMessage/errorMessage";

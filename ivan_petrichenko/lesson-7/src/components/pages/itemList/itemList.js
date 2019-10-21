@@ -33,15 +33,17 @@ export default class ItemList extends Component {
     } 
 
     renderItems(arr) {
+        const {renderItem, createNextId, onItemSelected} = this.props;
+
         return arr.map((item, i) => {
             // const {id} = item;
-            const label = this.props.renderItem(item);
+            const label = renderItem(item);
 
             return (
                 <ListGroupItem 
-                    key={this.props.createNextId()} 
+                    key={createNextId()} 
                     className="list-group-item"
-                    onClick={ () => this.props.onItemSelected(i)}>
+                    onClick={ () => onItemSelected(i)}>
                     {label}
                 </ListGroupItem>
             )

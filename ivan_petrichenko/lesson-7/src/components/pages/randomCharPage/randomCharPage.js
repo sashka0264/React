@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Col, Row, Button} from 'reactstrap';
 import styled from 'styled-components';
 import ErrorMessage from "../../errorMessage/errorMessage";
-import RandomChar from "../../randomChar/randomChar";
+import RandomChar from "./randomChar/randomChar";
 
 const StyledButton = styled(Button)`
     margin-bottom: 40px;

@@ -1,0 +1,56 @@
+html {
+    background: linear-gradient(180deg, #0837B0 0%, #021E66 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    padding-top: 70px;
+    flex-direction: column;
+}
+
+.counter-block {
+    width: 300px;
+    height: 300px;
+    background: #FFFFFF;
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.counter-buttons {
+    display: flex;
+    margin-top: 34px;
+}
+
+.counter-buttons div {
+    width: 70px;
+    height: 70px;
+    border-radius: 4px;
+    margin-right: 19px;
+    margin-left: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter-buttons div:nth-child(1) {
+    background-color: #089C20;
+}
+.counter-buttons div:nth-child(2) {
+    background-color: #E7AA10;
+}
+.counter-buttons div:nth-child(3) {
+    background-color: #CF1C1C;
+}
+.counter-buttons div:hover {
+    cursor: pointer;
+}

@@ -181,11 +181,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var MakeBusiness =
 /*#__PURE__*/
 function () {
-  function MakeBusiness() {
-    var owner = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Alena";
-    var cash = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    var emp = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "No";
-    var director = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'Victor';
+  function MakeBusiness(_ref) {
+    var _ref$owner = _ref.owner,
+        owner = _ref$owner === void 0 ? "Alena" : _ref$owner,
+        _ref$cash = _ref.cash,
+        cash = _ref$cash === void 0 ? 0 : _ref$cash,
+        _ref$emp = _ref.emp,
+        emp = _ref$emp === void 0 ? "No" : _ref$emp,
+        _ref$director = _ref.director,
+        director = _ref$director === void 0 ? 'Victor' : _ref$director;
 
     _classCallCheck(this, MakeBusiness);
 
@@ -213,7 +217,11 @@ function () {
   return MakeBusiness;
 }();
 
-var makeBusiness = new MakeBusiness('Sam', _parts_moneyAndSponsors__WEBPACK_IMPORTED_MODULE_0__["money"], _parts_employers__WEBPACK_IMPORTED_MODULE_1__["employersNames"]);
+var makeBusiness = new MakeBusiness({
+  cash: _parts_moneyAndSponsors__WEBPACK_IMPORTED_MODULE_0__["money"],
+  owner: 'Sam',
+  emp: _parts_employers__WEBPACK_IMPORTED_MODULE_1__["employersNames"]
+});
 makeBusiness.showInfo();
 
 /***/ })

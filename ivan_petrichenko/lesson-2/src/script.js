@@ -2,7 +2,7 @@ import {eu, money, sumSponsors} from './parts/moneyAndSponsors';
 import {employersNames} from './parts/employers';
 
 class MakeBusiness {
-    constructor(owner = "Alena", cash = 0, emp = "No", director = 'Victor') {
+    constructor({owner = "Alena", cash = 0, emp = "No", director = 'Victor'}) {
         this.owner = owner;
         this.cash = cash;
         this.emp = emp;
@@ -17,5 +17,5 @@ class MakeBusiness {
         console.log(`Note. Be careful with ${eu[0]}. It's a huge risk.`);
     }
 }
-const makeBusiness = new MakeBusiness('Sam', money, employersNames);
+const makeBusiness = new MakeBusiness({cash: money, owner: 'Sam', emp: employersNames});
 makeBusiness.showInfo();

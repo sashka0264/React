@@ -54,3 +54,8 @@ html {
 .counter-buttons div:hover {
     cursor: pointer;
 }
+.jumbotron {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -4,30 +4,24 @@ import * as actions from "../actions";
 import {bindActionCreators} from "redux";
 
 const Counter = ({state, inc, dec, rnd}) => {
+    const {num, width, height} = state;
     return (
         <div className="jumbotron">
-            <div id="counter-block" className="counter-block">
-                <h1 id="counter">{state.num}</h1>
+            <div style={{width: `${width}px`, height: `${height}px`}} id="counter-block" className="counter-block">
+                <h1 id="counter">{num}</h1>
             </div>
             <div className="counter-buttons">
-                <div 
-                    onClick={() => {
-                    inc();
-                    console.log(state);
-                }} 
-                    className="btn btn-primary">+</div>
-                <div 
-                    onClick={() => {
-                    dec();
-                    console.log(state);
-                }} 
-                    className="btn btn-primary">-</div>
-                <div 
-                    onClick={() => {
-                    rnd();
-                    console.log(state);
-                }}  
-                    className="btn btn-primary">C</div>
+                <div onClick={inc} className="btn btn-primary">
+                    <img src={process.env.PUBLIC_URL + "/img/Vector.png"} alt="plus"></img>
+                </div>
+
+                <div onClick={dec} className="btn btn-primary">
+                    <img src={process.env.PUBLIC_URL + "/img/Minus.png"} alt="plus"></img>
+                </div>
+
+                <div onClick={rnd} className="btn btn-primary">
+                    <img src={process.env.PUBLIC_URL + "/img/Group.png"} alt="reset"></img>
+                </div>
             </div>
         </div>
     )

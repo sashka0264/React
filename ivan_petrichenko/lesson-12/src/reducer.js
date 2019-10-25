@@ -7,22 +7,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case "INC":
-            state.num += 1;
-            state.width += 1;
-            state.height += 1;
-            return state;
+            return {...state, num: state.num + 1, width: state.width + 1, height: state.height + 1}
         case "DEC":
             if (state.width !== 0 & state.height !== 0) {
-                state.num -= 1;
-                state.width -= 1;
-                state.height -= 1;
+                return {...state, num: state.num - 1, width: state.width - 1, height: state.height - 1}
             }
             return state;
         case "RND":
-            state.num = 0;
-            state.width = 300;
-            state.height = 300;
-            return state;
+            return {...state, num: state.num + action.value, width: state.width + action.value, height: state.height + action.value}
         default: 
             return state;
     }

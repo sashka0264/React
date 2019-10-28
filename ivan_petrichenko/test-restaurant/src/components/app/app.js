@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import {MainPage, CartPage} from '../pages';
 import AppHeader from '../app-header';
 import WithRestoService from "../hoc";
@@ -8,9 +9,11 @@ const App = ({RestoService}) => {
     console.log(RestoService.getMenuItems());
     return (
         <div style={{background: `url(${Background}) center center/cover no-repeat`}} className="app">
-            <AppHeader total={50}/>
-            <MainPage/>
-            <CartPage/>
+            <Router>
+                <AppHeader total={50}/>
+                <Route path="/" exact render={() => <MainPage/>}/> 
+                <Route path="/order" render={() => <CartPage/>}/> 
+            </Router>
         </div>
     )
 }

@@ -18,8 +18,24 @@ const menuNotLoaded = (newError) => {
     }
 }
 
+const addedToCard = (id) => {
+    return {
+        type: "ADDED-TO-CARD",
+        payload: id
+    }
+}
+
+const deleteFromCard = (id) => {
+    return {
+        type: "DELETE-FROM-CARD",
+        payload: id
+    }
+}
+
 export {
     menuLoaded,
     menuRequested,
-    menuNotLoaded
+    menuNotLoaded, 
+    addedToCard,
+    deleteFromCard
 }

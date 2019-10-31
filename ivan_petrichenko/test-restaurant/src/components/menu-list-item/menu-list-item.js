@@ -4,7 +4,7 @@ import iconSalad from "./icons/salad.png";
 import iconMeat from "./icons/steak.png";
 import './menu-list-item.scss';
 
-const MenuListItem = ({menuItem}) => {
+const MenuListItem = ({menuItem, onAddToCard}) => {
     const {title, price, category, url} = menuItem;
     let icon;
     switch (category) {
@@ -31,7 +31,7 @@ const MenuListItem = ({menuItem}) => {
             </div>
 
             <div className="menu__price">Price: <span>{price}$</span></div>
-            <button className="menu__btn">Add to cart</button>
+            <button onClick={() => onAddToCard()} className="menu__btn">Add to cart</button>
 
         </li>
    

@@ -2,11 +2,9 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {MainPage, CartPage} from '../pages';
 import AppHeader from '../app-header';
-import WithRestoService from "../hoc";
 import Background from './food-bg.jpg';
 
-const App = ({RestoService}) => {
-    console.log(RestoService.getMenuItems());
+const App = () => {
     return (
         <div style={{background: `url(${Background}) center center/cover no-repeat`}} className="app">
             <Router>
@@ -25,10 +23,9 @@ const App = ({RestoService}) => {
                         Такой страницы нет, поэтому Switch отрендерил первый компонент без пути, который нашел
                     </div>}/>
                 </Switch> */}
-
             </Router>
         </div>
     )
 }
 
-export default WithRestoService()(App);
+export default App;

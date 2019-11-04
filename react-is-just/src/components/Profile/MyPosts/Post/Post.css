@@ -3,14 +3,14 @@
     display: flex;
     margin-top: 1px;
     position: relative;
-    padding: 15px 20px 15px 20px;
+    padding: 10px 15px 10px 15px;
     min-height: 50px;
     box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
 
 .app-content__posts-avatar {
-    width: 50px;
-    height: 50px;
+    width: 49px;
+    height: 49px;
     background-position: top;
     margin-right: 15px;
     border-radius: 50%;
@@ -23,14 +23,27 @@
 .app-content__posts-like img {
     width: 15px;
     margin-top: -2px;
+    margin-right: 7px;
 }
 
 .app-content__posts-like {
-    position: absolute;
-    right: 30px;
+
     display: flex;
     justify-content: center;
     cursor: pointer;
     align-items: center;
     bottom: 10px;
 }
+
+.app-content__posts-text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.app-content__posts-params {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+}
+

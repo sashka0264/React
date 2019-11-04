@@ -1,83 +1,55 @@
 import React from 'react';
-import "./MyPosts.css";
+import {connect} from "react-redux";
 import Post from './Post/Post';
-import {addPostCreator, updateNewPostTextCreator} from "../../../redux/profile-reducer";
-import styled from "styled-components"
+import {addPostCreator, updateNewPostTextCreator} from "../../../redux/actions";
+import style from "./MyPosts.module.css";
 
-const AppContent = styled.div`
-  margin-top: 10px;
-`;
-
-const AppContentSend = styled.div`
-  display: flex;
-  background-color: #ebecf0;
-  box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
-  padding: 10px;
-  button {
-    width: 10%;
-    border: 0px solid #c1c5d6;
-    color: #6c757d;
-    outline: none;
-  }
-  textarea {
-    width: 90%;
-    padding: 7px 0 33px 5px;
-    border: none;
-  }
-`;
-
-const AppContentPosts = styled.div`
-  word-break: break-all;
-  margin: 10px 0 0 0;
-  padding: 10px 0;
-  span {
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding: 0 10px;
-  }
-`;
-
-const MyPosts = (props) => {
-  let postsElements = props.profilePage.posts.map( (item) => {
-    return (
-      <Post message={item.message} likes={item.likes}/>
-    );
-  });
-
-  let newPostElement = React.createRef();
-  // Вместо поиска по id или классу, newPostElement ссылается на нужный нам элемент с помощью ref
-  let addPosts = () => {
-    let text = newPostElement.current.value,
-        action = addPostCreator(text);
-    props.dispatch(action);
-  };
-
-  let onPostChange = () => {
-    let text = newPostElement.current.value,
-        action = updateNewPostTextCreator(text);
-    props.dispatch(action);
-  };
+const MyPosts = ({profilePage, addPostCreator, updateNewPostTextCreator}) => {
+  
+  const newPostElement = React.createRef(),
+    onAddPosts = () => {
+      addPostCreator(newPostElement.current.value);
+    },
+    onPostChange = () => {
+      updateNewPostTextCreator(newPostElement.current.value);
+    };
 
   return (
-    <AppContent>
-      <AppContentSend>
+    <div className={style.appContentBlock}>
+      <div className={style.appContentSend}>
         <textarea 
           maxLength="280" 
           onChange={onPostChange} 
-          value={props.profilePage.newPostText} 
+          value={profilePage.newPostText} 
           ref={newPostElement} 
-          placeholder="О чем вы думаете?"/>
-        <button onClick={addPosts}>send</button>
-      </AppContentSend>
+          placeholder="О чем вы думаете?" 
+          className={style.appContentLetterTextarea}
+        />
+        <button onClick={onAddPosts} className={style.appContentLetterSend}>send</button>
+      </div>
 
-      <AppContentPosts>
-        <span className="app-content__posts-title">Мои посты:</span>
-        {postsElements}
-      </AppContentPosts>
-    </AppContent>
+      <div className={style.appContentPosts}>
+        <span className={style.appContentPostsTitle}>Мои посты:</span>
+        {
+          profilePage.posts.map(item => {
+            return <Post message={item.message} likes={item.likes} id={item.id} key={item.id}/>
+          })   
+        }
+      </div>
+    </div>
   );
 };
 
+const mapStateToProps = ({profilePage}) => {
+  return {
+    profilePage
+  }
+}
 
-export default MyPosts;
+const mapDispatchToProps = {
+  addPostCreator,
+  updateNewPostTextCreator
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 

@@ -1,30 +1,43 @@
 import React from 'react';
-import "./Navbar.css";
 import {NavLink} from "react-router-dom";
+import message from "./img/message.svg";
+import news from "./img/news.svg";
+import music from "./img/music.svg";
+import setting from "./img/setting.svg";
+import profile from "./img/profile.svg";
+import friends from "./img/friends.svg";
+import style from "./Navbar.module.css";
 
-const Navbar = (props) => {
+const Navbar = () => {
   return (
-    <nav className="app-nav">
+    <nav className={style.appNav}>
 
-      <NavLink to="/profile" className="app-nav__link">
-        <img src="https://image.flaticon.com/icons/svg/126/126486.svg"/>Профиль
+      <NavLink to="/profile" className={style.appNavLink}>
+        <img src={profile} className={style.appNavImage}/>Профиль
       </NavLink>
 
-      <NavLink to="/dialogs" className="app-nav__link">
-        <img src="https://image.flaticon.com/icons/svg/126/126475.svg"/>Сообщения
+      <NavLink to="/news" className={style.appNavLink}>
+        <img src={news} className={style.appNavImage}/>Новости
       </NavLink>
 
-      <NavLink to="/news" className="app-nav__link">
-        <img src="https://image.flaticon.com/icons/svg/126/126495.svg"/>Новости
+      <NavLink to="/dialogs" className={style.appNavLink}>
+        <img src={message} className={style.appNavImage}/>Сообщения
       </NavLink>
 
-      <NavLink to="/music" className="app-nav__link">
-        <img src="https://image.flaticon.com/icons/svg/126/126493.svg"/>Музыка
+      <NavLink to="/users" className={style.appNavLink}>
+        <img src={friends} className={style.appNavImage}/>Найти друзей
       </NavLink>
 
-      <NavLink to="/settings" className="app-nav__link">
-        <img src="https://image.flaticon.com/icons/svg/126/126472.svg"/>Настройки
+      <NavLink to="/music" className={style.appNavLink}>
+        <img src={music} className={style.appNavImage}/>Музыка
       </NavLink>
+
+
+      <NavLink to="/settings" className={style.appNavLink}>
+        <img src={setting} className={style.appNavImage}/>Настройки
+      </NavLink>
+
+      
 
     </nav>
   );

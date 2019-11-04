@@ -1,24 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {store} from "./redux/redux-store";
+import {store} from "./redux/store";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import {Provider} from "react-redux";
 import './index.css';
 import {App} from './App';
 // import {addPost, updateNewPostText, updateNewMessageText} from "./redux/store";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter as Router} from "react-router-dom";
 
-let rerenderEntireTree = (state) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <App state={state} dispatch={store.dispatch.bind(store)} store={store}/>
-        </BrowserRouter>, document.getElementById('root')
-    );
-};
-rerenderEntireTree(store.getState());
-store.subscribe( () => {
-    let state = store.getState();
-    rerenderEntireTree(state);
-});
-// Так как Redux не передает state, то нам нужно его запросить и передать, а не только
-// rerenderEntireTree
+ReactDOM.render(
+    <Provider store={store}>
+        <Router>
+            <App state={store.state} dispatch={store.dispatch.bind(store)} store={store}/>
+        </Router>
+    </Provider>, document.getElementById('root')
+);

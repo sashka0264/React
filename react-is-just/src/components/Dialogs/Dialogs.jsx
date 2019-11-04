@@ -1,58 +1,53 @@
 import React from 'react';
+import {connect} from "react-redux";
 import "./Dialogs.css";
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {updateNewMessageTextCreator, sendMessageCreator} from "../../redux/dialogs-reducer";
+import {updateNewMessageTextCreator, sendMessageCreator} from "../../redux/actions";
 
-const Dialogs = (props) => {
+const Dialogs = ({messagesPage, sendMessageCreator, updateNewMessageTextCreator}) => {
 
-    let state = props.store.getState().messagesPage;
-
-    let dialogsElements = state.dialogs.map( (item) => {
-        return (
-            <DialogItem name={item.name} id={item.id}/>
-        );
-    });
-
-    let messagesElements = state.messages.map( (item) => {
-        return (
-            <MessageItem content={item.content}/>
-        );
-    });
-    // Преобразование массива данных в массив компонентов
-    let newMessageElement = React.createRef();
-
-    let addMessage = () => {
-        let text = newMessageElement.current.value,
-            action = sendMessageCreator(text);
-        props.store.dispatch(action);
-    };
-
-    let onMessageChange = () => {
-        let text = newMessageElement.current.value,
-            action = updateNewMessageTextCreator(text);
-        props.store.dispatch(action);
-    };
+    const newMessageElement = React.createRef(),
+        addMessage = () => {
+            sendMessageCreator(newMessageElement.current.value);
+        },
+        onMessageChange = () => {
+            updateNewMessageTextCreator(newMessageElement.current.value);
+        };
 
     return (
         <div className="app-dialogs">
 
             <div className="app-dialogs-items">
 
-                {dialogsElements}
+                {
+                    messagesPage.dialogs.map( (item) => <DialogItem name={item.name} id={item.id} key={item.id}/>)
+                }
 
             </div>
 
             <div className="app-dialogs-messages">
 
-                {messagesElements}
+                {
+                    messagesPage.messages.map( (item) => <MessageItem content={item.content}/>)
+                }
 
-
-                <textarea value={state.newMessageText} onChange={onMessageChange} ref={newMessageElement} className="app-dialogs-messages__textarea" placeholder="Write a message..."></textarea>
+                <textarea value={messagesPage.newMessageText} onChange={onMessageChange} ref={newMessageElement} className="app-dialogs-messages__textarea" placeholder="Write a message..."></textarea>
                 <button onClick={addMessage} className="app-dialogs-messages__send">send</button>
             </div>
         </div>
     );
 };
 
-export default Dialogs;
+const mapStateToProps = ({messagesPage}) => {
+    return {
+        messagesPage
+    }
+}
+  
+const mapDispatchToProps = {
+    updateNewMessageTextCreator,
+    sendMessageCreator
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);

@@ -1,0 +1,49 @@
+.appUsers {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.appUsersItem {
+    display: flex;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.appUsersItemPersonBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.appUsersItemAboutBlock {
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+    padding: 12px;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    border-radius: 6px;
+    background-color: #ebecf0;
+    margin-left: 25px;
+}
+
+.appUsersItemFullname {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.appUsersItemCity {
+    margin-bottom: 15px;
+}
+
+.appUsersItemStatus {
+    color: #939393;
+    font-size: 13px;
+}
+
+.appUsersItemImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}

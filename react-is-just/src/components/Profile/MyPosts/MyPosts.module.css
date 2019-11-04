@@ -1,0 +1,35 @@
+.appContentBlock {
+    margin-top: 10px;
+}
+
+.appContentSend {
+    display: flex;
+    background-color: #ebecf0;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    padding: 10px;
+}
+
+.appContentLetterTextarea {
+    width: 90%;
+    padding: 7px 0 33px 5px;
+    border: none;
+}
+
+.appContentLetterSend {
+    width: 10%;
+    border: 0px solid #c1c5d6;
+    color: #6c757d;
+    outline: none;
+}
+
+.appContentPosts {
+    word-break: break-all;
+    margin: 10px 0 0 0;
+    padding: 10px 0;
+}
+
+.appContentPostsTitle {
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}

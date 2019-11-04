@@ -1,9 +1,10 @@
 import React from "react";
+import defaultAvatar from "./img/defaultAvatar.png";
 
 const ProfileInfo = (props) => {
     return (
         <div className="app-content-avatarAndDescription">
-            <img className="app-content__avatar" src="https://sun9-19.userapi.com/c629400/v629400532/3b34b/Q_OvSVHf4iU.jpg"></img>
+            <img className="app-content__avatar" src={defaultAvatar}></img>
             
             <div>
             <div className="app-content__name">Александр Колесников</div>

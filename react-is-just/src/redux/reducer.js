@@ -97,7 +97,7 @@ const reducer = (state = initialState, action) => {
                     ...state.usersPage,
                     users: state.usersPage.users.map(user => {
                         if (user.id === action.id) {
-                            return {...user, followed: false}
+                            return {...user, followed: true}
                         } 
                         return user;
                     })    
@@ -110,7 +110,7 @@ const reducer = (state = initialState, action) => {
                     ...state.usersPage,
                     users: state.usersPage.users.map(user => {
                         if (user.id === action.id) {
-                            return {...user, followed: true}
+                            return {...user, followed: false}
                         } 
                         return user;
                     })    

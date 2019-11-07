@@ -11,7 +11,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <App state={store.state} dispatch={store.dispatch.bind(store)} store={store}/>
+            <App/>
         </Router>
     </Provider>, document.getElementById('root')
 );

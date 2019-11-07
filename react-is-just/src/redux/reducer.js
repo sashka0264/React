@@ -5,17 +5,29 @@ import {
     ADD_POST,
     FOLLOW,
     UNFOLLOW,
-    SET_USERS
+    SET_USERS,
+    SET_CURRENT_PAGE,
+    SET_TOTAL_USERS_COUNT,
+    TOGGLE_IS_LOADING,
+    SET_USER_PROFILE,
+    SET_USER_DATA
 } from "./actions";
 
 
 const initialState = {
+    auth: {
+        userId: null,
+        email: null,
+        login: null,
+        isAuth: false
+    },
     profilePage: {
         posts: [ 
             {id: 2, message: "Как у вас всех дела? =)", likes: "12"}, 
             {id: 1, message: "Всем привет!", likes: "0"}
         ],
-        newPostText: ""
+        newPostText: "",
+        profile: {}
     },
     messagesPage: {
         dialogs: [ 
@@ -34,12 +46,11 @@ const initialState = {
     }, 
     sidebar: {},
     usersPage: {
-        users: [
-            // {id: 1, followed: false, photoUrl: "https://i09.fotocdn.net/s124/ca58f0996c2bef65/user_xl/2820992684.jpg", fullName: "Франческо", status: "Рисую", location: {city: "Рим", country: "Италия"} },
-            // {id: 2, followed: false, photoUrl: "https://i09.fotocdn.net/s124/ca58f0996c2bef65/user_xl/2820992684.jpg", fullName: "Дмитрий", status: "Сижу в офисе :D", location: {city: "Москва", country: "Россия"} },
-            // {id: 3, followed: true, photoUrl: "https://i09.fotocdn.net/s124/ca58f0996c2bef65/user_xl/2820992684.jpg", fullName: "Лара", status: "Хожу по магазинам", location: {city: "Рейкьявик", country: "Исландия"} },
-            // {id: 4, followed: true, photoUrl: "https://i09.fotocdn.net/s124/ca58f0996c2bef65/user_xl/2820992684.jpg", fullName: "Лукас", status: "Стою в пробке", location: {city: "Нью-Йорк", country: "США"} }
-        ]
+        pageSize: 30,
+        totalUsersCount: 0,
+        currentPage: 1,
+        users: [],
+        loading: false
     }
 }
 
@@ -121,10 +132,50 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 usersPage: {
                     ...state.usersPage,
-                    users: [
-                        ...state.usersPage.users,
-                        ...action.users
-                    ]
+                    users: [...action.users]
+                }
+            }
+        case SET_CURRENT_PAGE: 
+            return {
+                ...state,
+                usersPage: {
+                    ...state.usersPage,
+                    currentPage: action.page
+                }
+            }
+        case SET_TOTAL_USERS_COUNT: 
+            return {
+                ...state,
+                usersPage: {
+                    ...state.usersPage,
+                    totalUsersCount: action.count
+                }
+            }
+        case TOGGLE_IS_LOADING:
+            return {
+                ...state,
+                usersPage: {
+                    ...state.usersPage,
+                    loading: action.loadingStatus
+                }
+            }
+        case SET_USER_PROFILE: 
+            return {
+                ...state,
+                profilePage: {
+                    ...state.profilePage,
+                    profile: {...action.profile}
+                }
+            }
+        case SET_USER_DATA:
+            return {
+                ...state,
+                auth: {
+                    ...state.auth,
+                    userId: action.userId,
+                    email: action.email,
+                    login: action.login,
+                    isAuth: true
                 }
             }
         default: 

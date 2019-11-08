@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #d7d8db;
+  font-family: sans-serif;
+  color: #101118;
+  background-size: cover;
+}
+
+button, textarea, input {
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}

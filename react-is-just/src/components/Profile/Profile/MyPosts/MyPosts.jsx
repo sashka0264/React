@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Post from './Post/Post';
 import {addPostCreator, updateNewPostTextCreator} from "../../../../redux/actions";
+import Post from './Post/Post';
 import style from "./MyPosts.module.css";
 
 const MyPosts = ({profilePage, addPostCreator, updateNewPostTextCreator}) => {
@@ -46,10 +46,5 @@ const mapStateToProps = ({profilePage}) => {
   }
 }
 
-const mapDispatchToProps = {
-  addPostCreator,
-  updateNewPostTextCreator
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+export default connect(mapStateToProps, {addPostCreator, updateNewPostTextCreator})(MyPosts);
 

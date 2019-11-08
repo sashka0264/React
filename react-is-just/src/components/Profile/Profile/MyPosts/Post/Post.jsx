@@ -1,8 +1,8 @@
 import React from 'react';
+import style from "./Post.module.css";
 import heart from "./img/heart.svg";
 import zeroHeart from "./img/zeroHeart.png";
 import defaultAvatar from "./img/defaultAvatar.png";
-import "./Post.css";
 
 const Post = (props) => {
   let likeImage;
@@ -13,25 +13,22 @@ const Post = (props) => {
   }
 
   return (
-    <div className="app-content__posts-post">
-      <img className="app-content__posts-avatar" src={defaultAvatar}></img>
+    <div className={style.appContentPostsPost}>
+      <img className={style.appContentPostsAvatar} src={defaultAvatar}></img>
       
-      <div className="app-content__posts-text">
-
+      <div className={style.appContentPostsText}>
         <div>
-          <div className="app-content__posts-name">Alexandr Kolesnikov</div>
-
+          <div className={style.appContentPostsName}>Alexandr Kolesnikov</div>
           <div>{props.message}</div>
         </div>
         
-        <div className="app-content__posts-params">
-          <div className="app-content__posts-like" onClick={onLike}>
+        <div className={style.appContentPostsParams}>
+          <div className={style.appContentPostsLike} onClick={onLike}>
             <img src={likeImage} alt="heart"/>
             {props.likes}
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

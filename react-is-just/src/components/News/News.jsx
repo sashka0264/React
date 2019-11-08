@@ -1,12 +1,12 @@
 import React from 'react';
-import "./News.css";
+import style from "./News.module.css";
 
-const News = (props) => {
-    return (
-        <div className="app-news">
-            News
-        </div>
-    );
+const News = () => {
+	return (
+		<div className={style.appNews}>
+			Тут будут ваши новости
+		</div>
+	);
 };
 
 export default News;

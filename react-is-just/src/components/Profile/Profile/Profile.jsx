@@ -3,12 +3,12 @@ import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = ({profile}) => {
-    return (
-        <div className="app-content">
-            <ProfileInfo profile={profile}/>
-            <MyPosts/>
-        </div>
-    )
+	return (
+		<>
+			<ProfileInfo profile={profile}/>
+			<MyPosts/>
+		</>
+	)
 }
 
 export default Profile;

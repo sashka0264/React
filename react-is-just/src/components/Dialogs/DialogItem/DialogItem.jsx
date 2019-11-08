@@ -5,14 +5,14 @@ import defaultAvatar from "./img/defaultAvatar.png";
 
 const DialogItem = (props) => {
 
-    let path = "/dialogs/"+props.id;
+	let path = "/dialogs/"+props.id;
 
-    return (
-        <NavLink to={path} className="app-dialogs-items__item">
-            <img src={defaultAvatar}></img>
-            {props.name}
-        </NavLink>
-    )
+	return (
+		<NavLink to={path} className="app-dialogs-items__item">
+			<img src={defaultAvatar}></img>
+			{props.name}
+		</NavLink>
+	)
 };
 
 export default DialogItem;

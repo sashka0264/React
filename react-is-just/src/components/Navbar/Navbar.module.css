@@ -23,9 +23,9 @@
   text-decoration: none;
 }
 
-.appNavLink.active {
+/* .appNavLink.active {
   font-weight: 600;
-}
+} */
 
 @media (max-width: 767px) {
   .appNav {

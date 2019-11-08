@@ -1,0 +1,27 @@
+.appHeader {
+	grid-area: header;
+	background-color: #f2f2f2;
+	display: flex;
+	align-items: center;
+	padding: 20px;
+	margin-top: 5px;
+	border-radius: 2px;
+	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+}
+
+.appHeaderImage {
+	display: none;
+	width: 33px;
+	height: 33px;
+}
+
+.appHeaderLoginBlock {
+	margin-left: auto;
+	padding-right: 20px;
+}
+
+@media (max-width: 767px) {
+	.appHeaderImage {
+		display: inline-block;
+	}
+}

@@ -1,10 +1,10 @@
 import React from "react";
-import "./MessageItem.css";
+import style from "./MessageItem.module.css";
 
 const MessageItem = (props) => {
-    return (
-        <div className="app-dialogs-messages__message">{props.content}</div>
-    )
+	return (
+		<div className={style.appDialogsMessagesMessage}>{props.content}</div>
+	)
 }
 
 export default MessageItem; 

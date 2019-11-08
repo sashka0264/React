@@ -1,8 +1,8 @@
 import React from "react";
-import * as axios from "axios";
+import {NavLink} from "react-router-dom";
+import {getDeleteUser, getPostUser} from "../../../services/services";
 import style from "./Users.module.css";
 import defaultAvatar from "./img/defaultAvatar.png";
-import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
 	const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize),
@@ -36,28 +36,26 @@ const Users = (props) => {
 								<div>
 									{
 										item.followed ? 
-										<button onClick={() => {
-											axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`, {
-												withCredentials: true,
-												headers: {"API-KEY":"9c4c0b67-afad-4fc5-8099-60e295f78a94"}
-											})
-												.then(response => {
-													if (response.data.resultCode === 0) {
-														props.unfollowAC(item.id)
-													}
-												});
+										<button disabled={props.followingInProgress.some(id => id === item.id)} onClick={() => {
+											props.toggleIsFollowingProgressAC(true, item.id);
+
+											getDeleteUser(item.id).then(data => {
+												if (data.resultCode === 0) {
+													props.unfollowAC(item.id)
+												}
+												props.toggleIsFollowingProgressAC(false, item.id);
+											});
 										}}>Отписаться</button> :
 
-										<button onClick={() => {
-											axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${item.id}`,
-												{},
-												{withCredentials: true, headers: {"API-KEY":"9c4c0b67-afad-4fc5-8099-60e295f78a94"}
-											})
-												.then(response => {
-														if (response.data.resultCode === 0) {
-																props.followAC(item.id)
-														}
-												});
+										<button disabled={props.followingInProgress.some(id => id === item.id)} onClick={() => {
+											props.toggleIsFollowingProgressAC(true, item.id);
+
+											getPostUser(item.id).then(data => {
+												if (data.resultCode === 0) {
+													props.followAC(item.id)
+												}
+												props.toggleIsFollowingProgressAC(false, item.id);
+											});
 										}}>Подписаться</button> 
 									}
 								</div>

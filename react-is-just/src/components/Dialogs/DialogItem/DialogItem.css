@@ -1,24 +1,24 @@
 .app-dialogs-items__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: black;
-    padding: 10px 10px;
-    margin: 0 0 10px 10px;
-    border-radius: 2px;
-    background-color: #d7d8db;
-    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	color: black;
+	padding: 10px 10px;
+	margin: 0 0 10px 10px;
+	border-radius: 2px;
+	background-color: #d7d8db;
+	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 }
 
 .app-dialogs-items__item.active {
-    background-color: #ebecf0;
+	background-color: #ebecf0;
 }
 
 .app-dialogs-items__item img {
-    width: 50px;
-    height: 50px;
-    background-position: top;
-    margin-right: 15px;
-    border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	background-position: top;
+	margin-right: 15px;
+	border-radius: 50%;
 }

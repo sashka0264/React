@@ -1,12 +1,4 @@
-body {
-  background: #d7d8db;
-  /* background-color: #c1c5d6; */
-  font-family: sans-serif;
-  color: #101118;
-  background-size: cover;
-}
-
-.app-wrapper {
+.appWrapper {
   display: grid;
   grid-template-rows: 70px 1fr;
   grid-template-columns: 2.4fr 9.6fr;
@@ -19,7 +11,7 @@ body {
   margin-right: auto;
 }
 
-.app-reference {
+.appReference {
   grid-area: contentText;
   margin: 0 0 5px 0;
   border-radius: 2px;
@@ -28,7 +20,7 @@ body {
 }
 
 @media (max-width: 767px) {
-  .app-wrapper {
+  .appWrapper {
     grid-template-columns: 0 12fr;
     grid-template-areas: 
     "header header header"

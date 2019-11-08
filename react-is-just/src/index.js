@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {store} from "./redux/store";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Provider} from "react-redux";
-import './index.css';
-import {App} from './App';
-// import {addPost, updateNewPostText, updateNewMessageText} from "./redux/store";
 import {BrowserRouter as Router} from "react-router-dom";
+import {store} from "./redux/store";
+import {Provider} from "react-redux";
+import App from './App';
+import './index.module.css';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router>
-            <App/>
-        </Router>
-    </Provider>, document.getElementById('root')
+	<Provider store={store}>
+		<Router>
+			<App/>
+		</Router>
+	</Provider>, document.getElementById('root')
 );

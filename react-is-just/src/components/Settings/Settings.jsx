@@ -1,12 +1,12 @@
 import React from 'react';
-import "./Settings.css";
+import style from "./Settings.module.css";
 
 const Settings = () => {
-    return (
-        <div className="app-settings">
-            Settings
-        </div>
-    );
+	return (
+		<div className={style.appSettings}>
+			Тут будут ваши настройки
+		</div>
+	);
 };
 
 export default Settings;

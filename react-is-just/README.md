@@ -1,1 +1,3 @@
-Чтобы запустить проект, нужно скачать папку, открыть ее в консоли и написать "npm install", а затем "npm start".
+Сделал простенький интерфейс социальной сети.
+
+![Image alt](https://github.com/sashka0264/JavaScript/blob/master/react-is-just/screenshot.jpg)

@@ -28,7 +28,8 @@ const initialState = {
 			{id: 1, message: "Всем привет!", likes: "0"}
 		],
 		newPostText: "",
-		profile: {}
+		profile: {},
+		status: "Hello world!"
 	},
 	messagesPage: {
 		dialogs: [ 

@@ -9,7 +9,7 @@ const Header = (props) => {
       <img className={style.appHeaderImage} src="https://siliconprice.com/img/mobileMenuIcon.png"/>
 
       <div className={style.appHeaderLoginBlock}>
-        <NavLink to={"/login"}>{props.isAuth ? `${props.login}` : "Регистрация"}</NavLink>
+        <NavLink to={"/login"}>{props.isAuth ? `${props.login}` : "Войти"}</NavLink>
       </div>
     </header>
   );

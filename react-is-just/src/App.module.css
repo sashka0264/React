@@ -1,6 +1,6 @@
 .appWrapper {
   display: grid;
-  grid-template-rows: 70px 1fr;
+  grid-template-rows: 48px 1fr;
   grid-template-columns: 2.4fr 9.6fr;
   grid-gap: 10px;
   grid-template-areas: 
@@ -9,6 +9,7 @@
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
+  height: 99.5%;
 }
 
 .appReference {

@@ -16,13 +16,7 @@
 }
 
 .appContentName {
-	font-size: 19px;
-}
-
-.appContentStatus {
-	color: #939393;
-	font-size: 13px;
-	cursor: pointer;
+	font-size: 21px;
 }
 
 .appContentContacts {
@@ -74,5 +68,8 @@
 @media (max-width: 767px) {
 	.appContentAvatar {
 		max-width: 175px;
+	}
+	.appContentAvatarAndDescription {
+		flex-direction: column;
 	}
 }

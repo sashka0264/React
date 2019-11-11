@@ -1,9 +1,10 @@
 import React from "react";
 import Spinner from "../../../Spinner/Spinner";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import style from "./ProfileInfo.module.css";
 import defaultAvatar from "./img/defaultAvatar.png";
 
-const ProfileInfo = ({profile}) => {
+const ProfileInfo = ({profile, status}) => {
 	return (
 		(Object.keys(profile).length === 0) ?
 		
@@ -15,7 +16,7 @@ const ProfileInfo = ({profile}) => {
 				
 				<div>
 					<div className={style.appContentName}>{profile.fullName}</div>
-					<div className={style.appContentStatus}>изменить статус</div>
+					<ProfileStatus status={status}/>
 
 					<div className={style.appContentBasis}>
 						<div>Основная информация</div>

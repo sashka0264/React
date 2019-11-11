@@ -44,7 +44,7 @@ const initialState = {
 			{id: 2, content: "Как дела-то?"}, 
 			{id: 3, content: "=)"}
 		],
-		newMessageText: "Я - текст нового сообщения!"
+		newMessageText: ""
 	}, 
 	sidebar: {},
 	usersPage: {

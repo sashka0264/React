@@ -17,14 +17,13 @@
 
 .appDialogsMessagesTextarea {
 	margin: 9px;
-	border-radius: 6px;
 	padding: 19px;
-	background-color: #ebecf0;
 	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
 	position: absolute;
 	bottom: 11px;
 	width: 79.5%;
 	left: 10px;
+	border-radius: 6px;
 }
 
 .appDialogsMessagesSend {

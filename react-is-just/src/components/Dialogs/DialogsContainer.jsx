@@ -11,10 +11,10 @@ class DialogsContainer extends Component {
 	}
 };
 
-const mapStateToProps = ({messagesPage, auth}) => {
+const mapStateToProps = ({global}) => {
 	return {
-		messagesPage,
-		isAuth: auth.isAuth
+		messagesPage: global.messagesPage,
+		isAuth: global.auth.isAuth
 	}
 }
 

@@ -1,4 +1,4 @@
-import usersAPI from "../services/services";
+import {usersAPI, profileAPI, authAPI} from "../services/services";
 
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT",
 	SEND_MESSAGE = "SEND-MESSAGE",
@@ -12,7 +12,11 @@ export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT",
 	TOGGLE_IS_LOADING = "TOGGLE-IS-LOADING",
 	SET_USER_PROFILE = "SET-USER-PROFILE",
 	SET_USER_DATA = "SET-USER-DATA",
-	TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS";
+	TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS",
+	SET_USER_STATUS = "SET-USER-STATUS",
+	UPDATE_USER_STATUS = "UPDATE-USER-STATUS",
+	CHANGE_EDIT_MODE = "CHANGE-EDIT-MODE",
+	DISABLED_EDIT_MODE = "DISABLED-EDIT-MODE";
 
 export const updateNewMessageTextCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, content: text}),
 	sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}),
@@ -25,8 +29,12 @@ export const updateNewMessageTextCreator = (text) => ({type: UPDATE_NEW_MESSAGE_
 	setTotalUsersCountAC = (count) => ({type: SET_TOTAL_USERS_COUNT, count}),
 	toggleIsLoadingAC = (loadingStatus) => ({type: TOGGLE_IS_LOADING, loadingStatus}),
 	setUserProfileAC = (profile) => ({type: SET_USER_PROFILE, profile}),
-	setUserData = (userId, email, login) => ({type: SET_USER_DATA, userId, email, login}),
-	toggleIsFollowingProgressAC = (status, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, status, userId});
+	setUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, userId, email, login, isAuth}),
+	toggleIsFollowingProgressAC = (status, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, status, userId}),
+	setUserStatusAC = (status) => ({type: SET_USER_STATUS, status}),
+	updateUserStatusAC = () => ({type: UPDATE_USER_STATUS}),
+	changeEditMode = (status) => ({type: CHANGE_EDIT_MODE, status}),
+	disabledEditMode = (status) => ({type: DISABLED_EDIT_MODE, status});
 
 export const getUsersTC = (currentPage, pageSize) => {
 	return (dispatch) => {
@@ -64,24 +72,66 @@ followTC = (id) => {
 getProfileTC = (id) => {
 	return (dispatch) => {
     if (!id) {
-      id = 2;
+      id = 5102;
     }
 
-    usersAPI.getProfile(id).then(data => {
+    profileAPI.getProfile(id).then(data => {
       dispatch(setUserProfileAC(data));
     });
 	}
 },
+getUserStatusTC = (id) => {
+	return (dispatch) => {
+		if (!id) {
+			id = 5102;
+		}
+
+		profileAPI.getStatus(id).then(data => {
+			dispatch(setUserStatusAC(data));
+		});
+	}
+},
+updateUserStatusTC = (status) => {
+	return (dispatch) => {
+		dispatch(disabledEditMode(true));
+		profileAPI.updateStatus(status).then(data => {
+			if (data.resultCode === 0) {
+				dispatch(setUserStatusAC(status));
+				dispatch(disabledEditMode(false));
+				dispatch(changeEditMode(false));
+			}
+		});
+	}
+},
 getMeTC = () => {
 	return (dispatch) => {
-		usersAPI.getMe().then(data => {
+		authAPI.getMe().then(data => {
       if (data.resultCode === 0) {
         const {id, email, login} = data.data;
-        dispatch(setUserData(id, email, login));
+        dispatch(setUserData(id, email, login, true));
       }
     });
 	}
-};
+},
+loginTC = (email, password, rememberMe = false) => {
+	return (dispatch) => {
+		authAPI.logIn(email, password, rememberMe).then(data => {
+			if (data.resultCode === 0) {
+				dispatch(getMeTC());
+			}
+		})
+	}
+},
+logoutTC = () => {
+	return (dispatch) => {
+		authAPI.logOut().then(data => {
+			if (data.resultCode === 0) {
+				dispatch(setUserData(null, null, null, false));
+			}
+		})
+	}
+}
+;
 
 
     

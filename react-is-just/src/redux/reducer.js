@@ -11,7 +11,10 @@ import {
 	TOGGLE_IS_LOADING,
 	SET_USER_PROFILE,
 	SET_USER_DATA,
-	TOGGLE_IS_FOLLOWING_PROGRESS
+	TOGGLE_IS_FOLLOWING_PROGRESS,
+	SET_USER_STATUS,
+	CHANGE_EDIT_MODE,
+	DISABLED_EDIT_MODE
 } from "./actions";
 
 
@@ -29,7 +32,9 @@ const initialState = {
 		],
 		newPostText: "",
 		profile: {},
-		status: "Hello world!"
+		status: "",
+		editMode: false,
+		disabled: false
 	},
 	messagesPage: {
 		dialogs: [ 
@@ -180,7 +185,7 @@ const reducer = (state = initialState, action) => {
 					userId: action.userId,
 					email: action.email,
 					login: action.login,
-					isAuth: true
+					isAuth: action.isAuth
 				}
 			}
 		case TOGGLE_IS_FOLLOWING_PROGRESS: 
@@ -191,6 +196,31 @@ const reducer = (state = initialState, action) => {
 					followingInProgress: action.status 
 					? [...state.usersPage.followingInProgress, action.userId] 
 					: state.usersPage.followingInProgress.filter(id => id !== action.userId) 
+				}
+			}
+		case SET_USER_STATUS:
+			return {
+				...state,
+				profilePage: {
+					...state.profilePage,
+					status: action.status
+				}
+			}
+		case CHANGE_EDIT_MODE: 
+			return {
+				...state,
+				profilePage: {
+					...state.profilePage,
+					editMode: action.status
+				}
+			}
+		case DISABLED_EDIT_MODE: 
+			
+			return {
+				...state,
+				profilePage: {
+					...state.profilePage,
+					disabled: action.status
 				}
 			}
 		default: 

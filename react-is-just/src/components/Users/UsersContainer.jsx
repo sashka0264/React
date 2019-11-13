@@ -39,9 +39,9 @@ class UsersContainer extends Component {
 	}
 }
 
-const mapStateToProps = ({usersPage, auth}) => {
-	const {users, pageSize, totalUsersCount, currentPage, loading, followingInProgress} = usersPage;
-	const {isAuth} = auth;
+const mapStateToProps = ({global}) => {
+	const {users, pageSize, totalUsersCount, currentPage, loading, followingInProgress} = global.usersPage;
+	const {isAuth} = global.auth;
 	return {users, pageSize, totalUsersCount,currentPage, loading, followingInProgress, isAuth}
 }
   

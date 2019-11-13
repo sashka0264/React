@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {getMeTC} from "../../redux/actions";
+import {getMeTC, logoutTC} from "../../redux/actions";
 import Header from "./Header/Header";
 
 class HeaderAPI extends Component {
@@ -13,11 +13,11 @@ class HeaderAPI extends Component {
   }
 };
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({global}) => {
   return {
-    isAuth: auth.isAuth,
-    login: auth.login
+    isAuth: global.auth.isAuth,
+    login: global.auth.login
   }
 }
  
-export default connect(mapStateToProps, {getMeTC})(HeaderAPI);
+export default connect(mapStateToProps, {getMeTC, logoutTC})(HeaderAPI);

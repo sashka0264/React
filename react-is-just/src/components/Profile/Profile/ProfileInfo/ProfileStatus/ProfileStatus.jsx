@@ -4,36 +4,46 @@ import style from "./ProfileStatus.module.css";
 class ProfileStatus extends Component {
 
   state = {
-    editMode: false,
-    status: this.props.status,
-    newStatusText: ""
+    newStatusText: "",
   }
 
-  activateEditMode = async() => {
-    debugger;
-    await this.setState({editMode: true});
+  activateEditMode = () => {
+    this.props.changeEditMode(true)
   }
+  // Активация окна редактирования
+  cancel = async() => {
+    this.props.changeEditMode(false)
+  }
+  // Закрытие окна редактирования
 
   onChangeNewStatus = async(status) => {
     await this.setState({newStatusText: status});
   }
+  // Сохранение ожидаемого нового статуса
 
-  updateNewStatus = async() => {
-    await this.setState({status: this.state.newStatusText});
-    await this.setState({editMode: false});
+  updateNewStatus = () => {
+    this.props.updateUserStatusTC(this.state.newStatusText);
+
   }
+  // Подтвержение ожидаемого нового статуса
 
   render() {
     return (
       <>
-        {!this.state.editMode && <div onDoubleClick={this.activateEditMode}  className={style.appStatus}>{this.state.status}</div>} 
+        {!this.props.editMode && <div onDoubleClick={(this.props.id === 5102) && 
+          this.activateEditMode} className={style.appStatus}>
+          {(!this.props.status && this.props.id === 5102) ? "изменить статус" : this.props.status}
+        </div>} 
 
-        {this.state.editMode && <div className={style.appStatusEditor}>
+        {this.props.editMode && <div className={style.appStatusEditor}>
           <input 
             onChange={(e) => this.onChangeNewStatus(e.target.value)}
             autoFocus={true} 
           />
-          <button onClick={this.updateNewStatus}>Сохранить</button>
+          <div>
+            <button disabled={this.props.disabledEditMode} onClick={this.updateNewStatus} className={style.updateNewStatus}>Сохранить</button>
+            <button disabled={this.props.disabledEditMode} onClick={this.cancel} className={style.cancel}>Отмена</button>
+          </div>
         </div>} 
 
         

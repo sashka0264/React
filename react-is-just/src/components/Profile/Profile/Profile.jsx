@@ -2,10 +2,16 @@ import React from "react";
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = ({profile, status}) => {
+const Profile = ({profile, status, updateUserStatusTC, disabledEditMode, changeEditMode, editMode}) => {
 	return (
 		<>
-			<ProfileInfo profile={profile} status={status}/>
+			<ProfileInfo 
+				disabledEditMode={disabledEditMode}
+				profile={profile} 
+				editMode={editMode} 
+				status={status} 
+				changeEditMode={changeEditMode} 
+				updateUserStatusTC={updateUserStatusTC}/>
 			<MyPosts/>
 		</>
 	)

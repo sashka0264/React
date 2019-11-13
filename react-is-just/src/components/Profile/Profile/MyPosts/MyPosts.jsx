@@ -40,9 +40,9 @@ const MyPosts = ({profilePage, addPostCreator, updateNewPostTextCreator}) => {
   );
 };
 
-const mapStateToProps = ({profilePage}) => {
+const mapStateToProps = ({global}) => {
   return {
-    profilePage
+    profilePage: global.profilePage
   }
 }
 

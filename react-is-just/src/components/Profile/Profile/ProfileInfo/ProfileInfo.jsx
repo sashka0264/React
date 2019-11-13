@@ -4,7 +4,7 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import style from "./ProfileInfo.module.css";
 import defaultAvatar from "./img/defaultAvatar.png";
 
-const ProfileInfo = ({profile, status}) => {
+const ProfileInfo = ({profile, status, updateUserStatusTC, disabledEditMode, changeEditMode, editMode}) => {
 	return (
 		(Object.keys(profile).length === 0) ?
 		
@@ -16,7 +16,9 @@ const ProfileInfo = ({profile, status}) => {
 				
 				<div>
 					<div className={style.appContentName}>{profile.fullName}</div>
-					<ProfileStatus status={status}/>
+					<ProfileStatus disabledEditMode={disabledEditMode}
+						editMode={editMode} changeEditMode={changeEditMode} id={profile.userId} status={status} updateUserStatusTC={updateUserStatusTC}
+					/>
 
 					<div className={style.appContentBasis}>
 						<div>Основная информация</div>

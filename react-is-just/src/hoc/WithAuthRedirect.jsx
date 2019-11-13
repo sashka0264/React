@@ -5,7 +5,7 @@ const WithAuthRedirect = (Component) => {
   class RedirectComponent extends Component {
     render() {
       const {isAuth} = this.props;
-      if (!isAuth) return <Redirect to={"/login"}/>
+      if (!isAuth) return <Redirect to="/login"/>
       return <Component {...this.props}/>;
     }
   }

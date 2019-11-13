@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {updateNewMessageTextCreator, sendMessageCreator} from "../../redux/actions";
+import {sendMessageCreator} from "../../redux/actions";
 import Dialogs from './Dialogs/Dialogs';
 
 class DialogsContainer extends Component {
@@ -19,7 +19,7 @@ const mapStateToProps = ({global}) => {
 }
 
 export default compose(
-	connect(mapStateToProps, {updateNewMessageTextCreator, sendMessageCreator}), 
+	connect(mapStateToProps, {sendMessageCreator}), 
 	WithAuthRedirect
 )(
 	DialogsContainer

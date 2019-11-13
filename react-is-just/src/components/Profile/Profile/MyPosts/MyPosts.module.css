@@ -23,13 +23,11 @@
 }
 
 .appContentPosts {
-	word-break: break-all;
-	margin: 10px 0 0 0;
 	padding: 10px 0;
 }
 
 .appContentPostsTitle {
 	font-weight: bold;
-	margin-bottom: 20px;
-	padding: 0 10px;
+	color: black;
+	padding: 5px 10px 12px 10px;
 }

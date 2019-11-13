@@ -1,7 +1,5 @@
 import {
-	UPDATE_NEW_MESSAGE_TEXT, 
 	SEND_MESSAGE,
-	UPDATE_NEW_POST_TEXT,
 	ADD_POST,
 	FOLLOW,
 	UNFOLLOW,
@@ -30,7 +28,6 @@ const initialState = {
 			{id: 2, message: "Как у вас всех дела? =)", likes: "12"}, 
 			{id: 1, message: "Всем привет!", likes: "0"}
 		],
-		newPostText: "",
 		profile: {},
 		status: "",
 		editMode: false,
@@ -48,8 +45,7 @@ const initialState = {
 			{id: 1, content: "Привет, Саня!"}, 
 			{id: 2, content: "Как дела-то?"}, 
 			{id: 3, content: "=)"}
-		],
-		newMessageText: ""
+		]
 	}, 
 	sidebar: {},
 	usersPage: {
@@ -67,14 +63,6 @@ const reducer = (state = initialState, action) => {
 	console.log(action)
 
 	switch (action.type) {
-		case UPDATE_NEW_MESSAGE_TEXT: 
-			return {
-				...state,
-				messagesPage: {
-					...state.messagesPage, 
-					newMessageText: action.content
-				}
-			}
 		case SEND_MESSAGE: 
 			// с id нужно поработать
 			const newMessage = {id: 4, content: action.content}
@@ -85,8 +73,7 @@ const reducer = (state = initialState, action) => {
 					messages: [
 						...state.messagesPage.messages,
 						newMessage
-					],
-					newMessageText: ""
+					]
 				}
 			}
 		case ADD_POST:
@@ -101,14 +88,6 @@ const reducer = (state = initialState, action) => {
 						...state.profilePage.posts
 					],
 					newPostText: ""
-				}
-			}
-		case UPDATE_NEW_POST_TEXT: 
-			return {
-				...state, 
-				profilePage: {
-					...state.profilePage,
-					newPostText: action.newText
 				}
 			}
 		case FOLLOW:

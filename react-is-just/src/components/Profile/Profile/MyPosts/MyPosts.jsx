@@ -1,35 +1,44 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {addPostCreator, updateNewPostTextCreator} from "../../../../redux/actions";
+import {reduxForm, Field} from "redux-form";
+import {addPostCreator} from "../../../../redux/actions";
+import {required, maxLengthCreator, minLengthCreator} from "../../../../helpers/validators";
 import Post from './Post/Post';
 import style from "./MyPosts.module.css";
 
-const MyPosts = ({profilePage, addPostCreator, updateNewPostTextCreator}) => {
+const maxLength = maxLengthCreator(75), 
+    minLength = minLengthCreator(2);
+
+const MyPostsForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit} className={style.appContentSend}>
+      <Field 
+        validate={[required, maxLength, minLength]}
+        name="newPostBody" 
+        maxLength="75"
+        className={style.appContentLetterTextarea}  
+        placeholder="О чем вы думаете?"
+        component="textarea" 
+      />
+      <button className={style.appContentLetterSend}>send</button>
+    </form>
+  )
+}
+
+const MyPostsReduxForm = reduxForm({form: 'posts'})(MyPostsForm);
+
+const MyPosts = ({profilePage, addPostCreator}) => {
   
-  const newPostElement = React.createRef(),
-    onAddPosts = () => {
-      addPostCreator(newPostElement.current.value);
-    },
-    onPostChange = () => {
-      updateNewPostTextCreator(newPostElement.current.value);
-    };
+  const onSubmit = ({newPostBody}) => {
+    addPostCreator(newPostBody);
+  }
 
   return (
     <div className={style.appContentBlock}>
-      <div className={style.appContentSend}>
-        <textarea 
-          maxLength="280" 
-          onChange={onPostChange} 
-          value={profilePage.newPostText} 
-          ref={newPostElement} 
-          placeholder="О чем вы думаете?" 
-          className={style.appContentLetterTextarea}
-        />
-        <button onClick={onAddPosts} className={style.appContentLetterSend}>send</button>
-      </div>
+      <MyPostsReduxForm onSubmit={onSubmit}/>
 
       <div className={style.appContentPosts}>
-        <span className={style.appContentPostsTitle}>Мои посты:</span>
+        <div className={style.appContentPostsTitle}>Мои посты:</div>
         {
           profilePage.posts.map(item => {
             return <Post message={item.message} likes={item.likes} id={item.id} key={item.id}/>
@@ -46,5 +55,5 @@ const mapStateToProps = ({global}) => {
   }
 }
 
-export default connect(mapStateToProps, {addPostCreator, updateNewPostTextCreator})(MyPosts);
+export default connect(mapStateToProps, {addPostCreator})(MyPosts);
 

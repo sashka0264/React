@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {getMeTC, logoutTC} from "../../redux/actions";
 import Header from "./Header/Header";
 
-class HeaderAPI extends Component {
+class HeaderContainer extends Component {
   componentDidMount() {
     const {getMeTC} = this.props;
     getMeTC();
@@ -20,4 +20,4 @@ const mapStateToProps = ({global}) => {
   }
 }
  
-export default connect(mapStateToProps, {getMeTC, logoutTC})(HeaderAPI);
+export default connect(mapStateToProps, {getMeTC, logoutTC})(HeaderContainer);

@@ -1,8 +1,6 @@
 import {usersAPI, profileAPI, authAPI} from "../services/services";
 
-export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT",
-	SEND_MESSAGE = "SEND-MESSAGE",
-	UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT",
+export const SEND_MESSAGE = "SEND-MESSAGE",
 	ADD_POST = "ADD-POST",
 	FOLLOW = "FOLLOW",
 	UNFOLLOW = "UNFOLLOW",
@@ -18,9 +16,7 @@ export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT",
 	CHANGE_EDIT_MODE = "CHANGE-EDIT-MODE",
 	DISABLED_EDIT_MODE = "DISABLED-EDIT-MODE";
 
-export const updateNewMessageTextCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, content: text}),
-	sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}),
-	updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text}),
+export const sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}),
 	addPostCreator = (text) => ({type: ADD_POST, postMessage: text}),
 	followAC = (id) => ({type: FOLLOW, id}),
 	unfollowAC = (id) => ({type: UNFOLLOW, id}),
@@ -125,13 +121,12 @@ loginTC = (email, password, rememberMe = false) => {
 logoutTC = () => {
 	return (dispatch) => {
 		authAPI.logOut().then(data => {
-			if (data.resultCode === 0) {
+			if (data.data.resultCode === 0) {
 				dispatch(setUserData(null, null, null, false));
 			}
 		})
 	}
-}
-;
+};
 
 
     

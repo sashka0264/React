@@ -1,4 +1,5 @@
 import {usersAPI, profileAPI, authAPI} from "../services/services";
+import {stopSubmit} from "redux-form";
 
 export const SEND_MESSAGE = "SEND-MESSAGE",
 	ADD_POST = "ADD-POST",
@@ -14,6 +15,7 @@ export const SEND_MESSAGE = "SEND-MESSAGE",
 	SET_USER_STATUS = "SET-USER-STATUS",
 	UPDATE_USER_STATUS = "UPDATE-USER-STATUS",
 	CHANGE_EDIT_MODE = "CHANGE-EDIT-MODE",
+	INITIALIZED_SUCCESS = "INITIALIZED-SUCCESS",
 	DISABLED_EDIT_MODE = "DISABLED-EDIT-MODE";
 
 export const sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}),
@@ -30,6 +32,7 @@ export const sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}
 	setUserStatusAC = (status) => ({type: SET_USER_STATUS, status}),
 	updateUserStatusAC = () => ({type: UPDATE_USER_STATUS}),
 	changeEditMode = (status) => ({type: CHANGE_EDIT_MODE, status}),
+	initializedSuccess = () => ({type: INITIALIZED_SUCCESS}),
 	disabledEditMode = (status) => ({type: DISABLED_EDIT_MODE, status});
 
 export const getUsersTC = (currentPage, pageSize) => {
@@ -67,10 +70,6 @@ followTC = (id) => {
 },
 getProfileTC = (id) => {
 	return (dispatch) => {
-    if (!id) {
-      id = 5102;
-    }
-
     profileAPI.getProfile(id).then(data => {
       dispatch(setUserProfileAC(data));
     });
@@ -78,10 +77,6 @@ getProfileTC = (id) => {
 },
 getUserStatusTC = (id) => {
 	return (dispatch) => {
-		if (!id) {
-			id = 5102;
-		}
-
 		profileAPI.getStatus(id).then(data => {
 			dispatch(setUserStatusAC(data));
 		});
@@ -101,7 +96,7 @@ updateUserStatusTC = (status) => {
 },
 getMeTC = () => {
 	return (dispatch) => {
-		authAPI.getMe().then(data => {
+		return authAPI.getMe().then(data => {
       if (data.resultCode === 0) {
         const {id, email, login} = data.data;
         dispatch(setUserData(id, email, login, true));
@@ -109,14 +104,18 @@ getMeTC = () => {
     });
 	}
 },
-loginTC = (email, password, rememberMe = false) => {
-	return (dispatch) => {
-		authAPI.logIn(email, password, rememberMe).then(data => {
-			if (data.resultCode === 0) {
-				dispatch(getMeTC());
-			}
-		})
-	}
+loginTC = (email, password, rememberMe = false) => (dispatch) => {
+	authAPI.logIn(email, password, rememberMe).then(data => {
+		// с помощью этого return мы возвращаем promise, который потом используем в initializeAppTC, 
+		// используя .then
+		if (data.resultCode === 0) {
+			dispatch(getMeTC());
+		} else {
+			const message = (data.messages.length > 0) ? data.messages[0] : "Something wrong",
+				action = stopSubmit("login", {_error: `${message}`});
+			dispatch(action);
+		}
+	})
 },
 logoutTC = () => {
 	return (dispatch) => {
@@ -126,7 +125,18 @@ logoutTC = () => {
 			}
 		})
 	}
+},
+initializeAppTC = () => (dispatch) => {
+	let promiseGetMe = dispatch(getMeTC());
+	promiseGetMe.then(() => {
+		dispatch(initializedSuccess())
+	})
+	Promise.all([promiseGetMe]).then(() => {
+		dispatch(initializedSuccess())
+	})
+	// Если будет много dispatch
 };
+
 
 
     

@@ -12,11 +12,15 @@ import {
 	TOGGLE_IS_FOLLOWING_PROGRESS,
 	SET_USER_STATUS,
 	CHANGE_EDIT_MODE,
-	DISABLED_EDIT_MODE
+	DISABLED_EDIT_MODE,
+	INITIALIZED_SUCCESS
 } from "./actions";
 
 
 const initialState = {
+	app: {
+		initialized: false
+	},
 	auth: {
 		userId: null,
 		email: null,
@@ -200,6 +204,14 @@ const reducer = (state = initialState, action) => {
 				profilePage: {
 					...state.profilePage,
 					disabled: action.status
+				}
+			}
+		case INITIALIZED_SUCCESS:
+			return {
+				...state,
+				app: {
+					...state.app,
+					initialized: true
 				}
 			}
 		default: 

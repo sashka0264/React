@@ -2,7 +2,7 @@ import React from "react";
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = ({profile, status, updateUserStatusTC, disabledEditMode, changeEditMode, editMode}) => {
+const Profile = ({profile, isAuthUserId, status, updateUserStatusTC, disabledEditMode, changeEditMode, editMode}) => {
 	return (
 		<>
 			<ProfileInfo 
@@ -11,6 +11,7 @@ const Profile = ({profile, status, updateUserStatusTC, disabledEditMode, changeE
 				editMode={editMode} 
 				status={status} 
 				changeEditMode={changeEditMode} 
+				isAuthUserId={isAuthUserId}
 				updateUserStatusTC={updateUserStatusTC}/>
 			<MyPosts/>
 		</>

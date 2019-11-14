@@ -3,24 +3,32 @@ import {connect} from "react-redux";
 import {reduxForm, Field} from "redux-form";
 import {Redirect} from "react-router-dom";
 import {loginTC} from "../../redux/actions";
+import {LoginInputControl} from "../common/FormsControl/FormsControl";
+import {required, maxLengthCreator, minLengthCreator} from "../../helpers/validators";
 import style from "./Login.module.css";
+
+const maxLength = maxLengthCreator(30), 
+    minLength = minLengthCreator(2);
 
 const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit} className={style.appLoginBlock}>
       <Field 
-        name="login"
+        name="email"
         className={style.appLoginLog} 
-        component="input"
+        component={LoginInputControl}
         placeholder="Логин"
+        validate={[required, maxLength, minLength]}
       />
       <Field 
         name="password"
         className={style.appLoginPassword} 
-        component="input"
+        component={LoginInputControl}
         placeholder="Пароль"
         type="password"
+        validate={[required, maxLength, minLength]}
       />
+
       <div>
         <Field 
           name="rememberMe"
@@ -33,14 +41,15 @@ const LoginForm = (props) => {
       </div>
 
       <button>Войти</button>
+      <div className={style.appLoginError}>{props.error}</div>
     </form>
   )
 }
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
  
 const Login = (props) => {
-  const onSubmit = ({login, password, rememberMe}) => {
-    props.loginTC(login, password, rememberMe);
+  const onSubmit = ({email, password, rememberMe}) => {
+    props.loginTC(email, password, rememberMe);
   }
 
   if (props.isAuth) return <Redirect to="/profile"/>

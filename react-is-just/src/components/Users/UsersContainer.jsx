@@ -46,8 +46,7 @@ const mapStateToProps = ({global}) => {
 }
   
 export default compose(
-	connect(mapStateToProps, {setCurrentPageAC, getUsersTC, unfollowTC, followTC}),
-	WithAuthRedirect
+	connect(mapStateToProps, {setCurrentPageAC, getUsersTC, unfollowTC, followTC})
 )(
 	UsersContainer
 );

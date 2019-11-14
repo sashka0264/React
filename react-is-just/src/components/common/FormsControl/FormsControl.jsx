@@ -23,4 +23,8 @@ export const MessageFormControl = (props) => {
   return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
 }
 
+export const LoginInputControl = (props) => {
+  const {input, meta, child, ...restProps} = props;
+  return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
+}
 

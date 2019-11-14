@@ -12,17 +12,6 @@
 }
 
 .appLoginLog {
-  margin-bottom: 15px;
-  width: 270px;
-  font-size: 14px;
-  padding: 6px 12px 8px;
-  box-sizing: border-box;
-  height: 35px;
-  border-radius: 3px;
-  border: none;
-}
-
-.appLoginPassword {
   margin-bottom: 10px;
   width: 270px;
   font-size: 14px;
@@ -33,8 +22,19 @@
   border: none;
 }
 
+.appLoginPassword {
+  margin-bottom: 5px;
+  width: 270px;
+  font-size: 14px;
+  padding: 6px 12px 8px;
+  box-sizing: border-box;
+  height: 35px;
+  border-radius: 3px;
+  border: none;
+}
+
 .appLoginCheckbox {
-  margin-bottom: 15px;
+  margin-bottom: 9px;
 }
 
 .appLoginBlock button {
@@ -46,3 +46,8 @@
   border: none;
 }
 
+.appLoginError {
+  color: rgb(255, 102, 106);
+  font-size: 13px;
+  text-align: center;
+}

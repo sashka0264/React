@@ -6,8 +6,9 @@
 .formControl.error span {
   position: absolute;
   color: rgb(255, 102, 106);
-  top: 40%;
-  right: 5%;
+  bottom: 27%;
+  right: 3%;
+  font-size: 13px;
 }
 
 .formControl {

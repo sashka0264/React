@@ -30,9 +30,9 @@ class ProfileStatus extends Component {
   render() {
     return (
       <>
-        {!this.props.editMode && <div onDoubleClick={(this.props.id === 5102) && 
+        {!this.props.editMode && <div onDoubleClick={(this.props.id === this.props.isAuthUserId) && 
           this.activateEditMode} className={style.appStatus}>
-          {(!this.props.status && this.props.id === 5102) ? "изменить статус" : this.props.status}
+          {(!this.props.status && this.props.id === this.props.isAuthUserId) ? "изменить статус" : this.props.status}
         </div>} 
 
         {this.props.editMode && <div className={style.appStatusEditor}>

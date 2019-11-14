@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import Users from "./Users/Users";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../common/Spinner/Spinner";
 import {setCurrentPageAC, getUsersTC, unfollowTC, followTC} from "../../redux/actions";
 
 class UsersContainer extends Component {

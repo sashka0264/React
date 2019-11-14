@@ -1,0 +1,20 @@
+.formControl.error input, 
+.formControl.error textarea {
+  border-bottom: 1px double rgb(255, 102, 106);
+}
+
+.formControl.error span {
+  position: absolute;
+  color: rgb(255, 102, 106);
+  top: 40%;
+  right: 5%;
+}
+
+.formControl {
+  width: 100%;
+  position: relative;
+}
+
+.formControl textarea {
+  resize: none;
+}

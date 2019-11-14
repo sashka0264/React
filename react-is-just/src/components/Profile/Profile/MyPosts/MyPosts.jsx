@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {reduxForm, Field} from "redux-form";
+import {PostFormControl} from "../../../common/FormsControl/FormsControl";
 import {addPostCreator} from "../../../../redux/actions";
 import {required, maxLengthCreator, minLengthCreator} from "../../../../helpers/validators";
 import Post from './Post/Post';
+import sendIcon from "./img/sendIcon.svg";
 import style from "./MyPosts.module.css";
 
 const maxLength = maxLengthCreator(75), 
@@ -15,12 +17,11 @@ const MyPostsForm = (props) => {
       <Field 
         validate={[required, maxLength, minLength]}
         name="newPostBody" 
-        maxLength="75"
-        className={style.appContentLetterTextarea}  
-        placeholder="О чем вы думаете?"
-        component="textarea" 
+        className={style.appContentLetterInput}  
+        placeholder="Написать сообщение..."
+        component={PostFormControl} 
       />
-      <button className={style.appContentLetterSend}>send</button>
+      <button className={style.appContentLetterSend}><img src={sendIcon}/></button>
     </form>
   )
 }
@@ -36,7 +37,6 @@ const MyPosts = ({profilePage, addPostCreator}) => {
   return (
     <div className={style.appContentBlock}>
       <MyPostsReduxForm onSubmit={onSubmit}/>
-
       <div className={style.appContentPosts}>
         <div className={style.appContentPostsTitle}>Мои посты:</div>
         {

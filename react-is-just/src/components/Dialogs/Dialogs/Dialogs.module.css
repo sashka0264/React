@@ -1,38 +1,33 @@
 .appDialogs {
+	display: flex;
+	flex-direction: column;
+}
+
+.appDialogsFriendAndMessages {
 	display: grid;
-	grid-template-columns: 3.2fr 8.8fr;
+	grid-template-columns: 3fr 9fr;
 	height: 100%;
 	position: relative;
 }
 
-.appDialogsMessages {
-	padding: 10px 10px 100px 10px;
-	margin-top: 10px;
-}
-
-.appDialogsItems {
-	padding: 10px;
-	margin-top: 10px;
-}
-
-.appDialogsMessagesTextarea {
-	margin: 9px;
-	padding: 19px;
-	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
-	position: absolute;
-	bottom: 11px;
-	width: 79.5%;
-	left: 10px;
-	border-radius: 6px;
-}
-
 .appDialogsMessagesSend {
-	margin: 9px;
-	border-radius: 6px;
-	padding: 26px 19px 26px 19px;
-	background-color: #ebecf0;
+	border: 0px solid #c1c5d6;
+	color: #6c757d;
+	width: 40px;
+	background-color: white;
+}
+
+.appDialogsMessagesInput {
+	padding: 10px 0 20px 5px;
+	width: 600px;
+	border: none;
+	width: 99.6%;
+	min-height: 35px;
+}
+
+.appDialogsForm {
+	display: flex;
 	position: absolute;
-	bottom: 11px;
-	width: 10%;
-	right: 0;
+	bottom: 0;
+	width: 100%;
 }

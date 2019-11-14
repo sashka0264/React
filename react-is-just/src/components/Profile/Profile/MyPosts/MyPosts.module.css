@@ -4,22 +4,23 @@
 
 .appContentSend {
 	display: flex;
-	background-color: #ebecf0;
-	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+	background-color: white;
 	padding: 10px;
 }
 
-.appContentLetterTextarea {
-	width: 90%;
-	padding: 7px 0 33px 5px;
+.appContentLetterInput {
+	padding: 10px 0 20px 5px;
+	width: 600px;
 	border: none;
+	width: 99.6%;
 }
 
+
 .appContentLetterSend {
-	width: 10%;
 	border: 0px solid #c1c5d6;
 	color: #6c757d;
-	outline: none;
+	width: 40px;
+	background-color: white;
 }
 
 .appContentPosts {
@@ -29,5 +30,5 @@
 .appContentPostsTitle {
 	font-weight: bold;
 	color: black;
-	padding: 5px 10px 12px 10px;
+	padding: 4px 10px 12px 10px;
 }

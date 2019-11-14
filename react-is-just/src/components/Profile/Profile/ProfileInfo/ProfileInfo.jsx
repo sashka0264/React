@@ -1,5 +1,5 @@
 import React from "react";
-import Spinner from "../../../Spinner/Spinner";
+import Spinner from "../../../common/Spinner/Spinner";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import style from "./ProfileInfo.module.css";
 import defaultAvatar from "./img/defaultAvatar.png";

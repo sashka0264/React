@@ -14,9 +14,7 @@ export const SEND_MESSAGE = "SEND-MESSAGE",
 	TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS",
 	SET_USER_STATUS = "SET-USER-STATUS",
 	UPDATE_USER_STATUS = "UPDATE-USER-STATUS",
-	CHANGE_EDIT_MODE = "CHANGE-EDIT-MODE",
-	INITIALIZED_SUCCESS = "INITIALIZED-SUCCESS",
-	DISABLED_EDIT_MODE = "DISABLED-EDIT-MODE";
+	INITIALIZED_SUCCESS = "INITIALIZED-SUCCESS";
 
 export const sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}),
 	addPostCreator = (text) => ({type: ADD_POST, postMessage: text}),
@@ -31,9 +29,7 @@ export const sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}
 	toggleIsFollowingProgressAC = (status, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, status, userId}),
 	setUserStatusAC = (status) => ({type: SET_USER_STATUS, status}),
 	updateUserStatusAC = () => ({type: UPDATE_USER_STATUS}),
-	changeEditMode = (status) => ({type: CHANGE_EDIT_MODE, status}),
-	initializedSuccess = () => ({type: INITIALIZED_SUCCESS}),
-	disabledEditMode = (status) => ({type: DISABLED_EDIT_MODE, status});
+	initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 export const getUsersTC = (currentPage, pageSize) => {
 	return (dispatch) => {
@@ -84,12 +80,9 @@ getUserStatusTC = (id) => {
 },
 updateUserStatusTC = (status) => {
 	return (dispatch) => {
-		dispatch(disabledEditMode(true));
-		profileAPI.updateStatus(status).then(data => {
+		return profileAPI.updateStatus(status).then(data => {
 			if (data.resultCode === 0) {
 				dispatch(setUserStatusAC(status));
-				dispatch(disabledEditMode(false));
-				dispatch(changeEditMode(false));
 			}
 		});
 	}

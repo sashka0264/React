@@ -52,7 +52,8 @@
 .appUsersSelectedPage {
 	font-weight: bold;
 	padding-left: 6px;
-	margin-top: -2px;
+	margin-top: -1px;
+	color: gray;
 }
 
 .appUsersSelectedPage:hover {
@@ -70,7 +71,7 @@
 }
 
 .appUsersTotal {
-	padding: 6px 6px 20px;
+	padding: 0px 6px 20px 0px;
 }
 
 .appUsersTotal span {

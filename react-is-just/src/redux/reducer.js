@@ -11,8 +11,6 @@ import {
 	SET_USER_DATA,
 	TOGGLE_IS_FOLLOWING_PROGRESS,
 	SET_USER_STATUS,
-	CHANGE_EDIT_MODE,
-	DISABLED_EDIT_MODE,
 	INITIALIZED_SUCCESS
 } from "./actions";
 
@@ -33,9 +31,7 @@ const initialState = {
 			{id: 1, message: "Всем привет!", likes: "0"}
 		],
 		profile: {},
-		status: "",
-		editMode: false,
-		disabled: false
+		status: ""
 	},
 	messagesPage: {
 		dialogs: [ 
@@ -187,23 +183,6 @@ const reducer = (state = initialState, action) => {
 				profilePage: {
 					...state.profilePage,
 					status: action.status
-				}
-			}
-		case CHANGE_EDIT_MODE: 
-			return {
-				...state,
-				profilePage: {
-					...state.profilePage,
-					editMode: action.status
-				}
-			}
-		case DISABLED_EDIT_MODE: 
-			
-			return {
-				...state,
-				profilePage: {
-					...state.profilePage,
-					disabled: action.status
 				}
 			}
 		case INITIALIZED_SUCCESS:

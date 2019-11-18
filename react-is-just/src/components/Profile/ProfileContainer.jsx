@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {getProfileTC, getUserStatusTC, updateUserStatusTC, changeEditMode} from "../../redux/actions";
+import {getProfileTC, getUserStatusTC, updateUserStatusTC} from "../../redux/actions";
 import Profile from "./Profile/Profile";
 
 class ProfileContainer extends Component {
@@ -20,15 +20,12 @@ class ProfileContainer extends Component {
     getProfileTC(id);
   }
   render() {
-    const {profile, status, updateUserStatusTC, disabledEditMode, editMode, isAuthUserId, changeEditMode} = this.props;
+    const {profile, status, updateUserStatusTC, isAuthUserId} = this.props;
     return <Profile 
       {...this.props} 
       profile={profile} 
       status={status} 
       updateUserStatusTC={updateUserStatusTC}
-      disabledEditMode={disabledEditMode}
-      changeEditMode={changeEditMode}
-      editMode={editMode}
       isAuthUserId={isAuthUserId}
     />;
   }
@@ -40,13 +37,11 @@ const mapStateToProps = ({global}) => {
     status: global.profilePage.status,
     isAuth: global.auth.isAuth,
     isAuthUserId: global.auth.userId,
-    editMode: global.profilePage.editMode,
-    disabledEditMode: global.profilePage.disabled
   }
 };
 
 export default compose(
-  connect(mapStateToProps, {getProfileTC, getUserStatusTC, updateUserStatusTC, changeEditMode}),
+  connect(mapStateToProps, {getProfileTC, getUserStatusTC, updateUserStatusTC}),
   withRouter
   // Именно в таком порядке, снизу вверх, от первого к последнему
 )(

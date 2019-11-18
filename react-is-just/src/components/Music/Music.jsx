@@ -4,7 +4,7 @@ import style from "./Music.module.css";
 const Music = () => {
 	return (
 		<div className={style.appMusic}>
-			Тут будет ваша музыка
+			Тут будет ваша музыка (страничка в разработке)
 		</div>
 	);
 };

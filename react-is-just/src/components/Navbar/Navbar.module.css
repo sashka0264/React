@@ -21,11 +21,16 @@
   padding: 10px;
   color: #101118;
   text-decoration: none;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+  border-radius: 4px;
+  transition: background-color 0.05s ease-in-out;
 }
 
-/* .appNavLink.active {
-  font-weight: 600;
-} */
+.appNavLink:hover{
+  background-color: rgba(74, 118, 168, 0.05);
+  transition: background-color 0.05s ease-in-out;
+}
 
 @media (max-width: 767px) {
   .appNav {

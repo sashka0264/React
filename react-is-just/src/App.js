@@ -22,7 +22,8 @@ class App extends Component {
   }
 
   render() {
-    if (!this.props.initialized) {
+    const {initialized} = this.props;
+    if (!initialized) {
       return <Spinner/>
     }
     return (
@@ -44,11 +45,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({global}) => {
-	return {
-		initialized: global.app.initialized
-	}
-}
+const mapStateToProps = ({global}) => ({
+  initialized: global.app.initialized
+});
+
 
 export default compose(
   withRouter,

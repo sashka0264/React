@@ -1,7 +1,7 @@
 import React, {Component, useState, useEffect} from "react";
 import style from "./ProfileStatus.module.css";
 
-const ProfileStatus = (props) => {
+const ProfileStatus = ({status, id, isAuthUserId, updateUserStatusTC}) => {
   
   const [editMode, setEditMode] = useState(false);
   const [newStatus, updateNewStatus] = useState("");
@@ -12,10 +12,10 @@ const ProfileStatus = (props) => {
   // useEffect(() => console.log("done"), [props.status])
   // Когда произойдет отрисовка, код выполнится, если изменился props.status
 
-  const statusText = (!props.status && props.id === props.isAuthUserId) ? "изменить статус" : props.status;
+  const statusText = (!status && id === isAuthUserId) ? "изменить статус" : status;
 
   const activateMode = () => {
-    if (props.id === props.isAuthUserId) {
+    if (id === isAuthUserId) {
       setEditMode(true);
     }
   }
@@ -31,7 +31,7 @@ const ProfileStatus = (props) => {
 
   const sendNewStatus = () => {
     setDisabled(true);
-    props.updateUserStatusTC(newStatus).then(() => {
+    updateUserStatusTC(newStatus).then(() => {
       setEditMode(false);
       setDisabled(false);
     })

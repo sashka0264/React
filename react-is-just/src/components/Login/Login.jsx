@@ -10,18 +10,16 @@ import style from "./Login.module.css";
 const maxLength = maxLengthCreator(30), 
     minLength = minLengthCreator(2);
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
   return (
-    <form onSubmit={props.handleSubmit} className={style.appLoginBlock}>
-      <Field 
-        name="email"
+    <form onSubmit={handleSubmit} className={style.appLoginBlock}>
+      <Field name="email"
         className={style.appLoginLog} 
         component={LoginInputControl}
         placeholder="Логин"
         validate={[required, maxLength, minLength]}
       />
-      <Field 
-        name="password"
+      <Field name="password"
         className={style.appLoginPassword} 
         component={LoginInputControl}
         placeholder="Пароль"
@@ -30,29 +28,27 @@ const LoginForm = (props) => {
       />
 
       <div>
-        <Field 
-          name="rememberMe"
+        <Field name="rememberMe"
           className={style.appLoginCheckbox} 
           component="input"
           type="checkbox"
           placeholder="Пароль"
-        />
-        Запомнить меня
+        />Запомнить меня
       </div>
 
       <button>Войти</button>
-      <div className={style.appLoginError}>{props.error}</div>
+      <div className={style.appLoginError}>{error}</div>
     </form>
   )
 }
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
  
-const Login = (props) => {
+const Login = ({loginTC, isAuth}) => {
   const onSubmit = ({email, password, rememberMe}) => {
-    props.loginTC(email, password, rememberMe);
+    loginTC(email, password, rememberMe);
   }
 
-  if (props.isAuth) return <Redirect to="/profile"/>
+  if (isAuth) return <Redirect to="/profile"/>
 
   return (
     <div className={style.appLogin}>
@@ -61,10 +57,6 @@ const Login = (props) => {
   )
 }
 
-const mapStateToProps = ({global}) => {
-  return {
-    isAuth: global.auth.isAuth
-  }
-};
-
+const mapStateToProps = ({global}) => ({isAuth: global.auth.isAuth});
+  
 export default connect(mapStateToProps, {loginTC})(Login);

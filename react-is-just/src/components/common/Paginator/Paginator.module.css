@@ -1,0 +1,40 @@
+.appUsersTotal {
+	padding: 0px 6px 20px 0px;
+}
+
+.appUsersTotal span {
+	padding-left: 6px;
+	font-size: 13px;
+	color: #939393;
+}
+
+.appUsersPageList {
+	display: flex;
+	flex-wrap: wrap;
+	padding-bottom: 20px;
+}
+
+.appUsersSelectedPage {
+	font-weight: bold;
+	padding-left: 6px;
+	margin-top: -1px;
+	color: gray;
+}
+
+.appUsersSelectedPage:hover {
+	cursor: pointer;
+}
+
+.appUsersPage:hover {
+	cursor: pointer;
+}
+
+.appUsersPage {
+	padding-left: 6px;
+	font-size: 13px;
+	color: #939393;
+}
+
+
+
+

@@ -8,12 +8,12 @@ import Profile from "./Profile/Profile";
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    const {getProfileTC, getUserStatusTC, match, isAuthUserId} = this.props;
+    const {getProfileTC, getUserStatusTC, match, isAuthUserId, history} = this.props;
     let id = match.params.userId;
     if (!id) {
       id = isAuthUserId;
       if (!id) {
-        this.props.history.push("/login")
+        history.push("/login")
       }
     }
     getUserStatusTC(id);
@@ -31,14 +31,13 @@ class ProfileContainer extends Component {
   }
 };
 
-const mapStateToProps = ({global}) => {
-  return {
-    profile: global.profilePage.profile,
-    status: global.profilePage.status,
-    isAuth: global.auth.isAuth,
-    isAuthUserId: global.auth.userId,
-  }
-};
+const mapStateToProps = ({global}) => ({
+  profile: global.profilePage.profile,
+  status: global.profilePage.status,
+  isAuth: global.auth.isAuth,
+  isAuthUserId: global.auth.userId,
+})
+
 
 export default compose(
   connect(mapStateToProps, {getProfileTC, getUserStatusTC, updateUserStatusTC}),

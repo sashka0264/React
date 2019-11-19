@@ -4,12 +4,12 @@ import heart from "./img/heart.svg";
 import zeroHeart from "./img/zeroHeart.png";
 import defaultAvatar from "./img/defaultAvatar.png";
 
-const Post = (props) => {
+const Post = ({likes, id, message}) => {
   let likeImage;
-  (props.likes > 0) ? likeImage = heart : likeImage = zeroHeart;
+  (likes > 0) ? likeImage = heart : likeImage = zeroHeart;
 
   const onLike = () => {
-    console.log(props.id)
+    console.log(id)
   }
 
   return (
@@ -19,13 +19,13 @@ const Post = (props) => {
       <div className={style.appContentPostsText}>
         <div>
           <div className={style.appContentPostsName}>Alexandr Kolesnikov</div>
-          <div>{props.message}</div>
+          <div>{message}</div>
         </div>
         
         <div className={style.appContentPostsParams}>
           <div className={style.appContentPostsLike} onClick={onLike}>
             <img src={likeImage} alt="heart"/>
-            {props.likes}
+            {likes}
           </div>
         </div>
       </div>

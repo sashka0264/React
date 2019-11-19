@@ -2,14 +2,12 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Users from "./Users/Users";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getLoading, getFollowingInProgress, getIsAuth} from "../../redux/selectors";
 import Spinner from "../common/Spinner/Spinner";
 import {setCurrentPageAC, getUsersTC, unfollowTC, followTC} from "../../redux/actions";
 
 class UsersContainer extends Component {
 	componentDidMount() {
-		debugger
 		const {getUsersTC, currentPage, pageSize} = this.props;
 		getUsersTC(currentPage, pageSize);
 	}
@@ -49,8 +47,8 @@ const mapStateToProps = (state) => ({
 	loading: getLoading(state),
 	followingInProgress: getFollowingInProgress(state),
 	isAuth: getIsAuth(state)
-})
+});
 
 export default compose(
 	connect(mapStateToProps, {setCurrentPageAC, getUsersTC, unfollowTC, followTC})
-)(UsersContainer)
+)(UsersContainer);

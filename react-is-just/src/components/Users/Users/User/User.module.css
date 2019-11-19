@@ -1,0 +1,60 @@
+.appUsersItem {
+	display: flex;
+	margin-bottom: 15px;
+	padding: 5px;
+}
+
+.appUsersItemPersonBlock button {
+	text-align: center;
+	background-color: rgb(74, 118, 168);
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 5px 8px 5px 8px;
+}
+
+.appUsersItemPersonBlock {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.appUsersItemImage {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	margin-bottom: 10px;
+}
+
+.appUsersItemAboutBlock {
+	display: flex;
+	justify-content: space-between;
+	width: 83%;
+	padding: 12px;
+	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+	border-radius: 6px;
+	background-color: #ebecf0;
+	margin-left: 25px;
+}
+
+.appUsersItemFullname {
+	margin-bottom: 15px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.appUsersItemStatus {
+	color: #939393;
+	font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+

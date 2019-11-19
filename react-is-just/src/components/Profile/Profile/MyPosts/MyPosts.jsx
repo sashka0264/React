@@ -10,9 +10,9 @@ import style from "./MyPosts.module.css";
 
 const maxLength = maxLengthCreator(75), 
   minLength = minLengthCreator(2);
-const MyPostsForm = (props) => {
+const MyPostsForm = ({handleSubmit}) => {
   return (
-    <form onSubmit={props.handleSubmit} className={style.appContentSend}>
+    <form onSubmit={handleSubmit} className={style.appContentSend}>
       <Field 
         validate={[required, maxLength, minLength]}
         name="newPostBody" 
@@ -47,11 +47,7 @@ const MyPosts = React.memo(({addPostCreator, posts}) => {
   )
 });
 
-const mapStateToProps = ({global}) => {
-  return {
-    posts: global.profilePage.posts
-  }
-}
+const mapStateToProps = ({global}) => ({posts: global.profilePage.posts});
 
 export default connect(mapStateToProps, {addPostCreator})(MyPosts);
 

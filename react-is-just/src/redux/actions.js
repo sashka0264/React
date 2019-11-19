@@ -33,28 +33,31 @@ export const sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}
 	updateUserStatusAC = () => ({type: UPDATE_USER_STATUS}),
 	initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
-export const getUsersTC = (currentPage, pageSize) => async (dispatch) => {
+const followFlow = async (dispatch, id, apiMethod, actionCreator) => {
+	dispatch(toggleIsFollowingProgressAC(true, id));
+	const data = await apiMethod(id);
+	if (data.resultCode === 0) {
+		dispatch(actionCreator(id));
+	}
+	dispatch(toggleIsFollowingProgressAC(false, id));
+}
+
+export const unfollowTC = (id) => async (dispatch) => {
+	const apiMethod = usersAPI.getDeleteUser.bind(usersAPI),
+		actionCreator = unfollowAC;
+	followFlow(dispatch, id, apiMethod, actionCreator);
+},
+followTC = (id) => async (dispatch) => {
+	const apiMethod = usersAPI.getPostUser.bind(usersAPI),
+		actionCreator = followAC;
+	followFlow(dispatch, id, apiMethod, actionCreator);
+},
+getUsersTC = (currentPage, pageSize) => async (dispatch) => {
 	dispatch(toggleIsLoadingAC(true));
 	const data = await usersAPI.getUsers(currentPage, pageSize);
 	dispatch(toggleIsLoadingAC(false));
 	dispatch(setUsersAC(data.items));
 	dispatch(setTotalUsersCountAC(data.totalCount));
-},
-unfollowTC = (id) => async (dispatch) => {
-	dispatch(toggleIsFollowingProgressAC(true, id));
-	const data = await usersAPI.getDeleteUser(id);
-	if (data.resultCode === 0) {
-		dispatch(unfollowAC(id));
-	}
-	dispatch(toggleIsFollowingProgressAC(false, id));
-},
-followTC = (id) => async (dispatch) => {
-	dispatch(toggleIsFollowingProgressAC(true, id));
-	const data = await usersAPI.getPostUser(id);
-	if (data.resultCode === 0) {
-		dispatch(followAC(id));
-	}
-	dispatch(toggleIsFollowingProgressAC(false, id));
 },
 getProfileTC = (id) => async (dispatch) => {
 	const data = await profileAPI.getProfile(id);

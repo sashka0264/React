@@ -9,11 +9,6 @@ class HeaderContainer extends Component {
   }
 };
 
-const mapStateToProps = ({global}) => {
-  return {
-    isAuth: global.auth.isAuth,
-    login: global.auth.login
-  }
-}
- 
+const mapStateToProps = ({global}) => ({isAuth: global.auth.isAuth, login: global.auth.login});
+  
 export default connect(mapStateToProps, {logoutTC})(HeaderContainer);

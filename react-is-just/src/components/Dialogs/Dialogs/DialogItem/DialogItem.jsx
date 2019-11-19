@@ -3,14 +3,14 @@ import {NavLink} from "react-router-dom";
 import "./DialogItem.css";
 import defaultAvatar from "./img/defaultAvatar.png";
 
-const DialogItem = (props) => {
+const DialogItem = ({id, name}) => {
 
-	let path = "/dialogs/"+props.id;
+	let path = "/dialogs/" + id;
 
 	return (
 		<NavLink to={path} className="app-dialogs-items__item">
 			<img src={defaultAvatar}></img>
-			{props.name}
+			{name}
 		</NavLink>
 	)
 };

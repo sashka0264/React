@@ -9,7 +9,7 @@ const ProfileStatus = (props) => {
 
   // useEffect(() => console.log("done"))
   // Когда произойдет отрисовка, код выполнится
-  useEffect(() => console.log("done"), [props.status])
+  // useEffect(() => console.log("done"), [props.status])
   // Когда произойдет отрисовка, код выполнится, если изменился props.status
 
   const statusText = (!props.status && props.id === props.isAuthUserId) ? "изменить статус" : props.status;

@@ -9,6 +9,7 @@ import {setCurrentPageAC, getUsersTC, unfollowTC, followTC} from "../../redux/ac
 
 class UsersContainer extends Component {
 	componentDidMount() {
+		debugger
 		const {getUsersTC, currentPage, pageSize} = this.props;
 		getUsersTC(currentPage, pageSize);
 	}

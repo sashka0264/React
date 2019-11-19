@@ -11,7 +11,8 @@ import {
 	SET_USER_DATA,
 	TOGGLE_IS_FOLLOWING_PROGRESS,
 	SET_USER_STATUS,
-	INITIALIZED_SUCCESS
+	INITIALIZED_SUCCESS,
+	DELETE_POST
 } from "./actions";
 
 
@@ -60,7 +61,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 
-	console.log(action)
+	// console.log(action)
 
 	switch (action.type) {
 		case SEND_MESSAGE: 
@@ -86,8 +87,7 @@ const reducer = (state = initialState, action) => {
 					posts: [
 						newPost,
 						...state.profilePage.posts
-					],
-					newPostText: ""
+					]
 				}
 			}
 		case FOLLOW:
@@ -191,6 +191,14 @@ const reducer = (state = initialState, action) => {
 				app: {
 					...state.app,
 					initialized: true
+				}
+			}
+		case DELETE_POST:
+			return {
+				...state,
+				profilePage: {
+					...state.profilePage,
+					posts: state.profilePage.posts.filter((post) => post.id !== action.id)
 				}
 			}
 		default: 

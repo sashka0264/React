@@ -52,12 +52,12 @@ const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, users, fo
 
 								<div>
 									<div className={style.appUsersItemFullname}>{item.name}</div>
-									<div className={style.appUsersItemStatus}>{item.status}</div>
+									<div className={style.appUsersItemStatus}>{item.status ? item.status : "-"}</div>
 								</div>
 
 								<div>
-									<div className={style.appUsersItemCity}>{"item.location.city"},</div>
-									<div>{"item.location.country"}</div>
+									<div className={style.appUsersItemCity}>city,</div>
+									<div>country</div>
 								</div>
 							</div>
 						</div>

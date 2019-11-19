@@ -5,7 +5,6 @@ import style from "./ProfileInfo.module.css";
 import defaultAvatar from "./img/defaultAvatar.png";
 
 const ProfileInfo = ({profile, isAuthUserId, status, updateUserStatusTC, disabledEditMode, changeEditMode, editMode}) => {
-	console.log("render")
 	return (
 		(Object.keys(profile).length === 0) ?
 		

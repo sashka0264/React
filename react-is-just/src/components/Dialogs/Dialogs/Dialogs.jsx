@@ -21,7 +21,7 @@ const DialogsForm = ({handleSubmit}) => {
         name="newMessageBody" 
         placeholder="Write a message..."
       />
-      <button className={style.appDialogsMessagesSend}><img src={sendIcon}/></button>
+      <button className={style.appDialogsMessagesSend}><img alt="sendIcon" src={sendIcon}/></button>
     </form>
   );
 };

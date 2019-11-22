@@ -13,7 +13,7 @@ const ProfileInfo = ({profile, isAuthUserId, status, updateUserStatusTC, disable
 
 		<div className={style.appContent}>
 			<div className={style.appContentAvatarAndDescription}>
-				<img className={style.appContentAvatar} src={profile.photos.large ? profile.photos.large : defaultAvatar}/>
+				<img alt="defaultAvatar" className={style.appContentAvatar} src={profile.photos.large ? profile.photos.large : defaultAvatar}/>
 				
 				<div>
 					<div className={style.appContentName}>{profile.fullName}</div>

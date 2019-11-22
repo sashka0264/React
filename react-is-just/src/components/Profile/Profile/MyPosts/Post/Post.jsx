@@ -15,7 +15,7 @@ const Post = ({likes, id, message}) => {
 
   return (
     <div className={style.appContentPostsPost}>
-      <img className={style.appContentPostsAvatar} src={defaultAvatar}></img>
+      <img alt="defaultAvatar" className={style.appContentPostsAvatar} src={defaultAvatar}/>
       
       <div className={style.appContentPostsText}>
         <div>

@@ -9,7 +9,7 @@ const User = ({followingInProgress, unfollowTC, followTC, user}) => {
     <div key={user.id} className={style.appUsersItem}>
       <div className={style.appUsersItemPersonBlock}>
         <NavLink to={"/profile/" + user.id}>
-          <img src={user.photos.small ? user.photos.small : defaultAvatar} 
+          <img alt="avatar" src={user.photos.small ? user.photos.small : defaultAvatar} 
             className={style.appUsersItemImage}
           />
         </NavLink>

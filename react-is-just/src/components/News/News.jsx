@@ -1,13 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import style from "./News.module.css";
 
-const News = () => {
-	return (
-		<div className={style.appNews}>
-			Тут будут ваши новости (страничка в разработке)
-		</div>
-	);
+class News extends Component {
+	render() {
+		return (
+			<div className={style.appNews}>
+				Тут будут ваши новости (страничка в разработке)
+			</div>
+		);
+	}
 };
 
-export default News;
+export default WithAuthRedirect(News);
 

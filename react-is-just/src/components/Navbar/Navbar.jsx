@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
+import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import message from "./img/message.svg";
 import news from "./img/news.svg";
@@ -8,40 +10,44 @@ import profile from "./img/profile.svg";
 import friends from "./img/friends.svg";
 import style from "./Navbar.module.css";
 
-const Navbar = () => {
+const Navbar = ({isAuth}) => {
   return (
     <nav className={style.appNav}>
-      <NavLink to="/profile" className={style.appNavLink}>
-        <img src={profile} className={style.appNavImage}/>
+      {isAuth && <NavLink to="/profile" className={style.appNavLink}>
+        <img alt="profile-icon" src={profile} className={style.appNavImage}/>
         Профиль
-      </NavLink>
+      </NavLink>}
 
-      <NavLink to="/news" className={style.appNavLink}>
-        <img src={news} className={style.appNavImage}/>
+      {isAuth && <NavLink to="/news" className={style.appNavLink}>
+        <img alt="news-icon" src={news} className={style.appNavImage}/>
         Новости
-      </NavLink>
+      </NavLink>}
 
-      <NavLink to="/dialogs" className={style.appNavLink}>
-        <img src={message} className={style.appNavImage}/>
+      {isAuth &&<NavLink to="/dialogs" className={style.appNavLink}>
+        <img alt="message-icon" src={message} className={style.appNavImage}/>
         Сообщения
-      </NavLink>
+      </NavLink>}
 
       <NavLink to="/users" className={style.appNavLink}>
-        <img src={friends} className={style.appNavImage}/>
+        <img alt="friends-icon" src={friends} className={style.appNavImage}/>
         Найти друзей
       </NavLink>
 
-      <NavLink to="/music" className={style.appNavLink}>
-        <img src={music} className={style.appNavImage}/>
+      {isAuth && <NavLink to="/music" className={style.appNavLink}>
+        <img alt="music-icon" src={music} className={style.appNavImage}/>
         Музыка
-      </NavLink>
+      </NavLink>}
 
-      <NavLink to="/settings" className={style.appNavLink}>
-        <img src={setting} className={style.appNavImage}/>
+      {isAuth &&<NavLink to="/settings" className={style.appNavLink}>
+        <img alt="setting-icon" src={setting} className={style.appNavImage}/>
         Настройки
-      </NavLink>
+      </NavLink>}
     </nav>
   );
 };
 
-export default Navbar;
+const mapStateToProps = ({global}) => ({
+  isAuth: global.auth.isAuth
+});
+
+export default connect(mapStateToProps, null)(Navbar);

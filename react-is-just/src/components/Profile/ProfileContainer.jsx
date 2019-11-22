@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {getProfileTC, getUserStatusTC, updateUserStatusTC} from "../../redux/actions";
 import Profile from "./Profile/Profile";
 
@@ -17,8 +16,10 @@ class ProfileContainer extends Component {
         history.push("/login");
       }
     }
-    getUserStatusTC(id);
-    getProfileTC(id);
+    if (id) {
+      getUserStatusTC(id);
+      getProfileTC(id);
+    }
   }
   render() {
     const {profile, status, updateUserStatusTC, isAuthUserId} = this.props;

@@ -21,7 +21,7 @@ const MyPostsForm = ({handleSubmit}) => {
         placeholder="Написать сообщение..."
         component={PostFormControl} 
       />
-      <button className={style.appContentLetterSend}><img src={sendIcon}/></button>
+      <button className={style.appContentLetterSend}><img alt="sendIcon" src={sendIcon}/></button>
     </form>
   );
 };

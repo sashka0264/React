@@ -2,6 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import style from "./Header.module.css";
 
+// eslint-disable-next-line react/prop-types
 const Header = ({isAuth, login, logoutTC}) => {
   return (
     <header className={style.appHeader}>
@@ -16,6 +17,6 @@ const Header = ({isAuth, login, logoutTC}) => {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

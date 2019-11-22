@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import MyPosts from './MyPosts/MyPosts';
+import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = ({profile, isAuthUserId, status, updateUserStatusTC, disabledEditMode, changeEditMode, editMode}) => {
@@ -15,7 +16,7 @@ const Profile = ({profile, isAuthUserId, status, updateUserStatusTC, disabledEdi
 				updateUserStatusTC={updateUserStatusTC}/>
 			<MyPosts/>
 		</>
-	)
-}
+	);
+};
 
 export default Profile;

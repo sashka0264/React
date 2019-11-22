@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+/* eslint-disable react/prop-types */
+import React, {Component} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
@@ -13,7 +14,7 @@ class ProfileContainer extends Component {
     if (!id) {
       id = isAuthUserId;
       if (!id) {
-        history.push("/login")
+        history.push("/login");
       }
     }
     getUserStatusTC(id);
@@ -36,7 +37,7 @@ const mapStateToProps = ({global}) => ({
   status: global.profilePage.status,
   isAuth: global.auth.isAuth,
   isAuthUserId: global.auth.userId,
-})
+});
 
 
 export default compose(

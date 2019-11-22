@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Paginator from "../../common/Paginator/Paginator";
 import User from "./User/User";
@@ -22,7 +23,7 @@ const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, users, fo
 				/>)
 			}
 		</div>
-	)
-}
+	);
+};
 
 export default Users;

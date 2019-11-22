@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import "./DialogItem.css";
 import defaultAvatar from "./img/defaultAvatar.png";
 
+// eslint-disable-next-line react/prop-types
 const DialogItem = ({id, name}) => {
 
 	let path = "/dialogs/" + id;
@@ -12,7 +13,7 @@ const DialogItem = ({id, name}) => {
 			<img src={defaultAvatar}></img>
 			{name}
 		</NavLink>
-	)
+	);
 };
 
 export default DialogItem;

@@ -40,7 +40,7 @@ const followFlow = async (dispatch, id, apiMethod, actionCreator) => {
 		dispatch(actionCreator(id));
 	}
 	dispatch(toggleIsFollowingProgressAC(false, id));
-}
+};
 
 export const unfollowTC = (id) => async (dispatch) => {
 	const apiMethod = usersAPI.getDeleteUser.bind(usersAPI),
@@ -81,7 +81,7 @@ getMeTC = () => async (dispatch) => {
 	}
 },
 loginTC = (email, password, rememberMe = false) => async (dispatch) => {
-	const data = await authAPI.logIn(email, password, rememberMe)
+	const data = await authAPI.logIn(email, password, rememberMe);
 	if (data.resultCode === 0) {
 		dispatch(getMeTC());
 	} else {
@@ -99,11 +99,11 @@ logoutTC = () => async (dispatch) => {
 initializeAppTC = () => (dispatch) => {
 	let promiseGetMe = dispatch(getMeTC());
 	promiseGetMe.then(() => {
-		dispatch(initializedSuccess())
-	})
+		dispatch(initializedSuccess());
+	});
 	Promise.all([promiseGetMe]).then(() => {
-		dispatch(initializedSuccess())
-	})
+		dispatch(initializedSuccess());
+	});
 	// Если будет много dispatch
 };
 

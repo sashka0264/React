@@ -57,16 +57,16 @@ const initialState = {
 		loading: false,
 		followingInProgress: [] 
 	}
-}
+};
 
 const reducer = (state = initialState, action) => {
 
-	console.log(action)
+	console.log(action);
 
 	switch (action.type) {
 		case SEND_MESSAGE: 
 			// с id нужно поработать
-			const newMessage = {id: 4, content: action.content}
+			const newMessage = {id: 4, content: action.content};
 			return {
 				...state,
 				messagesPage: {
@@ -76,7 +76,7 @@ const reducer = (state = initialState, action) => {
 						newMessage
 					]
 				}
-			}
+			};
 		case ADD_POST:
 				// с id нужно поработать
 			const newPost = {id: 3, message: action.postMessage, likes: 0};
@@ -89,7 +89,7 @@ const reducer = (state = initialState, action) => {
 						...state.profilePage.posts
 					]
 				}
-			}
+			};
 		case FOLLOW:
 			return {
 				...state, 
@@ -97,12 +97,12 @@ const reducer = (state = initialState, action) => {
 					...state.usersPage,
 					users: state.usersPage.users.map(user => {
 						if (user.id === action.id) {
-							return {...user, followed: true}
+							return {...user, followed: true};
 						} 
 						return user;
 					})    
 				}
-			}
+			};
 		case UNFOLLOW:
 			return {
 				...state, 
@@ -110,12 +110,12 @@ const reducer = (state = initialState, action) => {
 					...state.usersPage,
 					users: state.usersPage.users.map(user => {
 						if (user.id === action.id) {
-							return {...user, followed: false}
+							return {...user, followed: false};
 						} 
 						return user;
 					})    
 				}
-			}
+			};
 		case SET_USERS:
 			return {
 				...state,
@@ -123,7 +123,7 @@ const reducer = (state = initialState, action) => {
 					...state.usersPage,
 					users: [...action.users]
 				}
-			}
+			};
 		case SET_CURRENT_PAGE: 
 			return {
 				...state,
@@ -131,7 +131,7 @@ const reducer = (state = initialState, action) => {
 					...state.usersPage,
 					currentPage: action.page
 				}
-			}
+			};
 		case SET_TOTAL_USERS_COUNT: 
 			return {
 				...state,
@@ -139,7 +139,7 @@ const reducer = (state = initialState, action) => {
 					...state.usersPage,
 					totalUsersCount: action.count
 				}
-			}
+			};
 		case TOGGLE_IS_LOADING:
 			return {
 				...state,
@@ -147,7 +147,7 @@ const reducer = (state = initialState, action) => {
 					...state.usersPage,
 					loading: action.loadingStatus
 				}
-			}
+			};
 		case SET_USER_PROFILE: 
 			return {
 				...state,
@@ -155,7 +155,7 @@ const reducer = (state = initialState, action) => {
 					...state.profilePage,
 					profile: {...action.profile}
 				}
-			}
+			};
 		case SET_USER_DATA:
 			return {
 				...state,
@@ -166,7 +166,7 @@ const reducer = (state = initialState, action) => {
 					login: action.login,
 					isAuth: action.isAuth
 				}
-			}
+			};
 		case TOGGLE_IS_FOLLOWING_PROGRESS: 
 			return {
 				...state,
@@ -176,7 +176,7 @@ const reducer = (state = initialState, action) => {
 					? [...state.usersPage.followingInProgress, action.userId] 
 					: state.usersPage.followingInProgress.filter(id => id !== action.userId) 
 				}
-			}
+			};
 		case SET_USER_STATUS:
 			return {
 				...state,
@@ -184,7 +184,7 @@ const reducer = (state = initialState, action) => {
 					...state.profilePage,
 					status: action.status
 				}
-			}
+			};
 		case INITIALIZED_SUCCESS:
 			return {
 				...state,
@@ -192,7 +192,7 @@ const reducer = (state = initialState, action) => {
 					...state.app,
 					initialized: true
 				}
-			}
+			};
 		case DELETE_POST:
 			return {
 				...state,
@@ -200,10 +200,10 @@ const reducer = (state = initialState, action) => {
 					...state.profilePage,
 					posts: state.profilePage.posts.filter((post) => post.id !== action.id)
 				}
-			}
+			};
 		default: 
-			return state
+			return state;
 	}
-}
+};
 
 export default reducer;

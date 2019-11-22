@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React from "react";
 import style from "./Post.module.css";
 import heart from "./img/heart.svg";
 import zeroHeart from "./img/zeroHeart.png";
@@ -9,8 +10,8 @@ const Post = ({likes, id, message}) => {
   (likes > 0) ? likeImage = heart : likeImage = zeroHeart;
 
   const onLike = () => {
-    console.log(id)
-  }
+    console.log(id);
+  };
 
   return (
     <div className={style.appContentPostsPost}>

@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {connect} from "react-redux";
 import {logoutTC} from "../../redux/actions";
 import Header from "./Header/Header";
 
 class HeaderContainer extends Component {
   render() {
-    return <Header {...this.props}/>
+    return <Header {...this.props}/>;
   }
 };
 

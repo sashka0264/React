@@ -1,4 +1,5 @@
-import React, {Component, useState, useEffect} from "react";
+/* eslint-disable react/prop-types */
+import React, {useState} from "react";
 import style from "./ProfileStatus.module.css";
 
 const ProfileStatus = ({status, id, isAuthUserId, updateUserStatusTC}) => {
@@ -18,24 +19,24 @@ const ProfileStatus = ({status, id, isAuthUserId, updateUserStatusTC}) => {
     if (id === isAuthUserId) {
       setEditMode(true);
     }
-  }
+  };
 
   const deactivateMode = () => {
     setEditMode(false);
     updateNewStatus("");
-  }
+  };
 
   const onChangeNewStatus = (newStatus) => {
     updateNewStatus(newStatus);
-  }
+  };
 
   const sendNewStatus = () => {
     setDisabled(true);
     updateUserStatusTC(newStatus).then(() => {
       setEditMode(false);
       setDisabled(false);
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -53,7 +54,7 @@ const ProfileStatus = ({status, id, isAuthUserId, updateUserStatusTC}) => {
         </div>
       </div>}    
     </>
-  )
-}
+  );
+};
 
 export default ProfileStatus;

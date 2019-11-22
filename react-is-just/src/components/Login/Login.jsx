@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import {connect} from "react-redux";
 import {reduxForm, Field} from "redux-form";
@@ -39,23 +40,23 @@ const LoginForm = ({handleSubmit, error}) => {
       <button>Войти</button>
       <div className={style.appLoginError}>{error}</div>
     </form>
-  )
-}
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+  );
+};
+const LoginReduxForm = reduxForm({form: "login"})(LoginForm);
  
 const Login = ({loginTC, isAuth}) => {
   const onSubmit = ({email, password, rememberMe}) => {
     loginTC(email, password, rememberMe);
-  }
+  };
 
-  if (isAuth) return <Redirect to="/profile"/>
+  if (isAuth) return <Redirect to="/profile"/>;
 
   return (
     <div className={style.appLogin}>
       <LoginReduxForm onSubmit={onSubmit}/>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = ({global}) => ({isAuth: global.auth.isAuth});
   

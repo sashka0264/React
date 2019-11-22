@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Spinner from "../../../common/Spinner/Spinner";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
@@ -39,7 +40,7 @@ const ProfileInfo = ({profile, isAuthUserId, status, updateUserStatusTC, disable
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 export default ProfileInfo;

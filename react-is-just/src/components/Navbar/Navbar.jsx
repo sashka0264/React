@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {NavLink} from "react-router-dom";
 import message from "./img/message.svg";
 import news from "./img/news.svg";

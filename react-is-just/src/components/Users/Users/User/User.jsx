@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import {NavLink} from "react-router-dom";
 import style from "./User.module.css";
@@ -17,12 +18,12 @@ const User = ({followingInProgress, unfollowTC, followTC, user}) => {
             user.followed ? 
             <button 
               disabled={followingInProgress.some(id => id === user.id)} 
-              onClick={() => {unfollowTC(user.id)}
+              onClick={() => {unfollowTC(user.id);}
               }>Отписаться</button> :
 
             <button 
               disabled={followingInProgress.some(id => id === user.id)} 
-              onClick={() => {followTC(user.id)}
+              onClick={() => {followTC(user.id);}
             }>Подписаться</button> 
           }
         </div>
@@ -36,7 +37,7 @@ const User = ({followingInProgress, unfollowTC, followTC, user}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default User;

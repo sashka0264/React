@@ -2,8 +2,13 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import style from "./Header.module.css";
 
-// eslint-disable-next-line react/prop-types
-const Header = ({isAuth, login, logoutTC}) => {
+interface IProps {
+  isAuth: boolean;
+  login: string | null;
+  logoutTC: any;
+}
+
+const Header = ({isAuth, login, logoutTC}: IProps) => {
   return (
     <header className={style.appHeader}>
       <img alt="menu-burger" className={style.appHeaderImage} src="https://siliconprice.com/img/mobileMenuIcon.png"/>

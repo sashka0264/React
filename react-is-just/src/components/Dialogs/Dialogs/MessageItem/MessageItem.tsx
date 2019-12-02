@@ -1,8 +1,11 @@
 import React from "react";
 import style from "./MessageItem.module.css";
 
-// eslint-disable-next-line react/prop-types
-const MessageItem = ({content}) => {
+interface IProps {
+  content: string;
+}
+
+const MessageItem = ({content}:IProps) => {
 	return (
 		<div className={style.appDialogsMessagesMessage}>{content}</div>
 	);

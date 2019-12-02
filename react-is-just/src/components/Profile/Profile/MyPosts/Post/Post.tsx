@@ -1,11 +1,16 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import style from "./Post.module.css";
 import heart from "./img/heart.svg";
 import zeroHeart from "./img/zeroHeart.png";
 import defaultAvatar from "./img/defaultAvatar.png";
 
-const Post = ({likes, id, message}) => {
+interface IProps {
+  likes: number;
+  id: number;
+  message: string;
+}
+
+const Post = ({likes, id, message}:IProps) => {
   let likeImage;
   (likes > 0) ? likeImage = heart : likeImage = zeroHeart;
 

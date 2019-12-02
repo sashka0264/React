@@ -10,7 +10,11 @@ import profile from "./img/profile.svg";
 import friends from "./img/friends.svg";
 import style from "./Navbar.module.css";
 
-const Navbar = ({isAuth}) => {
+interface IProps {
+  isAuth: boolean;
+}
+
+const Navbar = ({isAuth}:IProps) => {
   return (
     <nav className={style.appNav}>
       {isAuth && <NavLink to="/profile" className={style.appNavLink}>
@@ -46,7 +50,7 @@ const Navbar = ({isAuth}) => {
   );
 };
 
-const mapStateToProps = ({global}) => ({
+const mapStateToProps = ({global}:any) => ({
   isAuth: global.auth.isAuth
 });
 

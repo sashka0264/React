@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import {connect} from "react-redux";
 import {reduxForm, Field} from "redux-form";
@@ -11,7 +10,7 @@ import style from "./MyPosts.module.css";
 
 const maxLength = maxLengthCreator(75), 
   minLength = minLengthCreator(2);
-const MyPostsForm = ({handleSubmit}) => {
+const MyPostsForm = ({handleSubmit}:any) => {
   return (
     <form onSubmit={handleSubmit} className={style.appContentSend}>
       <Field 
@@ -27,9 +26,20 @@ const MyPostsForm = ({handleSubmit}) => {
 };
 const MyPostsReduxForm = reduxForm({form: "posts"})(MyPostsForm);
 
-const MyPosts = React.memo(function MyPosts({addPostCreator, posts}) {
+interface IProps {
+  addPostCreator: any;
+  posts: {
+    [key: string] : {
+      id: number;
+      likes: number;
+      message: string;
+    };
+    map: any;
+  };
+}
 
-  const onSubmit = ({newPostBody}) => {
+const MyPosts = React.memo(function MyPosts({addPostCreator, posts}:IProps) {
+  const onSubmit = ({newPostBody}:any) => {
     addPostCreator(newPostBody);
   };
 
@@ -39,7 +49,7 @@ const MyPosts = React.memo(function MyPosts({addPostCreator, posts}) {
       <div className={style.appContentPosts}>
         <div className={style.appContentPostsTitle}>Мои посты:</div>
         {
-          posts.map(item => {
+          posts.map((item:any) => {
             return <Post message={item.message} likes={item.likes} id={item.id} key={item.id}/>;
           })   
         }
@@ -48,7 +58,7 @@ const MyPosts = React.memo(function MyPosts({addPostCreator, posts}) {
   );
 });
 
-const mapStateToProps = ({global}) => ({posts: global.profilePage.posts});
+const mapStateToProps = ({global}:any) => ({posts: global.profilePage.posts});
 
 export default connect(mapStateToProps, {addPostCreator})(MyPosts);
 

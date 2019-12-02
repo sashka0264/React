@@ -2,8 +2,14 @@
 import React, {useState} from "react";
 import style from "./ProfileStatus.module.css";
 
-const ProfileStatus = ({status, id, isAuthUserId, updateUserStatusTC}) => {
-  
+interface IProps {
+  status: string;
+  id: number;
+  isAuthUserId: null | number;
+  updateUserStatusTC: any;
+}
+
+const ProfileStatus = ({status, id, isAuthUserId, updateUserStatusTC}:IProps) => {
   const [editMode, setEditMode] = useState(false);
   const [newStatus, updateNewStatus] = useState("");
   const [disabled, setDisabled] = useState(false);
@@ -26,7 +32,7 @@ const ProfileStatus = ({status, id, isAuthUserId, updateUserStatusTC}) => {
     updateNewStatus("");
   };
 
-  const onChangeNewStatus = (newStatus) => {
+  const onChangeNewStatus = (newStatus:string) => {
     updateNewStatus(newStatus);
   };
 

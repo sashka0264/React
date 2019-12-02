@@ -1,8 +1,13 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import style from "./FormsControl.module.css";
 
-const FormControl = ({meta, children}) => {
+interface IProps {
+  meta: {touched: boolean, error: undefined | string};
+  children: any;
+  input: {name: string};
+}
+
+const FormControl = ({meta, children}:IProps) => {
   const showError = meta.touched && meta.error;
   return (
     <div className={style.formControl + " " + (showError && style.error) }>
@@ -14,17 +19,17 @@ const FormControl = ({meta, children}) => {
   );
 };
 
-export const PostFormControl = (props) => {
+export const PostFormControl = (props: IProps) => {
   const {input, ...restProps} = props;
   return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>;
 };
 
-export const MessageFormControl = (props) => {
+export const MessageFormControl = (props: IProps) => {
   const {input, ...restProps} = props;
   return <FormControl {...props}><input {...input} {...restProps}/></FormControl>;
 };
 
-export const LoginInputControl = (props) => {
+export const LoginInputControl = (props: IProps) => {
   const {input, ...restProps} = props;
   return <FormControl {...props}><input {...input} {...restProps}/></FormControl>;
 };

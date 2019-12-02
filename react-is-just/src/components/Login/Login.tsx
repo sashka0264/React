@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import {connect} from "react-redux";
 import {reduxForm, Field} from "redux-form";
@@ -11,7 +10,7 @@ import style from "./Login.module.css";
 const maxLength = maxLengthCreator(30), 
     minLength = minLengthCreator(2);
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error}:any) => {
   return (
     <form onSubmit={handleSubmit} className={style.appLoginBlock}>
       <Field name="email"
@@ -43,9 +42,15 @@ const LoginForm = ({handleSubmit, error}) => {
   );
 };
 const LoginReduxForm = reduxForm({form: "login"})(LoginForm);
+
+interface IProps {
+  loginTC: any;
+  isAuth: boolean;
+}
  
-const Login = ({loginTC, isAuth}) => {
-  const onSubmit = ({email, password, rememberMe}) => {
+const Login = ({loginTC, isAuth}:IProps) => {
+  const onSubmit = ({email, password, rememberMe}:any) => {
+    console.log(email, password, rememberMe);
     loginTC(email, password, rememberMe);
   };
 
@@ -58,6 +63,6 @@ const Login = ({loginTC, isAuth}) => {
   );
 };
 
-const mapStateToProps = ({global}) => ({isAuth: global.auth.isAuth});
+const mapStateToProps = ({global}:any) => ({isAuth: global.auth.isAuth});
   
 export default connect(mapStateToProps, {loginTC})(Login);

@@ -2,7 +2,14 @@
 import React from "react";
 import style from "./Paginator.module.css";
 
-const Paginator = ({totalUsersCount, pageSize, currentPage, onPageChanged}) => {
+interface IProps {
+  totalUsersCount: number;
+  pageSize: number;
+  currentPage: number;
+  onPageChanged(item:number): void;
+}
+
+const Paginator = ({totalUsersCount, pageSize, currentPage, onPageChanged}:IProps) => {
   const pagesCount = Math.ceil(totalUsersCount / pageSize),
     pages = [];
 			
@@ -18,7 +25,7 @@ const Paginator = ({totalUsersCount, pageSize, currentPage, onPageChanged}) => {
           pages.map(item => <span 
             key={item}
             className={currentPage === item ? style.appUsersSelectedPage : style.appUsersPage}
-            onClick={() => onPageChanged(item)}>
+            onClick={() => {onPageChanged(item); console.log(item)}}>
             {item}
           </span>)
         }

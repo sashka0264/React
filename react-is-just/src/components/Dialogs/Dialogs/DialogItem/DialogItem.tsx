@@ -1,13 +1,16 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import {NavLink} from "react-router-dom";
+// npm i --save @types/react-router-dom
 import "./DialogItem.css";
 import defaultAvatar from "./img/defaultAvatar.png";
 
-const DialogItem = ({id, name}) => {
+interface IProps {
+  id: number;
+  name: string;
+}
 
-	let path = "/dialogs/" + id;
-
+const DialogItem = ({id, name}:IProps) => {
+	let path:string = "/dialogs/" + id;
 	return (
 		<NavLink to={path} className="app-dialogs-items__item">
 			<img alt="defaultAvatar" src={defaultAvatar}/>

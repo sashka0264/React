@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import plus from "./img/plus.svg";
 import style from  "./Card.module.css";
+import editSvg from "./img/edit.png";
 
 class Card extends Component {
   state = {
     mode: false,
-    message: ""
+    message: "",
+    modeTitle: false,
+    modeTitleValue: ""
   }
 
- 
 
   dragStart = (index, cardId) => {
     this.props.changeSelectedTaskAC(index, cardId);
@@ -34,6 +36,25 @@ class Card extends Component {
     this.setState({message: e.target.value});
   }
 
+  modeTitle = () => {
+    this.setState({modeTitle: true});
+  }
+
+  titleModeCancel = () => {
+    this.setState({modeTitle: false});
+  }
+
+  titleModeChange = (e) => {
+    this.setState({modeTitleValue:e.target.value})
+  }
+
+  updateNewTitle = () => {
+    if (this.state.modeTitleValue !== "") {
+      this.props.newTitleAC(this.state.modeTitleValue, this.props.id);
+      this.setState({modeTitleValue: "", modeTitle: false});
+    }
+  }
+
   render() {
     
     const {tasks} = this.props;
@@ -42,9 +63,20 @@ class Card extends Component {
     return (
       <div className={style.appCard} id={this.props.id}>
         <div className={style.appCardContent + " content"}>
-          <div className={style.appCardTitle}>Название карточки</div>
+          {!this.state.modeTitle ? <div className={style.appCardTitle}>
+            {this.props.itemTitle} <img src={editSvg} alt="edit-icon" onDoubleClick={this.modeTitle}/>
+          </div> :
 
-          Список задач
+          <div className={style.appCardTitleMode}>
+            <input value={this.state.modeTitleValue} onChange={this.titleModeChange} autoFocus/>
+
+            <div>
+              <button className={style.appCardTitleModeSave} onClick={this.updateNewTitle}>Сохранить</button>
+              <button className={style.appCardTitleModeCancel} onClick={this.titleModeCancel}>Отмена</button>
+            </div>
+          </div>}
+
+        
           <div>
             {tasks.map((task, i) => <div 
               className={style.appCardTaskItem + " task"} 

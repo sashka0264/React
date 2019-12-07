@@ -2,9 +2,10 @@ import React, { Component} from 'react';
 import {Provider} from "react-redux";
 import {connect} from "react-redux";
 import {store} from "./redux/store";
-import {newTaskAC, changeSelectedTaskAC, finishSelectedTaskAC} from "./redux/actions";
+import {newTaskAC, changeSelectedTaskAC, finishSelectedTaskAC, newTitleAC} from "./redux/actions";
 import Card from "./components/Card/Card";
 import style from  "./app.module.css";
+import plus from "./components/Card/img/plus.svg"
 
 const AppContainer = () => {
   return (
@@ -43,18 +44,24 @@ class App extends Component {
   }
   
   render() {
-    const {itemList, newTaskAC, changeSelectedTaskAC} = this.props;
+    const {itemList, newTaskAC, changeSelectedTaskAC, newTitleAC} = this.props;
     return (
       <div onDragOver={this.dragOver} onDragEnd={this.dragEnd} className={style.appCards}>
         {
           itemList.map((item) => <Card 
+            itemTitle={item.title}
             key={item.id} 
             id={item.id} 
             tasks={item.tasks} 
             changeSelectedTaskAC={changeSelectedTaskAC}
+            newTitleAC={newTitleAC}
             newTaskAC={newTaskAC}/>
           )
         }
+        <div className={style.appAddCards}>
+          <img className={style.appCardPlusImage} src={plus} alt="plus"/>
+          <span>Добавить карточку</span>
+        </div>
       </div>
     )
   }
@@ -66,7 +73,7 @@ const mapStateToProps = ({items, selectedTaskPosition}) => ({
 });
 
 
-const AppWithState = connect(mapStateToProps, {newTaskAC, changeSelectedTaskAC, finishSelectedTaskAC})(App);
+const AppWithState = connect(mapStateToProps, {newTaskAC, changeSelectedTaskAC, finishSelectedTaskAC, newTitleAC})(App);
 
 export default AppContainer;
 

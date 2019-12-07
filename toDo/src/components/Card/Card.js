@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import plus from "./img/plus.svg";
 import style from  "./Card.module.css";
-import editSvg from "./img/edit.png";
+import editPng from "./img/edit.png";
+import deletePng from "./img/delete.png";
 
 class Card extends Component {
   state = {
@@ -11,21 +12,16 @@ class Card extends Component {
     modeTitleValue: ""
   }
 
-
   dragStart = (index, cardId) => {
-    this.props.changeSelectedTaskAC(index, cardId);
- 
+    const {changeSelectedTaskAC} = this.props;
+    changeSelectedTaskAC(index, cardId);
   }
   // START, фиксируется то элемент, который мы взяли
 
-  dragEnd = (e) => {
-    // console.log(e.target);
-    // не то
-  }
-
   createNewTask = (e) => {
+    const {newTaskAC, id} = this.props;
     if (this.state.mode && this.state.message !== "") {
-      this.props.newTaskAC(this.props.id, this.state.message);
+      newTaskAC(id, this.state.message);
       this.setState({message: "", mode: false});
     } else {
       this.setState({mode: true});
@@ -49,22 +45,35 @@ class Card extends Component {
   }
 
   updateNewTitle = () => {
+    const {newTitleAC, id} = this.props;
     if (this.state.modeTitleValue !== "") {
-      this.props.newTitleAC(this.state.modeTitleValue, this.props.id);
+      newTitleAC(this.state.modeTitleValue, id);
       this.setState({modeTitleValue: "", modeTitle: false});
     }
   }
 
-  render() {
-    
-    const {tasks} = this.props;
+  deleteTask = (position, cardId) => {
+    const {deleteTaskAC} = this.props;
+    deleteTaskAC(position, cardId);
+  }
 
-  
+  deleteCard = (cardId) => {
+    const {deleteCardAC} = this.props;
+    deleteCardAC(cardId);
+  }
+
+  render() {
+    const {tasks, id, itemTitle} = this.props;
+
     return (
-      <div className={style.appCard} id={this.props.id}>
+      <div className={style.appCard} id={id}>
         <div className={style.appCardContent + " content"}>
           {!this.state.modeTitle ? <div className={style.appCardTitle}>
-            {this.props.itemTitle} <img src={editSvg} alt="edit-icon" onDoubleClick={this.modeTitle}/>
+            {itemTitle} 
+            <div className={style.appCardSetting}>
+              <img src={editPng} alt="edit-icon" onDoubleClick={this.modeTitle}/>
+              <img src={deletePng} alt="delete-icon" onDoubleClick={() => this.deleteCard(id)}/>
+            </div>
           </div> :
 
           <div className={style.appCardTitleMode}>
@@ -82,13 +91,14 @@ class Card extends Component {
               className={style.appCardTaskItem + " task"} 
               id={i}
               draggable='true'
-              onDragEnd={this.dragEnd}
-              onDragStart={(e) => {this.dragStart(i, this.props.id)}}
-              key={i}>{task}
+              
+              onDragStart={(e) => {this.dragStart(i, id)}}
+              key={i}>
+              {task}
+              <img src={deletePng} alt="delete-icon" onClick={() => this.deleteTask(i, id)}/>
             </div>)}
           </div>
 
-          {/* Создание таска */}
           {
             this.state.mode ? <textarea className={style.appCardNewTask} value={this.state.message} onChange={this.modeNewTask} autoFocus/> : null
           }

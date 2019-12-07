@@ -1,17 +1,48 @@
-import {NEW_TASK, CHANGE_SELECTED_TASK, FINISH_SELECTED_TASK, NEW_TITLE} from "./actions";
+import {
+  NEW_TASK, 
+  CHANGE_SELECTED_TASK, 
+  FINISH_SELECTED_TASK, 
+  NEW_TITLE, 
+  DELETE_TASK, 
+  DELETE_CARD,
+  NEW_CARD
+} from "./actions";
 
 const initialState = {
-  items: [
-    {id: 1, title: "Тестовая доска 1", tasks: ["Пример таска 1", "Пример таска 2"]},
-    {id: 2, title: "Тестовая доска 2", tasks: ["Пример таска 3", "Пример таска 4"]}
-  ],
+  items: [],
   selectedTaskPosition: {position: null, cardId: null},
   finishTaskPosition: {position: null, cardId: null}
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
+    case DELETE_CARD: 
+      return {
+        ...state,
+        items: state.items.filter((item) => action.cardId !== item.id)
+      }
+    case DELETE_TASK: 
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          if (item.id === action.cardId) {
+            return {
+              ...item,
+              tasks: item.tasks.filter((item, i) => i !== action.position) 
+            }
+          }
+          return item;
+        })
+      }
+    case NEW_CARD: 
+      const newItem = {id: action.nextId, title: "Тестовая доска", tasks: []}
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          newItem
+        ]
+      }
     case NEW_TASK: 
       const newMessage = action.text;
       return {
@@ -82,7 +113,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         items: state.items.map((item) => {
           if (item.id === action.cardId) {
-            console.log(item)
             return {
               ...item,
               title: action.newTitle

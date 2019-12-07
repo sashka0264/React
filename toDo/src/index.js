@@ -8,22 +8,22 @@ ReactDOM.render(<AppContainer/>, document.getElementById('root'));
 // class List extends React.Component {
 //   state = {...this.props}
 
-  // dragStart = (e) => {
-  //   this.dragged = e.currentTarget;
-  // }
-  // // START, фиксируется то элемент, который мы взяли
+//   dragStart = (e) => {
+//     this.dragged = e.currentTarget;
+//   }
+//   // START, фиксируется то элемент, который мы взяли
 
-  // dragEnd = () => {
-  //   let data = this.state.data;
-  //   // console.log(data) - тут фиксируется новая, созданная дата
-  //   let from = Number(this.dragged.dataset.id);
-  //   // console.log(from) - от какого элемента вытаскивали, его номер в списке
-  //   let to = Number(this.over.dataset.id);
-  //   // console.log(to) - на какое место в списке поместили этот элемент
-  //   data.splice(to, 0, data.splice(from, 1)[0]);
-  //   // Тут мы выполняем действие по обновлению нашего обьекта даты с элементами
-  //   this.setState({data: data});
-  // }
+//   dragEnd = () => {
+//     let data = this.state.data;
+//     // console.log(data) - тут фиксируется новая, созданная дата
+//     let from = Number(this.dragged.dataset.id);
+//     // console.log(from) - от какого элемента вытаскивали, его номер в списке
+//     let to = Number(this.over.dataset.id);
+//     // console.log(to) - на какое место в списке поместили этот элемент
+//     data.splice(to, 0, data.splice(from, 1)[0]);
+//     // Тут мы выполняем действие по обновлению нашего обьекта даты с элементами
+//     this.setState({data: data});
+//   }
 
 //   dragOver = (e) => {
 //     if (e.target.tagName !== "LI") {
@@ -64,16 +64,6 @@ ReactDOM.render(<AppContainer/>, document.getElementById('root'));
 //     )
 //   }
 // }
-
-
-
-
-
-
-
-
-
-
 
 
 

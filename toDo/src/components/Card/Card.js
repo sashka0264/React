@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import plus from "./img/plus.svg";
 import style from  "./Card.module.css";
-import {DragSource} from 'react-dnd'
 
 class Card extends Component {
   state = {
@@ -9,11 +8,18 @@ class Card extends Component {
     message: ""
   }
 
-  dragStart = (e) => {
-    this.dragged = e.currentTarget;
-    console.log(this.dragged)
+ 
+
+  dragStart = (index, cardId) => {
+    this.props.changeSelectedTaskAC(index, cardId);
+ 
   }
   // START, фиксируется то элемент, который мы взяли
+
+  dragEnd = (e) => {
+    // console.log(e.target);
+    // не то
+  }
 
   createNewTask = (e) => {
     if (this.state.mode && this.state.message !== "") {
@@ -34,17 +40,18 @@ class Card extends Component {
 
   
     return (
-      <div className={style.appCard}>
-        <div className={style.appCardContent}>
+      <div className={style.appCard} id={this.props.id}>
+        <div className={style.appCardContent + " content"}>
           <div className={style.appCardTitle}>Название карточки</div>
 
           Список задач
           <div>
             {tasks.map((task, i) => <div 
-              className={style.appCardTaskItem} 
+              className={style.appCardTaskItem + " task"} 
+              id={i}
               draggable='true'
               onDragEnd={this.dragEnd}
-              onDragStart={this.dragStart}
+              onDragStart={(e) => {this.dragStart(i, this.props.id)}}
               key={i}>{task}
             </div>)}
           </div>

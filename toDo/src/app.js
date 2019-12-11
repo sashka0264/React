@@ -2,7 +2,15 @@ import React from 'react';
 import {Provider} from "react-redux";
 import {connect} from "react-redux";
 import {store} from "./redux/store";
-import {newTaskAC, changeSelectedTaskAC, deleteCardAC, finishSelectedTaskAC, deleteTaskAC, newCardAC, newTitleAC} from "./redux/actions";
+import {
+  newTaskAC, 
+  changeSelectedTaskAC, 
+  deleteCardAC, 
+  finishSelectedTaskAC, 
+  deleteTaskAC,
+  newCardAC, 
+  newTitleAC
+} from "./redux/actions";
 import Card from "./components/Card/Card";
 import AddOrCreateTask from "./components/AddOrCreateTask/AddOrCreateTask";
 import style from  "./app.module.css";
@@ -24,13 +32,13 @@ const App = ({finishSelectedTaskAC, newTitleAC, deleteTaskAC, deleteCardAC,
   const dragOver = (e) => {
     if (!e.target.classList.contains("task")) {
       if (e.target.classList.contains("content")) {
-        positionElementEnd = e.target.childNodes[0].parentNode.id;
-        cardIdElementEnd = e.target.parentNode.id;
+        positionElementEnd = e.target.closest(".content").id;
+        cardIdElementEnd = e.target.closest(".card").id;
       }
       return;
     } 
-    positionElementEnd = e.target.childNodes[0].parentNode.id;
-    cardIdElementEnd = e.target.parentNode.parentNode.parentNode.id;
+    positionElementEnd = e.target.closest(".task").id;
+    cardIdElementEnd = e.target.closest(".card").id;
   }
 
   const dragEnd = () => {

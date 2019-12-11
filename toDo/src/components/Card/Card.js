@@ -68,7 +68,7 @@ const Card = ({changeSelectedTaskAC, newTaskAC, createNextId, id, newTitleAC, ta
   }
 
   return (
-    <div className={style.appCard} id={id}>
+    <div className={style.appCard + " card"} id={id}>
       <div className={style.appCardContent + " content"}>
         {!state.modeTitle ? <div className={style.appCardTitle}>
           {itemTitle} 

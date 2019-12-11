@@ -1,12 +1,11 @@
-import React, { Component} from 'react';
+import React from 'react';
 import {Provider} from "react-redux";
 import {connect} from "react-redux";
-import nextId from "react-id-generator";
 import {store} from "./redux/store";
 import {newTaskAC, changeSelectedTaskAC, deleteCardAC, finishSelectedTaskAC, deleteTaskAC, newCardAC, newTitleAC} from "./redux/actions";
 import Card from "./components/Card/Card";
+import AddOrCreateTask from "./components/AddOrCreateTask/AddOrCreateTask";
 import style from  "./app.module.css";
-import plus from "./components/Card/img/plus.svg"
 
 const AppContainer = () => {
   return (
@@ -15,81 +14,69 @@ const AppContainer = () => {
     </Provider>
   )
 }
+export default AppContainer;
 
-class App extends Component {
+const App = ({finishSelectedTaskAC, newTitleAC, deleteTaskAC, deleteCardAC, 
+  changeSelectedTaskAC, newCardAC, itemList, newTaskAC, createNextId}) => {
 
-  state = {
-    positionElementEnd: null,
-    cardIdElementEnd: null
-  }
+  let positionElementEnd, cardIdElementEnd;
 
-  createNextId = () => {
-    return nextId();
-  }
-
-  dragOver = (e) => {
+  const dragOver = (e) => {
     if (!e.target.classList.contains("task")) {
       if (e.target.classList.contains("content")) {
-        this.setState({
-          positionElementEnd: e.target.childNodes[0].parentNode.id,
-          cardIdElementEnd: e.target.parentNode.id
-        })
+        positionElementEnd = e.target.childNodes[0].parentNode.id;
+        cardIdElementEnd = e.target.parentNode.id;
       }
       return;
     } 
-
-    this.setState({
-      positionElementEnd: e.target.childNodes[0].parentNode.id,
-      cardIdElementEnd: e.target.parentNode.parentNode.parentNode.id
-    })
+    positionElementEnd = e.target.childNodes[0].parentNode.id;
+    cardIdElementEnd = e.target.parentNode.parentNode.parentNode.id;
   }
 
-  dragEnd = () => {
-    const {finishSelectedTaskAC} = this.props;
-    finishSelectedTaskAC(this.state.positionElementEnd, this.state.cardIdElementEnd);
+  const dragEnd = () => {
+    finishSelectedTaskAC(positionElementEnd, cardIdElementEnd);
   }
 
-  createNewCard = () => {
-    const {newCardAC} = this.props;
-    newCardAC(this.createNextId());
+  const createNewCard = () => {
+    newCardAC(createNextId());
   }
   
-  render() {
-    const {itemList, newTaskAC, changeSelectedTaskAC, deleteCardAC, newTitleAC, deleteTaskAC} = this.props;
-    return (
-      <div onDragOver={this.dragOver} onDragEnd={this.dragEnd} className={style.appCards}>
-        {
-          itemList.map((item) => <Card 
-            itemTitle={item.title}
-            key={item.id} 
-            id={item.id} 
-            deleteTaskAC={deleteTaskAC}
-            deleteCardAC={deleteCardAC}
-            tasks={item.tasks} 
-            changeSelectedTaskAC={changeSelectedTaskAC}
-            newTitleAC={newTitleAC}
-            newTaskAC={newTaskAC}/>
-          )
-        }
-        <div className={style.appAddCards} onClick={this.createNewCard}>
-          <img className={style.appCardPlusImage} src={plus} alt="plus"/>
-          <span>Добавить карточку</span>
-        </div>
-      </div>
-    )
-  }
+  return (
+    <div onDragOver={dragOver} onDragEnd={dragEnd} className={style.appCards}>
+      {
+        itemList.map((item) => <Card 
+          itemTitle={item.title}
+          key={item.id} 
+          id={item.id} 
+          deleteTaskAC={deleteTaskAC}
+          deleteCardAC={deleteCardAC}
+          tasks={item.tasks} 
+          changeSelectedTaskAC={changeSelectedTaskAC}
+          newTitleAC={newTitleAC}
+          newTaskAC={newTaskAC}
+        />)
+      }
+      <AddOrCreateTask createNewCard={createNewCard}/>
+    </div>
+  )
 }
 
-const mapStateToProps = ({items, selectedTaskPosition}) => ({
+const mapStateToProps = ({items, selectedTaskPosition, createNextId}) => ({
   itemList: items,
-  selectedTaskPosition: selectedTaskPosition
+  selectedTaskPosition,
+  createNextId
 });
 
 const mapDispatchToProps = {
-  deleteCardAC, newTaskAC, deleteTaskAC, newCardAC, changeSelectedTaskAC, finishSelectedTaskAC, newTitleAC
+  deleteCardAC, 
+  newTaskAC, 
+  deleteTaskAC, 
+  newCardAC, 
+  changeSelectedTaskAC, 
+  finishSelectedTaskAC, 
+  newTitleAC
 }
 
 const AppWithState = connect(mapStateToProps, mapDispatchToProps)(App);
 
-export default AppContainer;
 

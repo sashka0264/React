@@ -1,4 +1,16 @@
+@font-face {
+  font-family: "Roboto Light";
+  src: url('./fonts/Roboto-Light.eot');
+  src: url('./fonts/Roboto-Light.eot?#iefix') format('embedded-opentype'),
+  url('./fonts/Roboto-Light.woff') format('woff'),
+  url('./fonts/Roboto-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;    
+}
+
 body {
-  background: url("./img/background.jpg");
+  background: url("./img/background.jpg") no-repeat;
   background-size: cover;
+  font-family: "Roboto Light";
 }

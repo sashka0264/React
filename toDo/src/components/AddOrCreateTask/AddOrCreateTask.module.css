@@ -1,0 +1,25 @@
+.appAddCards {
+	min-width: 200px;
+	background-color: gray;
+	margin: 11.09px;
+	background-color: #ebecf0;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	padding: 14px 0 14px 0;
+}
+
+.appAddCards img {
+	margin-right: 10px;
+}
+
+.appAddCards span:hover {
+	cursor: pointer;
+	opacity: 0.7;
+	transition: 0.3s opacity ease-in-out;
+}
+
+.appAddCards span {
+	opacity: 1;
+	transition: 0.3s opacity ease-in-out;
+}

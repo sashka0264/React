@@ -7,12 +7,21 @@ import {
   DELETE_CARD,
   NEW_CARD
 } from "./actions";
+import nextId from "react-id-generator";
 
-const initialState = {
-  items: [],
-  selectedTaskPosition: {position: null, cardId: null},
-  finishTaskPosition: {position: null, cardId: null}
-};
+let initialState;
+if (localStorage["redux-tesla-store"] === undefined) {
+  initialState = {
+    items: [],
+    selectedTaskPosition: {position: null, cardId: null},
+    finishTaskPosition: {position: null, cardId: null},
+    createNextId: () => {
+      return nextId();
+    }
+  }
+} else {
+  initialState = JSON.parse(localStorage["redux-tesla-store"]);
+}
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -35,7 +44,7 @@ const reducer = (state = initialState, action) => {
         })
       }
     case NEW_CARD: 
-      const newItem = {id: action.nextId, title: "Тестовая доска", tasks: []}
+      const newItem = {id: action.nextId, title: "Новая доска", tasks: []}
       return {
         ...state,
         items: [

@@ -1,116 +1,121 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import plus from "./img/plus.svg";
 import style from  "./Card.module.css";
 import editPng from "./img/edit.png";
 import deletePng from "./img/delete.png";
 
-class Card extends Component {
-  state = {
+const Card = ({changeSelectedTaskAC, newTaskAC, createNextId, id, newTitleAC, tasks, itemTitle, deleteTaskAC, deleteCardAC}) => {
+  const [state, setState] = useState({
     mode: false,
     message: "",
     modeTitle: false,
     modeTitleValue: ""
-  }
+  });
 
-  dragStart = (index, cardId) => {
-    const {changeSelectedTaskAC} = this.props;
+  const dragStart = (index, cardId) => {
     changeSelectedTaskAC(index, cardId);
   }
-  // START, фиксируется то элемент, который мы взяли
+  // START, фиксируется тот элемент, который мы взяли
 
-  createNewTask = (e) => {
-    const {newTaskAC, id} = this.props;
-    if (this.state.mode && this.state.message !== "") {
-      newTaskAC(id, this.state.message);
-      this.setState({message: "", mode: false});
+  const createNewTask = () => {
+    if (state.mode && state.message.trim() !== "") {
+      newTaskAC(id, state.message);
+      setState({...state, message: "", mode: false});
     } else {
-      this.setState({mode: true});
+      setState({...state, mode: true});
     }
   }
 
-  modeNewTask = (e) => {
-    this.setState({message: e.target.value});
+
+  const modeNewTask = (e) => {
+    if (e.key === undefined) {
+      setState({...state, message: e.target.value});
+    } else if (e.key === "Enter") {
+      createNewTask();
+    }
+
   }
 
-  modeTitle = () => {
-    this.setState({modeTitle: true});
+  const modeTitle = () => {
+    setState({...state, modeTitle: true});
   }
 
-  titleModeCancel = () => {
-    this.setState({modeTitle: false});
+  const titleModeCancel = () => {
+    setState({...state, modeTitle: false});
   }
 
-  titleModeChange = (e) => {
-    this.setState({modeTitleValue:e.target.value})
-  }
-
-  updateNewTitle = () => {
-    const {newTitleAC, id} = this.props;
-    if (this.state.modeTitleValue !== "") {
-      newTitleAC(this.state.modeTitleValue, id);
-      this.setState({modeTitleValue: "", modeTitle: false});
+  const titleModeChange = (e) => {
+    if (e.key === undefined) {
+      setState({...state, modeTitleValue: e.target.value})
+    } else if (e.key === "Enter") {
+      updateNewTitle();
     }
   }
 
-  deleteTask = (position, cardId) => {
-    const {deleteTaskAC} = this.props;
+  const updateNewTitle = () => {
+    if (state.modeTitleValue.trim() !== "") {
+      newTitleAC(state.modeTitleValue, id);
+      setState({...state, modeTitleValue: "", modeTitle: false});
+    }
+  }
+
+  const deleteTask = (position, cardId) => {
     deleteTaskAC(position, cardId);
   }
 
-  deleteCard = (cardId) => {
-    const {deleteCardAC} = this.props;
+  const deleteCard = (cardId) => {
     deleteCardAC(cardId);
   }
 
-  render() {
-    const {tasks, id, itemTitle} = this.props;
-
-    return (
-      <div className={style.appCard} id={id}>
-        <div className={style.appCardContent + " content"}>
-          {!this.state.modeTitle ? <div className={style.appCardTitle}>
-            {itemTitle} 
-            <div className={style.appCardSetting}>
-              <img src={editPng} alt="edit-icon" onDoubleClick={this.modeTitle}/>
-              <img src={deletePng} alt="delete-icon" onDoubleClick={() => this.deleteCard(id)}/>
-            </div>
-          </div> :
-
-          <div className={style.appCardTitleMode}>
-            <input value={this.state.modeTitleValue} onChange={this.titleModeChange} autoFocus/>
-
-            <div>
-              <button className={style.appCardTitleModeSave} onClick={this.updateNewTitle}>Сохранить</button>
-              <button className={style.appCardTitleModeCancel} onClick={this.titleModeCancel}>Отмена</button>
-            </div>
-          </div>}
-
-        
-          <div>
-            {tasks.map((task, i) => <div 
-              className={style.appCardTaskItem + " task"} 
-              id={i}
-              draggable='true'
-              
-              onDragStart={(e) => {this.dragStart(i, id)}}
-              key={i}>
-              {task}
-              <img src={deletePng} alt="delete-icon" onClick={() => this.deleteTask(i, id)}/>
-            </div>)}
+  return (
+    <div className={style.appCard} id={id}>
+      <div className={style.appCardContent + " content"}>
+        {!state.modeTitle ? <div className={style.appCardTitle}>
+          {itemTitle} 
+          <div className={style.appCardSetting}>
+            <img src={editPng} alt="edit-icon" onClick={modeTitle}/>
+            <img src={deletePng} alt="delete-icon" onClick={() => deleteCard(id)}/>
           </div>
+        </div> :
 
-          {
-            this.state.mode ? <textarea className={style.appCardNewTask} value={this.state.message} onChange={this.modeNewTask} autoFocus/> : null
-          }
+        <div className={style.appCardTitleMode}>
+          <input maxLength="15" value={state.modeTitleValue} onChange={titleModeChange} onKeyPress={titleModeChange} autoFocus/>
+
+          <div>
+            <button className={style.appCardTitleModeCancel} onClick={titleModeCancel}>Отмена</button>
+          </div>
+        </div>}
+
+      
+        <div>
+          {tasks.map((task, i) => <div 
+            className={style.appCardTaskItem + " task"} 
+            id={i}
+            draggable='true'
+            
+            onDragStart={(e) => {dragStart(i, id)}}
+            key={i}>
+            {task}
+            <img src={deletePng} alt="delete-icon" onClick={() => deleteTask(i, id)}/>
+          </div>)}
         </div>
 
-        <div className={!this.state.mode ? style.appCardPlus : style.appCardPlusActive} onClick={this.createNewTask}>
-          <img className={style.appCardPlusImage} src={plus} alt="plus"/>
-          {this.state.mode ? "Добавить задачу" : "Создать задачу"}
-        </div>
+        {
+          state.mode ? 
+          <textarea maxLength="15" className={style.appCardNewTask} value={state.message} onKeyPress={modeNewTask} onChange={modeNewTask} autoFocus/> : 
+          null
+        }
       </div>
-    )
-  }
+
+      <div className={!state.mode ? style.appCardPlus : style.appCardPlusActive} onClick={createNewTask}>
+        <img className={style.appCardPlusImage} src={plus} alt="plus"/>
+        {state.mode ? "Добавить задачу" : "Создать задачу"}
+      </div>
+
+      
+    </div>
+  )
+  
 }
 
 export default Card;

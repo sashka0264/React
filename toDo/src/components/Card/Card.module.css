@@ -54,10 +54,13 @@
 	margin-left: 10px;
 	width: 13px;
 	height: 13px;
+	transition: 0.3s opacity ease-in-out;
 }
 
 .appCardSetting img:hover {
 	cursor: pointer;
+	opacity: 0.7;
+	transition: 0.3s opacity ease-in-out;
 }
 
 .appCardTaskItem {

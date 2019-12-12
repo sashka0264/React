@@ -20,9 +20,7 @@ if (localStorage["redux-tesla-store"] === undefined) {
 }
 
 const reducer = (state = initialState, action) => {
-  // console.log(action)
   switch (action.type) {
-    
     case DELETE_CARD: 
       return {
         ...state,
@@ -85,19 +83,15 @@ const reducer = (state = initialState, action) => {
         item.tasks.forEach((item, i) => (i === state.selectedTaskPosition.position) && (task = item))
       );
       // Получаем task в виде строки, которуй мы хотим перенести
-
       return {
         ...state,
         items: state.items.map((item) => {
-
           // Если карточка одна и та же:
           if (state.selectedTaskPosition.cardId === action.cardId) {
             if (item.id === state.selectedTaskPosition.cardId) {
-          
-              let arr = item.tasks.filter((item, i) => i !== state.selectedTaskPosition.position);
-              let left = arr.filter((item, i) => i < action.position);
-              let right = arr.filter((item, i) => i >= action.position);
-
+              const arr = item.tasks.filter((item, i) => i !== state.selectedTaskPosition.position),
+                left = arr.filter((item, i) => i < action.position),
+                right = arr.filter((item, i) => i >= action.position);
               return {
                 ...item,
                 tasks: [...left, task, ...right]
@@ -112,13 +106,9 @@ const reducer = (state = initialState, action) => {
                 tasks: item.tasks.filter((item, i) => i !== state.selectedTaskPosition.position) 
               }
             }
- 
-
             if (item.id === action.cardId) {
-
-              let left = item.tasks.filter((item, i) => i < action.position);
-              let right = item.tasks.filter((item, i) => i >= action.position);
-              
+              const left = item.tasks.filter((item, i) => i < action.position),
+                right = item.tasks.filter((item, i) => i >= action.position);
               return {
                 ...item,
                 tasks: [...left, task, ...right]

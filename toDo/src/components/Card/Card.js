@@ -41,7 +41,7 @@ const Card = ({changeSelectedTaskAC, newTaskAC, createNextId, id, newTitleAC, ta
   }
 
   const titleModeCancel = () => {
-    setState({...state, modeTitle: false});
+    setState({...state, modeTitle: false, modeTitleValue: ""});
   }
 
   const titleModeChange = (e) => {
@@ -79,7 +79,7 @@ const Card = ({changeSelectedTaskAC, newTaskAC, createNextId, id, newTitleAC, ta
         </div> :
 
         <div className={style.appCardTitleMode}>
-          <input maxLength="15" value={state.modeTitleValue} onChange={titleModeChange} onKeyPress={titleModeChange} autoFocus/>
+          <input maxLength="16" value={state.modeTitleValue} onChange={titleModeChange} onKeyPress={titleModeChange} autoFocus/>
 
           <div>
             <button className={style.appCardTitleModeCancel} onClick={titleModeCancel}>Отмена</button>

@@ -7,3 +7,4 @@ export const store = createStore(reducer);
 // });
 // конфликт с "react-id-generator", можно заморочиться и написать свой генератор, но
 // думаю, правильнее сделать это на back-end 
+window.store = store; 

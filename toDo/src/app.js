@@ -2,6 +2,7 @@ import React from 'react';
 import {Provider} from "react-redux";
 import {connect} from "react-redux";
 import {store} from "./redux/store";
+import nextId from "react-id-generator";
 import {
   newTaskAC, 
   changeSelectedTaskAC, 
@@ -25,20 +26,25 @@ const AppContainer = () => {
 export default AppContainer;
 
 const App = ({finishSelectedTaskAC, newTitleAC, deleteTaskAC, deleteCardAC, 
-  changeSelectedTaskAC, newCardAC, itemList, newTaskAC, createNextId}) => {
+  changeSelectedTaskAC, newCardAC, itemList, newTaskAC}) => {
+
+  const createNextId = () => {
+    return nextId();
+  }
 
   let positionElementEnd, cardIdElementEnd;
 
   const dragOver = (e) => {
-    if (!e.target.classList.contains("task")) {
-      if (e.target.classList.contains("content")) {
+    if (e.target.closest(".card") !== null) {
+      cardIdElementEnd = e.target.closest(".card").id;
+
+      if (e.target.closest(".content") !== null) {
         positionElementEnd = e.target.closest(".content").id;
-        cardIdElementEnd = e.target.closest(".card").id;
       }
-      return;
-    } 
-    positionElementEnd = e.target.closest(".task").id;
-    cardIdElementEnd = e.target.closest(".card").id;
+      if (e.target.closest(".task") !== null) {
+        positionElementEnd = e.target.closest(".task").id;
+      }
+    }
   }
 
   const dragEnd = () => {
@@ -69,10 +75,8 @@ const App = ({finishSelectedTaskAC, newTitleAC, deleteTaskAC, deleteCardAC,
   )
 }
 
-const mapStateToProps = ({items, selectedTaskPosition, createNextId}) => ({
-  itemList: items,
-  selectedTaskPosition,
-  createNextId
+const mapStateToProps = ({items}) => ({
+  itemList: items
 });
 
 const mapDispatchToProps = {

@@ -7,24 +7,25 @@ import {
   DELETE_CARD,
   NEW_CARD
 } from "./actions";
-import nextId from "react-id-generator";
 
 let initialState;
 if (localStorage["redux-tesla-store"] === undefined) {
   initialState = {
-    items: [],
+    items: [
+      {id: "id-1", title: "s", tasks: ["Задача 265", "Задача 771", "Задача 6"]},
+      {id: "id-0", title: "sdsd", tasks: ["Задача 771", "Задача 6"]}
+    ],
     selectedTaskPosition: {position: null, cardId: null},
-    finishTaskPosition: {position: null, cardId: null},
-    createNextId: () => {
-      return nextId();
-    }
+    finishTaskPosition: {position: null, cardId: null}
   }
 } else {
   initialState = JSON.parse(localStorage["redux-tesla-store"]);
 }
 
 const reducer = (state = initialState, action) => {
+  // console.log(action)
   switch (action.type) {
+    
     case DELETE_CARD: 
       return {
         ...state,
@@ -81,42 +82,70 @@ const reducer = (state = initialState, action) => {
           ...state
         }
       }
-      if (state.selectedTaskPosition.cardId === action.cardId) {
-        return {
-          ...state
-        }
-      }
+      // Если мы хотим перенсти туда же, откуда взяли, то ничего не делаем
+      let task;
+      state.items.forEach((item) => (item.id === state.selectedTaskPosition.cardId) && 
+        item.tasks.forEach((item, i) => (i === state.selectedTaskPosition.position) && (task = item))
+      );
+      // Получаем task в виде строки, которуй мы хотим перенести
 
-      let message;
-      state.items.forEach((item) => {
-        if (item.id === state.selectedTaskPosition.cardId) {
-          item.tasks.forEach((item, i) => {
-            if (i === state.selectedTaskPosition.position) {
-              message = item;
-            }
-          })
-        } 
-      });
- 
       return {
         ...state,
         items: state.items.map((item) => {
-          if (item.id === state.selectedTaskPosition.cardId) {
-            return {
-              ...item,
-              tasks: item.tasks.filter((item, i) => i !== state.selectedTaskPosition.position) 
-            }
-          }
-          if (item.id === action.cardId) {
-            return {
-              ...item,
-              tasks: [...item.tasks, message]
-            }
-          }
-          return item;
-        })
-      }
 
+          if (state.selectedTaskPosition.cardId === action.cardId) {
+            if (item.id === state.selectedTaskPosition.cardId) {
+          
+              let arr = item.tasks.filter((item, i) => {
+        
+                return i !== state.selectedTaskPosition.position;
+              });
+      
+              let left = arr.filter((item, i) => {
+                return i < action.position;
+              })
+      
+              let right = arr.filter((item, i) => {
+                return i >= action.position;
+              })
+              return {
+                ...item,
+                tasks: [...left, task, ...right]
+              };
+            }
+            return item;
+          }
+
+          if (state.selectedTaskPosition.cardId !== action.cardId) {
+            if (item.id === state.selectedTaskPosition.cardId) {
+              return {
+                ...item,
+                tasks: item.tasks.filter((item, i) => i !== state.selectedTaskPosition.position) 
+              }
+            }
+            // Удаляем таск из старой карточки
+            if (item.id === action.cardId) {
+              // action position не учел
+              // console.log(item.tasks)
+
+              let left = item.tasks.filter((item, i) => {
+                return i < action.position;
+              })
+
+              let right = item.tasks.filter((item, i) => {
+                return i >= action.position;
+              })
+              
+
+              return {
+                ...item,
+                tasks: [...left, task, ...right]
+              }
+            }
+            return item;
+          }
+        }) 
+      }
     case NEW_TITLE: 
       return {
         ...state,

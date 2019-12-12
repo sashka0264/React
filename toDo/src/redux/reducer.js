@@ -11,10 +11,7 @@ import {
 let initialState;
 if (localStorage["redux-tesla-store"] === undefined) {
   initialState = {
-    items: [
-      {id: "id-1", title: "s", tasks: ["Задача 265", "Задача 771", "Задача 6"]},
-      {id: "id-0", title: "sdsd", tasks: ["Задача 771", "Задача 6"]}
-    ],
+    items: [],
     selectedTaskPosition: {position: null, cardId: null},
     finishTaskPosition: {position: null, cardId: null}
   }
@@ -93,50 +90,35 @@ const reducer = (state = initialState, action) => {
         ...state,
         items: state.items.map((item) => {
 
+          // Если карточка одна и та же:
           if (state.selectedTaskPosition.cardId === action.cardId) {
             if (item.id === state.selectedTaskPosition.cardId) {
           
-              let arr = item.tasks.filter((item, i) => {
-        
-                return i !== state.selectedTaskPosition.position;
-              });
-      
-              let left = arr.filter((item, i) => {
-                return i < action.position;
-              })
-      
-              let right = arr.filter((item, i) => {
-                return i >= action.position;
-              })
+              let arr = item.tasks.filter((item, i) => i !== state.selectedTaskPosition.position);
+              let left = arr.filter((item, i) => i < action.position);
+              let right = arr.filter((item, i) => i >= action.position);
+
               return {
                 ...item,
                 tasks: [...left, task, ...right]
               };
             }
             return item;
-          }
-
-          if (state.selectedTaskPosition.cardId !== action.cardId) {
+            // Если карточки разные:
+          } else {
             if (item.id === state.selectedTaskPosition.cardId) {
               return {
                 ...item,
                 tasks: item.tasks.filter((item, i) => i !== state.selectedTaskPosition.position) 
               }
             }
-            // Удаляем таск из старой карточки
+ 
+
             if (item.id === action.cardId) {
-              // action position не учел
-              // console.log(item.tasks)
 
-              let left = item.tasks.filter((item, i) => {
-                return i < action.position;
-              })
-
-              let right = item.tasks.filter((item, i) => {
-                return i >= action.position;
-              })
+              let left = item.tasks.filter((item, i) => i < action.position);
+              let right = item.tasks.filter((item, i) => i >= action.position);
               
-
               return {
                 ...item,
                 tasks: [...left, task, ...right]

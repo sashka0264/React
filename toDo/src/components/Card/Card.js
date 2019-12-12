@@ -4,11 +4,11 @@ import style from  "./Card.module.css";
 import editPng from "./img/edit.png";
 import deletePng from "./img/delete.png";
 
-const Card = ({changeSelectedTaskAC, newTaskAC, createNextId, id, newTitleAC, tasks, itemTitle, deleteTaskAC, deleteCardAC}) => {
+const Card = ({changeSelectedTaskAC, newTaskAC, id, newTitleAC, tasks, itemTitle, deleteTaskAC, deleteCardAC}) => {
   const [state, setState] = useState({
     mode: false,
     message: "",
-    modeTitle: false,
+    modeTitle: true,
     modeTitleValue: ""
   });
 
@@ -26,14 +26,12 @@ const Card = ({changeSelectedTaskAC, newTaskAC, createNextId, id, newTitleAC, ta
     }
   }
 
-
   const modeNewTask = (e) => {
     if (e.key === undefined) {
       setState({...state, message: e.target.value});
     } else if (e.key === "Enter") {
       createNewTask();
     }
-
   }
 
   const modeTitle = () => {
@@ -111,8 +109,6 @@ const Card = ({changeSelectedTaskAC, newTaskAC, createNextId, id, newTitleAC, ta
         <img className={style.appCardPlusImage} src={plus} alt="plus"/>
         {state.mode ? "Добавить задачу" : "Создать задачу"}
       </div>
-
-      
     </div>
   )
   

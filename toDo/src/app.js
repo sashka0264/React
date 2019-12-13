@@ -35,6 +35,7 @@ const App = ({finishSelectedTaskAC, newTitleAC, deleteTaskAC, deleteCardAC,
   let positionElementEnd, cardIdElementEnd;
 
   const dragOver = (e) => {
+    
     if (e.target.closest(".card") !== null) {
       cardIdElementEnd = e.target.closest(".card").id;
 
@@ -44,9 +45,9 @@ const App = ({finishSelectedTaskAC, newTitleAC, deleteTaskAC, deleteCardAC,
       if (e.target.closest(".task") !== null) {
         positionElementEnd = +e.target.closest(".task").id;
       }
-    }
+    } 
   }
-
+  
   const dragEnd = () => {
     finishSelectedTaskAC(positionElementEnd, cardIdElementEnd);
   }

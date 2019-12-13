@@ -1,5 +1,6 @@
 
 Тестовое задание в виде To-Do List - реализовать наипростейший Drag-and-drop на примере карточек.
+Стилистика и адаптив был не нужен, поэтому не реализован.
 
 ![Image alt](https://github.com/sashka0264/React/blob/master/toDo/Screenshot.jpg)
 

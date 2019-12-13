@@ -26,6 +26,10 @@ const Card = ({changeSelectedTaskAC, newTaskAC, id, newTitleAC, tasks, itemTitle
     }
   }
 
+  const canselCreateNewTask = () => {
+    setState({...state, mode: false, message: ""});
+  }
+
   const modeNewTask = (e) => {
     if (e.key === undefined) {
       setState({...state, message: e.target.value});
@@ -100,7 +104,16 @@ const Card = ({changeSelectedTaskAC, newTaskAC, id, newTitleAC, tasks, itemTitle
 
         {
           state.mode ? 
-          <textarea maxLength="15" className={style.appCardNewTask} value={state.message} onKeyPress={modeNewTask} onChange={modeNewTask} autoFocus/> : 
+          <div className={style.appCardModeNewTask}>
+            <textarea 
+              maxLength="15" 
+              className={style.appCardNewTask} 
+              value={state.message} 
+              onKeyPress={modeNewTask} 
+              onChange={modeNewTask} autoFocus
+            />
+            <img src={deletePng} alt="delete-icon" onClick={canselCreateNewTask}/>
+          </div> : 
           null
         }
       </div>

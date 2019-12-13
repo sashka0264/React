@@ -9,12 +9,7 @@ export const NEW_TASK = "NEW-TASK",
 export const newTaskAC = (id, text) => ({type: NEW_TASK, id, text}),
   changeSelectedTaskAC = (position, cardId) => ({type: CHANGE_SELECTED_TASK, position, cardId}),
   finishSelectedTaskAC = (position, cardId) => ({type: FINISH_SELECTED_TASK, position, cardId}),
-  // test-done
   newTitleAC = (newTitle, cardId) => ({type: NEW_TITLE, newTitle, cardId}),
-  // test-done
   deleteTaskAC = (position, cardId) => ({type: DELETE_TASK, position, cardId}),
-  // test-done
   deleteCardAC = (cardId) => ({type: DELETE_CARD, cardId}),
-  // test-done
   newCardAC = (nextId) => ({type: NEW_CARD, nextId});
-  // test-done

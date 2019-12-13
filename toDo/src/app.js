@@ -39,10 +39,10 @@ const App = ({finishSelectedTaskAC, newTitleAC, deleteTaskAC, deleteCardAC,
       cardIdElementEnd = e.target.closest(".card").id;
 
       if (e.target.closest(".content") !== null) {
-        positionElementEnd = e.target.closest(".content").id;
+        positionElementEnd = +e.target.closest(".content").id;
       }
       if (e.target.closest(".task") !== null) {
-        positionElementEnd = e.target.closest(".task").id;
+        positionElementEnd = +e.target.closest(".task").id;
       }
     }
   }

@@ -12,8 +12,7 @@ let initialState;
 if (localStorage["redux-tesla-store"] === undefined) {
   initialState = {
     items: [],
-    selectedTaskPosition: {position: null, cardId: null},
-    finishTaskPosition: {position: null, cardId: null}
+    selectedTaskPosition: {position: null, cardId: null}
   }
 } else {
   initialState = JSON.parse(localStorage["redux-tesla-store"]);
@@ -72,6 +71,7 @@ const reducer = (state = initialState, action) => {
         }
       }
     case FINISH_SELECTED_TASK: 
+    console.log(action)
       if (state.selectedTaskPosition.cardId === action.cardId && state.selectedTaskPosition.position === action.position) {
         return {
           ...state

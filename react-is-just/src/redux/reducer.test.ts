@@ -1,17 +1,10 @@
-import reducer from "./reducer";
+import reducer, {initialState} from "./reducer";
 import {
 	addPostCreator,
 	deletePost
 } from "./actions";
 
-let state = {
-	profilePage: {
-		posts: [ 
-			{id: 2, message: "Как у вас всех дела? =)", likes: 0}, 
-			{id: 1, message: "Всем привет!", likes: 0}
-		]
-	}
-};
+let state: typeof initialState = initialState;
 
 it("length of new post should be incremented", () => {
 	let action = addPostCreator("test-post");

@@ -15,53 +15,52 @@ import {
 	DELETE_POST
 } from "./actions";
 
-
-const initialState = {
+export const initialState = {
 	app: {
-		initialized: false
+		initialized: false as boolean
 	},
 	auth: {
-		userId: null,
-		email: null,
-		login: null,
-		isAuth: false
+		userId: null as null | number,
+		email: null as null | string,
+		login: null as null | string,
+		isAuth: false as boolean
 	},
 	profilePage: {
 		posts: [ 
 			{id: 2, message: "Как у вас всех дела? =)", likes: 12}, 
 			{id: 1, message: "Всем привет!", likes: 0}
-		],
-		profile: {},
-		status: ""
+		] as Array<{id: number, message: string, likes: number}>,
+		profile: {} as {},
+		status: "" as string
 	},
 	messagesPage: {
 		dialogs: [ 
-			{id: 1, name: "Уля Мирзоева"}, 
-			{id: 2, name: "Анна Потапова"}, 
-			{id: 3, name: "Влад Балабкин"}, 
-			{id: 4, name: "Тимур Костенко"}, 
-			{id: 5, name: "Андрей Арчаков"}
-		],
+			{id: 1, name: "Уля"}, 
+			{id: 2, name: "Анна"}, 
+			{id: 3, name: "Влад"}, 
+			{id: 4, name: "Тимур"}, 
+			{id: 5, name: "Андрей"}
+		] as Array<{id: number, name: string}>,
 		messages: [ 
-			{id: 1, content: "Привет, Саня!"}, 
-			{id: 2, content: "Как дела-то?"}, 
-			{id: 3, content: "=)"}
-		]
+			{id: 1, content: "Привет"}, 
+			{id: 2, content: "Как дела?"}, 
+			{id: 3, content: ":3"}
+		] as Array<{id: number, content: string}>
 	}, 
-	sidebar: {},
+	sidebar: {} as {},
 	usersPage: {
-		pageSize: 30,
-		totalUsersCount: 0,
-		currentPage: 1,
-		users: [],
-		loading: false,
-		followingInProgress: [] 
+		pageSize: 30 as number,
+		totalUsersCount: 0 as number,
+		currentPage: 1 as number,
+		users: [] as Array<{}>,
+		loading: false as boolean,
+		followingInProgress: [] as []
 	}
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: any = initialState, action: any) => {
 
-	// console.log(action);
+	console.log(state);
 
 	switch (action.type) {
 		case SEND_MESSAGE: 
@@ -95,7 +94,7 @@ const reducer = (state = initialState, action) => {
 				...state, 
 				usersPage: {
 					...state.usersPage,
-					users: state.usersPage.users.map(user => {
+					users: state.usersPage.users.map((user: { id: any; }) => {
 						if (user.id === action.id) {
 							return {...user, followed: true};
 						} 
@@ -108,7 +107,7 @@ const reducer = (state = initialState, action) => {
 				...state, 
 				usersPage: {
 					...state.usersPage,
-					users: state.usersPage.users.map(user => {
+					users: state.usersPage.users.map((user: { id: any; }) => {
 						if (user.id === action.id) {
 							return {...user, followed: false};
 						} 
@@ -174,7 +173,7 @@ const reducer = (state = initialState, action) => {
 					...state.usersPage,
 					followingInProgress: action.status 
 					? [...state.usersPage.followingInProgress, action.userId] 
-					: state.usersPage.followingInProgress.filter(id => id !== action.userId) 
+					: state.usersPage.followingInProgress.filter((id: any) => id !== action.userId) 
 				}
 			};
 		case SET_USER_STATUS:
@@ -198,7 +197,7 @@ const reducer = (state = initialState, action) => {
 				...state,
 				profilePage: {
 					...state.profilePage,
-					posts: state.profilePage.posts.filter((post) => post.id !== action.id)
+					posts: state.profilePage.posts.filter((post: { id: any; }) => post.id !== action.id)
 				}
 			};
 		default: 

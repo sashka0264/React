@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {reduxForm, Field} from "redux-form";
 import {PostFormControl} from "../../../common/FormsControl/FormsControl";
-import {addPostCreator} from "../../../../redux/actions";
+import {addPostAC} from "../../../../redux/actions";
 import {required, maxLengthCreator, minLengthCreator} from "../../../../helpers/validators";
 import Post from "./Post/Post";
 import sendIcon from "./img/sendIcon.svg";
@@ -27,7 +27,7 @@ const MyPostsForm = ({handleSubmit}:any) => {
 const MyPostsReduxForm = reduxForm({form: "posts"})(MyPostsForm);
 
 interface IProps {
-  addPostCreator: any;
+  addPostAC: any;
   posts: {
     [key: string] : {
       id: number;
@@ -38,9 +38,9 @@ interface IProps {
   };
 }
 
-const MyPosts = React.memo(function MyPosts({addPostCreator, posts}:IProps) {
+const MyPosts = React.memo(function MyPosts({addPostAC, posts}:IProps) {
   const onSubmit = ({newPostBody}:any) => {
-    addPostCreator(newPostBody);
+    addPostAC(newPostBody);
   };
 
   return (
@@ -60,5 +60,5 @@ const MyPosts = React.memo(function MyPosts({addPostCreator, posts}:IProps) {
 
 const mapStateToProps = ({global}:any) => ({posts: global.profilePage.posts});
 
-export default connect(mapStateToProps, {addPostCreator})(MyPosts);
+export default connect(mapStateToProps, {addPostAC})(MyPosts);
 

@@ -20,7 +20,7 @@ interface IProps {
       map: any;
     };
   };
-  sendMessageCreator: any;
+  sendMessageAC: any;
 }
 
 const maxLength = maxLengthCreator(75), 
@@ -43,9 +43,9 @@ const DialogsForm = ({handleSubmit}:any) => {
 
 const DialogsReduxForm = reduxForm({form: "dialogs"})(DialogsForm);
 
-const Dialogs = ({messagesPage, sendMessageCreator}:IProps) => {
+const Dialogs = ({messagesPage, sendMessageAC}:IProps) => {
   const onSubmit = ({newMessageBody}:any) => {
-    sendMessageCreator(newMessageBody);
+    sendMessageAC(newMessageBody);
 	};
   return (
     <div className={style.appDialogs}>

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {sendMessageCreator} from "../../redux/actions";
+import {sendMessageAC} from "../../redux/actions";
 import Dialogs from "./Dialogs/Dialogs";
 
 class DialogsContainer extends Component {
@@ -14,7 +14,7 @@ class DialogsContainer extends Component {
 const mapStateToProps = ({global}) => ({messagesPage: global.messagesPage, isAuth: global.auth.isAuth});
 
 export default compose(
-  connect(mapStateToProps, {sendMessageCreator}), 
+  connect(mapStateToProps, {sendMessageAC}), 
   WithAuthRedirect
 )(
   DialogsContainer

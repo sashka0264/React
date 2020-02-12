@@ -27,8 +27,7 @@ export const initialState = {
 	},
 	profilePage: {
 		posts: [ 
-			{id: 2, message: "Как у вас всех дела? =)", likes: 12}, 
-			{id: 1, message: "Всем привет!", likes: 0}
+			// {id: 1, message: "Тестовый пост", likes: 12}
 		] as Array<{id: number, message: string, likes: number}>,
 		profile: {} as {},
 		status: "" as string
@@ -60,12 +59,12 @@ export const initialState = {
 
 const reducer = (state: any = initialState, action: any) => {
 
-	console.log(state);
+	// console.log(state);
 
 	switch (action.type) {
 		case SEND_MESSAGE: 
 			// с id нужно поработать
-			const newMessage = {id: 4, content: action.content};
+			const newMessage = {id: Date.now(), content: action.content};
 			return {
 				...state,
 				messagesPage: {
@@ -78,7 +77,7 @@ const reducer = (state: any = initialState, action: any) => {
 			};
 		case ADD_POST:
 				// с id нужно поработать
-			const newPost = {id: 3, message: action.postMessage, likes: 0};
+			const newPost = {id: Date.now(), message: action.postMessage, likes: 0};
 			return {
 				...state,
 				profilePage: {

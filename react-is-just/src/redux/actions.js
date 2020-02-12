@@ -17,9 +17,9 @@ export const SEND_MESSAGE = "SEND-MESSAGE",
 	DELETE_POST = "DELETE-POST",
 	INITIALIZED_SUCCESS = "INITIALIZED-SUCCESS";
 
-export const sendMessageCreator = (text) => ({type: SEND_MESSAGE, content: text}),
-	addPostCreator = (text) => ({type: ADD_POST, postMessage: text}),
-	deletePost = (id) => ({type: DELETE_POST, id}),
+export const sendMessageAC = (text) => ({type: SEND_MESSAGE, content: text}),
+	addPostAC = (text) => ({type: ADD_POST, postMessage: text}),
+	deletePostAC = (id) => ({type: DELETE_POST, id}),
 	followAC = (id) => ({type: FOLLOW, id}),
 	unfollowAC = (id) => ({type: UNFOLLOW, id}),
 	setUsersAC = (users) => ({type: SET_USERS, users}),

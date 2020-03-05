@@ -31,7 +31,7 @@ const AppContainer = () => {
 
 export default AppContainer;
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     const {initializeAppTC} = this.props;
     initializeAppTC();

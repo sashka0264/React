@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App dispatches the 'initializeAppTC()' method it receives from props 1`] = `<Spinner />`;

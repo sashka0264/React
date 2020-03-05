@@ -14,8 +14,10 @@ const Header = ({isAuth, login, logoutTC}: IProps) => {
       <img alt="menu-burger" className={style.appHeaderImage} src="https://siliconprice.com/img/mobileMenuIcon.png"/>
 
       <div className={style.appHeaderLoginBlock}>
-        <NavLink className={style.appHeaderLogIn} to="/login">{isAuth ? `${login}` : "Войти"}</NavLink>
-
+        <NavLink className={style.appHeaderLogIn} to="/login">
+          <span>{isAuth ? `${login}` : "Войти"}</span>
+        </NavLink>
+        
         <span onClick={() => logoutTC()} className={style.appHeaderLogOut}>
           {isAuth ? "Выйти" : null}
         </span>

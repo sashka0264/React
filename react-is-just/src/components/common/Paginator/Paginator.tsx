@@ -27,6 +27,7 @@ const Paginator = ({totalUsersCount, setPagePeroid, pageSize, currentPage, onPag
       <div className={style.appUsersPageList}>
         {
           startPage > 1 && <img 
+            alt={'leftArrow'}
             src={ leftArrow } 
             className={style.arrows}
             onClick={() => {
@@ -46,6 +47,7 @@ const Paginator = ({totalUsersCount, setPagePeroid, pageSize, currentPage, onPag
         }
         {
           (startPage + 10) < pagesCount && <img 
+            alt={'rightArrow'}
             src={ rightArrow } 
             className={style.arrows}
             onClick={() => {

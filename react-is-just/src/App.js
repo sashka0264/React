@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, {Component, Suspense } from "react";
-import {Route, withRouter} from "react-router-dom";
+import React, { Component } from "react";
+import { Route, withRouter } from "react-router-dom";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {BrowserRouter as Router} from "react-router-dom";
@@ -10,6 +10,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/Navbar/Navbar";
 import {getMeTC, initializeAppTC} from "./redux/actions";
 import Spinner from "./components/common/Spinner/Spinner";
+import WithSuspense from "./hoc/WithSuspense";
 import style from "./App.module.css";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer')),
@@ -49,40 +50,40 @@ export class App extends Component {
         <Navbar/>
   
         <div className={style.appReference}>
-          <Route path="/profile/:userId?" render={() => <Suspense fallback={null}>
-              <ProfileContainer/>
-            </Suspense>
-          }/>
+          <Route 
+            path="/profile/:userId?" 
+            render={WithSuspense(ProfileContainer, null)}
+          /> 
 
-          <Route path="/dialogs" render={() => <Suspense fallback={null}>
-              <DialogsContainer/>
-            </Suspense>
-          }/>
+          <Route 
+            path="/dialogs" 
+            render={WithSuspense(DialogsContainer, Spinner)}
+          /> 
 
-          <Route path="/news" render={() => <Suspense fallback={null}>
-              <News/>
-            </Suspense>
-          }/>
+          <Route 
+            path="/news" 
+            render={WithSuspense(News, Spinner)}
+          /> 
 
-          <Route path="/music" render={() => <Suspense fallback={null}>
-              <Music/>
-            </Suspense>
-          }/>
+          <Route 
+            path="/music" 
+            render={WithSuspense(Music, Spinner)}
+          /> 
 
-          <Route path="/settings" render={() => <Suspense fallback={null}>
-              <Settings/>
-            </Suspense>
-          }/>
+          <Route 
+            path="/settings" 
+            render={WithSuspense(Settings, Spinner)}
+          /> 
 
-          <Route path="/users" render={() => <Suspense fallback={null}>
-              <UsersContainer/>
-            </Suspense>
-          }/>
+          <Route 
+            path="/users" 
+            render={WithSuspense(UsersContainer, null)}
+          /> 
 
-          <Route path="/login" render={() => <Suspense fallback={null}>
-              <LoginPage/>
-            </Suspense>
-          }/>
+          <Route 
+            path="/login" 
+            render={WithSuspense(LoginPage, Spinner)}
+          /> 
         </div>
       </div>
     );
@@ -92,7 +93,6 @@ export class App extends Component {
 const mapStateToProps = ({global}) => ({
   initialized: global.app.initialized
 });
-
 
 const AppWithRouter = compose(
   withRouter,

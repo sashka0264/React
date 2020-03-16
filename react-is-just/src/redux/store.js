@@ -7,6 +7,6 @@ import {reducer as formReducer} from "redux-form";
 
 const reducers = combineReducers({global: reducer, form: formReducer});
 
-export const store = createStore(reducers, applyMiddleware(thunkMiddleware, logger));
+export const store = createStore(reducers, applyMiddleware(thunkMiddleware)); // + logger
 
 window.store = store;

@@ -20,4 +20,7 @@ getFollowingInProgress = (state) => {
 },
 getIsAuth = (state) => {
   return state.global.auth.isAuth;
+},
+getPagePeriod = (state) => {
+  return state.global.usersPage.pagePeriod;
 };

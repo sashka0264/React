@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {Component} from "react";
+import React, {Component, Suspense } from "react";
 import {Route, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {compose} from "redux";
@@ -8,16 +8,17 @@ import {store} from "./redux/store";
 import {Provider} from "react-redux";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from "./components/Navbar/Navbar";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import Dialogs from "./components/Dialogs/DialogsContainer";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import UsersContainer from "./components/Users/UsersContainer";
-import LoginPage from "./components/Login/Login";
 import {getMeTC, initializeAppTC} from "./redux/actions";
 import Spinner from "./components/common/Spinner/Spinner";
 import style from "./App.module.css";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer')),
+  ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer')),
+  News = React.lazy(() => import('./components/News/News')),
+  Music = React.lazy(() => import('./components/Music/Music')),
+  Settings = React.lazy(() => import('./components/Settings/Settings')),
+  UsersContainer = React.lazy(() => import('./components/Users/UsersContainer')),
+  LoginPage = React.lazy(() => import('./components/Login/Login'));
 
 const AppContainer = () => {
   return (
@@ -48,13 +49,40 @@ export class App extends Component {
         <Navbar/>
   
         <div className={style.appReference}>
-          <Route path="/profile/:userId?" component={ProfileContainer}/>
-          <Route path="/dialogs" component={Dialogs}/> 
-          <Route path="/news" component={News}/>
-          <Route path="/music" component={Music}/>
-          <Route path="/settings" component={Settings}/>
-          <Route path="/users" component={UsersContainer}/>
-          <Route path="/login" component={LoginPage}/>
+          <Route path="/profile/:userId?" render={() => <Suspense fallback={null}>
+              <ProfileContainer/>
+            </Suspense>
+          }/>
+
+          <Route path="/dialogs" render={() => <Suspense fallback={null}>
+              <DialogsContainer/>
+            </Suspense>
+          }/>
+
+          <Route path="/news" render={() => <Suspense fallback={null}>
+              <News/>
+            </Suspense>
+          }/>
+
+          <Route path="/music" render={() => <Suspense fallback={null}>
+              <Music/>
+            </Suspense>
+          }/>
+
+          <Route path="/settings" render={() => <Suspense fallback={null}>
+              <Settings/>
+            </Suspense>
+          }/>
+
+          <Route path="/users" render={() => <Suspense fallback={null}>
+              <UsersContainer/>
+            </Suspense>
+          }/>
+
+          <Route path="/login" render={() => <Suspense fallback={null}>
+              <LoginPage/>
+            </Suspense>
+          }/>
         </div>
       </div>
     );

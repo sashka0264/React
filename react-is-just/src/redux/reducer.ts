@@ -12,7 +12,8 @@ import {
 	TOGGLE_IS_FOLLOWING_PROGRESS,
 	SET_USER_STATUS,
 	INITIALIZED_SUCCESS,
-	DELETE_POST
+	DELETE_POST,
+	SET_PAGE_PERIOD
 } from "./actions";
 
 export const initialState = {
@@ -49,6 +50,7 @@ export const initialState = {
 	sidebar: {} as {},
 	usersPage: {
 		pageSize: 30 as number,
+		pagePeriod: {usePage: 1, control: 10} as Record<string, number>,
 		totalUsersCount: 0 as number,
 		currentPage: 1 as number,
 		users: [] as Array<{}>,
@@ -58,10 +60,19 @@ export const initialState = {
 };
 
 const reducer = (state: any = initialState, action: any) => {
-
-	// console.log(state);
-
+	// console.log(action)
 	switch (action.type) {
+		case SET_PAGE_PERIOD:
+			return {
+				...state, 
+				usersPage: {
+					...state.usersPage,
+					pagePeriod: {
+						...state.usersPage.pagePeriod,
+						usePage: action.usePage
+					}
+				}
+			}
 		case SEND_MESSAGE: 
 			// с id нужно поработать
 			const newMessage = {id: Date.now(), content: action.content};

@@ -30,11 +30,17 @@
 }
 
 .appUsersPage {
-	padding-left: 6px;
+	padding: 0 6px 0 6px;
 	font-size: 13px;
 	color: #939393;
 }
 
+.arrows {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+}
 
-
-
+.arrows:hover {
+	cursor: pointer;
+}

@@ -15,7 +15,8 @@ export const SEND_MESSAGE = "SEND-MESSAGE",
 	SET_USER_STATUS = "SET-USER-STATUS",
 	UPDATE_USER_STATUS = "UPDATE-USER-STATUS",
 	DELETE_POST = "DELETE-POST",
-	INITIALIZED_SUCCESS = "INITIALIZED-SUCCESS";
+	INITIALIZED_SUCCESS = "INITIALIZED-SUCCESS",
+	SET_PAGE_PERIOD = "SET_PAGE_PERIOD";
 
 export const sendMessageAC = (text) => ({type: SEND_MESSAGE, content: text}),
 	addPostAC = (text) => ({type: ADD_POST, postMessage: text}),
@@ -31,6 +32,7 @@ export const sendMessageAC = (text) => ({type: SEND_MESSAGE, content: text}),
 	toggleIsFollowingProgressAC = (status, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, status, userId}),
 	setUserStatusAC = (status) => ({type: SET_USER_STATUS, status}),
 	updateUserStatusAC = () => ({type: UPDATE_USER_STATUS}),
+	setPagePeriodAC = (usePage) => ({type: SET_PAGE_PERIOD, usePage}),
 	initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 const followFlow = async (dispatch, id, apiMethod, actionCreator) => {

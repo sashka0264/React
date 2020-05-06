@@ -1,36 +1,7 @@
-.settings {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-}
-
-.start {
-  margin-top: 20px;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 900px;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1px;
-  min-height: 57px;
-  min-width: 57px;
-}
-
 .app {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }

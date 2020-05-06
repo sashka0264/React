@@ -1,6 +1,7 @@
 import {
   INITIALIZE,
-  OPEN_CARD
+  OPEN_CARD,
+  RESTART
 } from './actions';
 
 export const initialState = {
@@ -14,6 +15,7 @@ export const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  // console.log(action)
   switch (action.type) {
     case INITIALIZE: 
       const colorsGenerator = (amount) => { // amount = (кол-во карточек) / 2
@@ -44,21 +46,38 @@ const reducer = (state = initialState, action) => {
         gridMap: map
       }
     case OPEN_CARD: 
-      const newGridMap = state.gridMap
+      let newLastCard = {
+        id: action.id,
+        color: action.color
+      }
+
+      let newGridMap = state.gridMap
         .map((item) => {
           if (item.opened && item.id !== action.id) return {...item, opened: false}
-          if (item.id === action.id) return {...item,opened: true}
+          if (item.id === action.id && !state.lastCard.id && !state.lastCard.color) return {...item, opened: true}
           return item;
         });
+        
+      if (action.color === state.lastCard.color) newGridMap = newGridMap.filter((item) => item.color !== action.color);
+    
+      if (state.lastCard.id && state.lastCard.color) {
+        newLastCard.id = null;
+        newLastCard.color = null;
+      }
       
-
-
       return {
         ...state,
         gridMap: newGridMap,
+        lastCard: newLastCard
+      }
+    case RESTART:
+      return {
+        ...state,
+        initialized: false,
+        gridMap: null,
         lastCard: {
-          id: action.id,
-          color: action.color
+          id: null,
+          color: null
         }
       }
     default: 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Provider, connect } from 'react-redux';
 import { initializeAC as initialize, openCardAC as openCard, restartAC as restart } from './redux/actions';
 import store from './redux/store'

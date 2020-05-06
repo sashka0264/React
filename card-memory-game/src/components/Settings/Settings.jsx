@@ -17,7 +17,7 @@ const Settings = ({ maxGrids, initializeAC }) => {
       setGrid({...grid, error: true, helperText: `max ${maxGrids}`});
     } else if (grid.value < 2) {
       setGrid({...grid, error: true, helperText: 'min 2'});
-    } else if (grid.value % 2 !== 0) {
+    } else if ((grid.value ** 2) % 2 !== 0) {
       setGrid({...grid, error: true, helperText: 'odd number'});
     } else {
       setGrid({...grid, error: false, helperText: ''});
